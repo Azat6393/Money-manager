@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/transFragment">
 
+    <fragment
+        android:id="@+id/transFragment"
+        android:name="com.woynex.parasayar.feature_trans.presentation.trans.TransFragment"
+        android:label="fragment_trans"
+        tools:layout="@layout/fragment_trans" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.woynex.parasayar.feature_statistics.presentation.stats.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/accountsFragment"
+        android:name="com.woynex.parasayar.feature_accounts.presentation.accounts.AccountsFragment"
+        android:label="fragment_accounts"
+        tools:layout="@layout/fragment_accounts" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.woynex.parasayar.feature_settings.presentation.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

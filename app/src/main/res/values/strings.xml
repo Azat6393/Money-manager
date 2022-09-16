@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Para Sayar</string>
+    <string name="trans">Trans</string>
+    <string name="stats">Stats</string>
+    <string name="accounts">Accounts</string>
+    <string name="more">More</string>
 </resources>

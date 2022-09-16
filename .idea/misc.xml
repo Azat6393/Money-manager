@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/activity_main.xml" value="0.15" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_accounts.xml" value="0.3625" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_settings.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_statistics.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_trans.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/menu/botton_navigation_bar.xml" value="0.1" />
       </map>
