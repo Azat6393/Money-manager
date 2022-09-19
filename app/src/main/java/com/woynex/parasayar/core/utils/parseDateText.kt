@@ -7,5 +7,10 @@ import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun parseDateText(date: LocalDate): String {
-    return DateTimeFormatter.ofPattern("dd LLL").format(date)
+    return DateTimeFormatter.ofPattern("LLL y").format(date)
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun parseYear(date: LocalDate): String {
+    return DateTimeFormatter.ofPattern("y").format(date)
 }

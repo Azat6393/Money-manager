@@ -19,10 +19,19 @@
         android:id="@+id/accountsFragment"
         android:name="com.woynex.parasayar.feature_accounts.presentation.accounts.AccountsFragment"
         android:label="fragment_accounts"
-        tools:layout="@layout/fragment_accounts" />
+        tools:layout="@layout/fragment_accounts" >
+        <action
+            android:id="@+id/action_accountsFragment_to_addAccountFragment"
+            app:destination="@id/addAccountFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.woynex.parasayar.feature_settings.presentation.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/addAccountFragment"
+        android:name="com.woynex.parasayar.feature_accounts.presentation.add_account.AddAccountFragment"
+        android:label="fragment_add_account"
+        tools:layout="@layout/fragment_add_account" />
 </navigation>

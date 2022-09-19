@@ -6,6 +6,7 @@
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/dialog_select_month.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_accounts.xml" value="0.3625" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_add_account.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_calendar.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_daily.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_monthly.xml" value="0.3625" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_total.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_trans.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_weekly.xml" value="0.3625" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/menu/accounts_menu.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/menu/botton_navigation_bar.xml" value="0.1" />
       </map>

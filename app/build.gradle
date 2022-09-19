@@ -84,6 +84,8 @@ dependencies {
 
     // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$room_version"
+
+    implementation "com.github.skydoves:powermenu:2.2.0"
 }
 kapt {
     correctErrorTypes true

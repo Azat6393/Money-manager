@@ -15,4 +15,6 @@
     <color name="surface">#FF625D67</color>
     <color name="neutral">#FFE8DEF8</color>
     <color name="secondary">#FFFFD8E4</color>
+    <color name="blue">#3a86ff</color>
+    <color name="red">#e63946</color>
 </resources>
