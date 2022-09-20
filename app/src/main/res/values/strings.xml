@@ -34,4 +34,6 @@
     <string name="currency">Currency</string>
     <string name="description">Description</string>
     <string name="save">Save</string>
+    <string name="income">Income</string>
+    <string name="expenses">Expenses</string>
 </resources>
