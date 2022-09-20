@@ -36,4 +36,5 @@
     <string name="save">Save</string>
     <string name="income">Income</string>
     <string name="expenses">Expenses</string>
+    <string name="account_group">Account Group</string>
 </resources>

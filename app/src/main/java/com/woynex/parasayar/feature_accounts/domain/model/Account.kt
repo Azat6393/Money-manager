@@ -9,7 +9,7 @@ data class Account(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val name: String,
-    val deposit: String,
-    val withdrawal: String,
+    val deposit: Double,
+    val withdrawal: Double,
     val group_name: String
 )

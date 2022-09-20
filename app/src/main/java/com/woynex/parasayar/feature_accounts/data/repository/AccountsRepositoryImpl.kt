@@ -2,6 +2,7 @@ package com.woynex.parasayar.feature_accounts.data.repository
 
 import com.woynex.parasayar.feature_accounts.data.room.AccountsDao
 import com.woynex.parasayar.feature_accounts.domain.model.Account
+import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
 import com.woynex.parasayar.feature_accounts.domain.repository.AccountsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -23,5 +24,21 @@ class AccountsRepositoryImpl @Inject constructor(
 
     override fun getAccounts(): Flow<List<Account>> {
         return dao.getAccounts()
+    }
+
+    override suspend fun insertAccountGroup(accountGroup: AccountGroup) {
+        dao.insertAccountGroup(accountGroup)
+    }
+
+    override suspend fun deleteAccountGroup(accountGroup: AccountGroup) {
+        dao.deleteAccountGroup(accountGroup)
+    }
+
+    override suspend fun updateAccountGroup(accountGroup: AccountGroup) {
+        dao.updateAccountGroup(accountGroup)
+    }
+
+    override fun getAccountGroups(): Flow<List<AccountGroup>> {
+        return dao.getAccountGroups()
     }
 }

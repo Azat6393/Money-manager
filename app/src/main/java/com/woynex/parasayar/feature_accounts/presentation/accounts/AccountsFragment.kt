@@ -9,23 +9,33 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.skydoves.powermenu.MenuAnimation
 import com.skydoves.powermenu.OnMenuItemClickListener
 import com.skydoves.powermenu.PowerMenu
 import com.skydoves.powermenu.PowerMenuItem
 import com.woynex.parasayar.R
+import com.woynex.parasayar.core.utils.OnItemClickListener
 import com.woynex.parasayar.databinding.FragmentAccountsBinding
+import com.woynex.parasayar.feature_accounts.domain.model.Account
+import com.woynex.parasayar.feature_accounts.presentation.adapter.AccountAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class AccountsFragment : Fragment(R.layout.fragment_accounts) {
+class AccountsFragment : Fragment(R.layout.fragment_accounts), OnItemClickListener<Account> {
 
     private lateinit var _binding: FragmentAccountsBinding
-
+    private val viewModel: AccountsViewModel by viewModels()
     private lateinit var powerMenu: PowerMenu
+    private val mAdapter: AccountAdapter by lazy { AccountAdapter(this) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +44,42 @@ class AccountsFragment : Fragment(R.layout.fragment_accounts) {
         initPowerMenu()
         _binding.moreBtn.setOnClickListener {
             powerMenu.showAsDropDown(_binding.moreBtn)
+        }
+        initRecyclerView()
+        observe()
+    }
+
+    private fun initRecyclerView() {
+        _binding.recyclerView.apply {
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun observe() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.accounts.collectLatest { result ->
+                    val sortedList = result.sortedWith(compareBy({ it.group_name }, { it.name }))
+                    mAdapter.submitList(sortedList)
+                    var allDeposit = 0.0
+                    var allWithdraws = 0.0
+                    result.forEach {
+                        allDeposit += it.deposit
+                        allWithdraws += it.withdrawal
+                    }
+                    _binding.apply {
+                        assets.text = allDeposit.toString()
+                        liabilities.text = allWithdraws.toString()
+                        total.text = (allDeposit - allWithdraws).toString()
+                        total.setTextColor(
+                            if ((allDeposit - allWithdraws) >= 0) Color.parseColor("#3a86ff")
+                            else Color.parseColor("#e63946")
+                        )
+                    }
+                }
+            }
         }
     }
 
@@ -61,16 +107,21 @@ class AccountsFragment : Fragment(R.layout.fragment_accounts) {
 
     private val onMenuItemClickListener: OnMenuItemClickListener<PowerMenuItem> =
         OnMenuItemClickListener<PowerMenuItem> { position, item ->
-            when(position){
+            when (position) {
                 0 -> {
                     powerMenu.dismiss()
-                    val action = AccountsFragmentDirections.actionAccountsFragmentToAddAccountFragment()
+                    val action =
+                        AccountsFragmentDirections.actionAccountsFragmentToAddAccountFragment()
                     findNavController().navigate(action)
                 }
                 1 -> {
-                    Toast.makeText(requireContext(),"Delete", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Delete", Toast.LENGTH_SHORT).show()
                     powerMenu.dismiss()
                 }
             }
         }
+
+    override fun onClick(item: Account) {
+
+    }
 }

@@ -1,7 +1,9 @@
 package com.woynex.parasayar.core.data.room
 
 import androidx.room.Database
+import androidx.room.DatabaseConfiguration
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteOpenHelper
 import com.woynex.parasayar.feature_accounts.data.room.AccountsDao
 import com.woynex.parasayar.feature_accounts.domain.model.Account
 import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
@@ -12,7 +14,8 @@ import com.woynex.parasayar.feature_trans.domain.model.Trans
 
 @Database(
     entities = [Trans::class, Category::class, Account::class, AccountGroup::class],
-    version = 1
+    version = 1,
+    exportSchema = true
 )
 abstract class ParaSayarDatabase : RoomDatabase() {
     abstract val accountsDao: AccountsDao

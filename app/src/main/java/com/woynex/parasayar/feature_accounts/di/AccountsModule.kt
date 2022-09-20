@@ -37,4 +37,15 @@ object AccountsModule {
             getAccounts = GetAccounts(repo)
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideAccountGroupUseCases(repo: AccountsRepository): AccountGroupUseCases {
+        return AccountGroupUseCases(
+            insertAccountGroup = InsertAccountGroup(repo),
+            updateAccountGroup = UpdateAccountGroup(repo),
+            deleteAccountGroup = DeleteAccountGroup(repo),
+            getAccountGroups = GetAccountGroups(repo)
+        )
+    }
 }

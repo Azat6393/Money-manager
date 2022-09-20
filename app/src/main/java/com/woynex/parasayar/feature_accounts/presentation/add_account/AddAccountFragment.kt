@@ -3,17 +3,23 @@ package com.woynex.parasayar.feature_accounts.presentation.add_account
 import android.os.Bundle
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.text.set
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.woynex.parasayar.R
+import com.woynex.parasayar.core.utils.custom_dialog.AccountGroupsDialog
+import com.woynex.parasayar.core.utils.showSnackBar
 import com.woynex.parasayar.databinding.FragmentAddAccountBinding
+import com.woynex.parasayar.feature_accounts.domain.model.Account
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddAccountFragment: Fragment(R.layout.fragment_add_account) {
+class AddAccountFragment : Fragment(R.layout.fragment_add_account) {
 
     private lateinit var _binding: FragmentAddAccountBinding
+    private val viewModel: AddAccountViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,6 +29,43 @@ class AddAccountFragment: Fragment(R.layout.fragment_add_account) {
             backBtn.setOnClickListener {
                 findNavController().popBackStack()
             }
+            saveBtn.setOnClickListener {
+                if (isValid()) {
+                    viewModel.addAccount(
+                        Account(
+                            name = _binding.name.text.toString(),
+                            deposit = _binding.amount.text.toString().toDouble(),
+                            withdrawal = 0.0,
+                            group_name = _binding.group.text.toString()
+                        )
+                    )
+                    findNavController().popBackStack()
+                }
+            }
+            group.setOnClickListener {
+                showGroupList()
+            }
+        }
+        showGroupList()
+    }
+
+    private fun showGroupList() {
+        AccountGroupsDialog(viewModel.accountGroup) {
+            _binding.group.setText(it.name)
+        }.show(childFragmentManager, "AccountGroup")
+    }
+
+    private fun isValid(): Boolean {
+        return when {
+            _binding.group.text.toString().isBlank() -> {
+                requireView().showSnackBar("There is no group name")
+                false
+            }
+            _binding.name.text.toString().isBlank() -> {
+                requireView().showSnackBar("There is no name")
+                false
+            }
+            else -> true
         }
     }
 

@@ -5,4 +5,5 @@ object RoomConstants {
     const val CATEGORY_TABLE_NAME = "category"
     const val ACCOUNT_TABLE_NAME = "account"
     const val ACCOUNT_GROUP_TABLE_NAME = "account_group"
+    const val SUB_CATEGORY_TABLE_NAME = "subcategory"
 }

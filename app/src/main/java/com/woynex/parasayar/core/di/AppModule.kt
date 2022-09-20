@@ -17,11 +17,9 @@ object AppModule {
     @Singleton
     fun provideParaSayarDatabase(
         app: Application
-    ): ParaSayarDatabase {
-        return Room.databaseBuilder(
-            app,
-            ParaSayarDatabase::class.java,
-            "para_sayar_database"
-        ).build()
-    }
+    ) = Room.databaseBuilder(
+        app,
+        ParaSayarDatabase::class.java,
+        "para_sayar_database"
+    ).createFromAsset("database/para_sayar.db").build()
 }

@@ -4,10 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.woynex.parasayar.core.utils.RoomConstants
 
-@Entity(tableName = RoomConstants.CATEGORY_TABLE_NAME)
-data class Category(
+@Entity(tableName = RoomConstants.SUB_CATEGORY_TABLE_NAME)
+data class SubCategory(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val name: String,
-    val type: String,
+    val category_name: String
 )
