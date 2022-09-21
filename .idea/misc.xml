@@ -3,21 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/drawable/radio_button_background.xml" value="0.2285" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/drawable/radio_button_selected.xml" value="0.2285" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/drawable/radio_button_text_color.xml" value="0.229" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/drawable/radio_button_unchecked.xml" value="0.2285" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/bottom_amount_input.xml" value="0.31351351351351353" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/dialog_account_groups.xml" value="0.3625" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/dialog_accounts.xml" value="0.3625" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/dialog_categories.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/dialog_select_month.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_accounts.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_add_account.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_calendar.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_daily.xml" value="0.3625" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_expense.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_monthly.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_settings.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_statistics.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_total.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_trans.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_trans_details.xml" value="0.33" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/fragment_weekly.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/item_account.xml" value="0.3625" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/item_accout.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/item_accout_group.xml" value="0.3625" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/item_category.xml" value="0.33" />
+        <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/layout/item_subcategory.xml" value="0.31261261261261264" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/menu/accounts_menu.xml" value="0.3625" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
         <entry key="..\:/Users/berdi/AndroidStudioProjects/ParaSayar/app/src/main/res/menu/botton_navigation_bar.xml" value="0.1" />

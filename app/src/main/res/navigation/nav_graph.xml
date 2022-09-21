@@ -9,7 +9,11 @@
         android:id="@+id/transFragment"
         android:name="com.woynex.parasayar.feature_trans.presentation.trans.TransFragment"
         android:label="fragment_trans"
-        tools:layout="@layout/fragment_trans" />
+        tools:layout="@layout/fragment_trans" >
+        <action
+            android:id="@+id/action_transFragment_to_transDetailsFragment"
+            app:destination="@id/transDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.woynex.parasayar.feature_statistics.presentation.stats.StatisticsFragment"
@@ -34,4 +38,9 @@
         android:name="com.woynex.parasayar.feature_accounts.presentation.add_account.AddAccountFragment"
         android:label="fragment_add_account"
         tools:layout="@layout/fragment_add_account" />
+    <fragment
+        android:id="@+id/transDetailsFragment"
+        android:name="com.woynex.parasayar.feature_trans.presentation.trans_details.TransDetailsFragment"
+        android:label="fragment_trans_details"
+        tools:layout="@layout/fragment_trans_details" />
 </navigation>

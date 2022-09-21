@@ -4,5 +4,7 @@ data class CategoryUseCases(
     val insertCategory: InsertCategory,
     val updateCategory: UpdateCategory,
     val deleteCategory: DeleteCategory,
-    val getCategories: GetCategories
+    val getExpenseCategories: GetExpenseCategories,
+    val getExpenseCategoryWithSubCategories: GetExpenseCategoryWithSubCategories,
+    val getIncomeCategoryWithSubCategories: GetIncomeCategoryWithSubCategories
 )

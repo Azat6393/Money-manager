@@ -1,6 +1,5 @@
 package com.woynex.parasayar.core.utils.custom_dialog
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,35 +12,35 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.OnItemClickListener
-import com.woynex.parasayar.core.utils.adapter.AccountGroupAdapter
-import com.woynex.parasayar.databinding.DialogAccountGroupsBinding
-import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
+import com.woynex.parasayar.core.utils.adapter.AccountAdapter
+import com.woynex.parasayar.databinding.DialogAccountsBinding
+import com.woynex.parasayar.feature_accounts.domain.model.Account
 import kotlinx.coroutines.flow.StateFlow
 
-class AccountGroupsDialog(
-    private val accountGroups: StateFlow<List<AccountGroup>>,
-    private val selectedGroup: (AccountGroup) -> Unit
-) : DialogFragment(), OnItemClickListener<AccountGroup> {
+class AccountsDialog(
+    private val accounts: StateFlow<List<Account>>,
+    private val selectedAccount: (Account) -> Unit
+) : DialogFragment(), OnItemClickListener<Account> {
 
-    private lateinit var _binding: DialogAccountGroupsBinding
-    private val mAdapter: AccountGroupAdapter by lazy {
-        AccountGroupAdapter(this)
+    private lateinit var _binding: DialogAccountsBinding
+    private val mAdapter: AccountAdapter by lazy {
+        AccountAdapter(this)
     }
 
     private var selected = false
-    private var groupList = listOf<AccountGroup>()
+    private var accountList = listOf<Account>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_account_groups, container, false)
+        return inflater.inflate(R.layout.dialog_accounts, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = DialogAccountGroupsBinding.bind(view)
+        _binding = DialogAccountsBinding.bind(view)
 
         _binding.recyclerView.apply {
             adapter = mAdapter
@@ -54,9 +53,9 @@ class AccountGroupsDialog(
     private fun observe() {
         lifecycleScope.launchWhenStarted {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                accountGroups.collect { result ->
+                accounts.collect { result ->
                     mAdapter.submitList(result)
-                    groupList = result
+                    accountList = result
                 }
             }
         }
@@ -70,18 +69,9 @@ class AccountGroupsDialog(
         )
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        if (groupList.isNotEmpty()) {
-            if (!selected) {
-                selectedGroup(groupList[0])
-            }
-        }
-    }
-
-    override fun onClick(accountGroup: AccountGroup) {
+    override fun onClick(item: Account) {
         selected = true
-        selectedGroup(accountGroup)
+        selectedAccount(item)
         this.dismiss()
     }
 }

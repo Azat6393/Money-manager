@@ -5,3 +5,9 @@ object TransTypes {
     const val EXPENSE = "expense"
     const val TRANSFER = "transfer"
 }
+
+sealed interface TransType {
+    object Income : TransType
+    object Expense : TransType
+    object Transfer : TransType
+}

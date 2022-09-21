@@ -6,16 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.woynex.parasayar.core.utils.OnItemClickListener
-import com.woynex.parasayar.databinding.ItemAccoutGroupBinding
-import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
+import com.woynex.parasayar.databinding.ItemAccoutBinding
+import com.woynex.parasayar.feature_accounts.domain.model.Account
 
 
-class AccountGroupAdapter(private val listener: OnItemClickListener<AccountGroup>) :
-    ListAdapter<AccountGroup, AccountGroupAdapter.AccountGroupViewHolder>(DiffCallBack) {
+class AccountAdapter(private val listener: OnItemClickListener<Account>) :
+    ListAdapter<Account, AccountAdapter.AccountViewHolder>(DiffCallBack) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountGroupViewHolder {
-        return AccountGroupViewHolder(
-            ItemAccoutGroupBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountViewHolder {
+        return AccountViewHolder(
+            ItemAccoutBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -23,14 +23,14 @@ class AccountGroupAdapter(private val listener: OnItemClickListener<AccountGroup
         )
     }
 
-    override fun onBindViewHolder(holder: AccountGroupViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
             holder.bind(item)
         }
     }
 
-    inner class AccountGroupViewHolder(private val _binding: ItemAccoutGroupBinding) :
+    inner class AccountViewHolder(private val _binding: ItemAccoutBinding) :
         RecyclerView.ViewHolder(_binding.root) {
 
         init {
@@ -43,7 +43,7 @@ class AccountGroupAdapter(private val listener: OnItemClickListener<AccountGroup
             }
         }
 
-        fun bind(item: AccountGroup) {
+        fun bind(item: Account) {
             _binding.apply {
                 _binding.name.text = item.name
             }
@@ -51,12 +51,12 @@ class AccountGroupAdapter(private val listener: OnItemClickListener<AccountGroup
     }
 
     companion object {
-        private val DiffCallBack = object : DiffUtil.ItemCallback<AccountGroup>() {
-            override fun areItemsTheSame(oldItem: AccountGroup, newItem: AccountGroup): Boolean {
+        private val DiffCallBack = object : DiffUtil.ItemCallback<Account>() {
+            override fun areItemsTheSame(oldItem: Account, newItem: Account): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: AccountGroup, newItem: AccountGroup): Boolean {
+            override fun areContentsTheSame(oldItem: Account, newItem: Account): Boolean {
                 return oldItem == newItem
             }
         }

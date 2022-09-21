@@ -34,8 +34,20 @@ object SettingsModule {
             insertCategory = InsertCategory(repo),
             updateCategory = UpdateCategory(repo),
             deleteCategory = DeleteCategory(repo),
-            getCategories = GetCategories(repo)
+            getExpenseCategories = GetExpenseCategories(repo),
+            getExpenseCategoryWithSubCategories = GetExpenseCategoryWithSubCategories(repo),
+            getIncomeCategoryWithSubCategories = GetIncomeCategoryWithSubCategories(repo)
         )
     }
 
+    @Provides
+    @Singleton
+    fun provideSubCategoryUseCases(repo: SettingsRepository): SubCategoryUseCases {
+        return SubCategoryUseCases(
+            insertSubCategory = InsertSubCategory(repo),
+            updateSubCategory = UpdateSubCategory(repo),
+            deleteSubCategory = DeleteSubCategory(repo),
+            getSubCategories = GetSubCategories(repo),
+        )
+    }
 }

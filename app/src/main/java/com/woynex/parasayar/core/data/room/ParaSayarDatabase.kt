@@ -10,10 +10,11 @@ import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
 import com.woynex.parasayar.feature_settings.data.room.SettingsDao
 import com.woynex.parasayar.feature_trans.data.room.TransDao
 import com.woynex.parasayar.feature_settings.domain.model.Category
+import com.woynex.parasayar.feature_settings.domain.model.SubCategory
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 
 @Database(
-    entities = [Trans::class, Category::class, Account::class, AccountGroup::class],
+    entities = [Trans::class, Category::class, Account::class, AccountGroup::class, SubCategory::class],
     version = 1,
     exportSchema = true
 )

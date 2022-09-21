@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.woynex.parasayar.R
@@ -29,6 +30,13 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
         _binding = FragmentTransBinding.bind(view)
 
         date = LocalDate.now()
+
+        _binding.apply {
+            addTransFab.setOnClickListener {
+                val action = TransFragmentDirections.actionTransFragmentToTransDetailsFragment()
+                findNavController().navigate(action)
+            }
+        }
 
         parseWithMonth()
         initViewPager()

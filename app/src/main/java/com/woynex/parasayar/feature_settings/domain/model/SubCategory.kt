@@ -9,5 +9,6 @@ data class SubCategory(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val name: String,
-    val category_name: String
+    val category_name: String,
+    val category_id: Int
 )
