@@ -13,20 +13,21 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.woynex.parasayar.R
-import com.woynex.parasayar.core.utils.TransType
+import com.woynex.parasayar.core.utils.*
 import com.woynex.parasayar.core.utils.adapter.CategoryAdapter
 import com.woynex.parasayar.core.utils.bottom_sheet.AmountInputBottomSheet
 import com.woynex.parasayar.core.utils.custom_dialog.AccountsDialog
 import com.woynex.parasayar.core.utils.custom_dialog.CategoriesDialog
-import com.woynex.parasayar.core.utils.parseFullDate
-import com.woynex.parasayar.core.utils.showSnackBar
 import com.woynex.parasayar.databinding.FragmentTransDetailsBinding
 import com.woynex.parasayar.feature_accounts.domain.model.Account
 import com.woynex.parasayar.feature_settings.domain.model.Category
+import com.woynex.parasayar.feature_trans.domain.model.Trans
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_add_account.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.ZoneOffset
 import java.util.*
 
 @AndroidEntryPoint
@@ -37,9 +38,12 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
     private lateinit var dateAndTime: LocalDateTime
     private val viewModel: TransDetailsViewModel by viewModels()
 
-    private lateinit var selectedAccount: Account
-    private lateinit var selectedToAccount: Account
+    private var selectedAccount: Account? = null
+    private var selectedToAccount: Account? = null
     private var selectedCategory = ""
+    private var selectedSubCategory: String? = null
+    private var selectedCurrency = ""
+    private var selectedAmount = 0.00
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,20 +74,30 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                     } else {
                         viewModel.getExpenseCategories()
                     }
-                    CategoriesDialog(viewModel.categoryWithSubCategories) {
-                        selectedCategory = it
-                        _binding.category.setText(it)
+                    CategoriesDialog(viewModel.categoryWithSubCategories) { category, subCategory ->
+                        selectedCategory = category
+                        selectedSubCategory = subCategory
+                        _binding.category.setText(
+                            if (subCategory != null) "$category/$subCategory" else category
+                        )
                     }.show(childFragmentManager, "Category Dialog")
                 }
             }
             amount.setOnClickListener {
-                AmountInputBottomSheet {
-                    _binding.amount.setText(it)
+                AmountInputBottomSheet { currency, amount ->
+                    selectedCurrency = currency
+                    selectedAmount = amount
+                    _binding.amount.setText("$currency $amount")
                 }.show(childFragmentManager, "Amount Input Bottom Sheet")
             }
             saveBtn.setOnClickListener {
                 if (isValid()) {
-
+                    when (transType) {
+                        TransType.Expense -> doExpense()
+                        TransType.Income -> doIncome()
+                        TransType.Transfer -> doTransfer()
+                    }
+                    findNavController().popBackStack()
                 }
             }
             backBtn.setOnClickListener {
@@ -91,6 +105,107 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             }
         }
         onTypeChange()
+    }
+
+    private fun doExpense() {
+        val newTrans = createTrans()
+        viewModel.insertTrans(trans = newTrans, selectedAccount!!)
+    }
+
+    private fun doIncome() {
+        val newTrans = createTrans()
+        viewModel.insertTrans(trans = newTrans, selectedAccount!!)
+    }
+
+    private fun doTransfer() {
+        val newTrans = createTransferTrans()
+        if (newTrans.fee_amount == null){
+            viewModel.insertTransferTrans(
+                trans = newTrans,
+                to = selectedToAccount!!,
+                from = selectedAccount!!
+            )
+        } else {
+            val feeTrans =
+                createFeeTrans(newTrans.fee_amount, newTrans.category, newTrans.account_name)
+            viewModel.insertTransferTrans(
+                trans = newTrans,
+                to = selectedToAccount!!,
+                from = selectedAccount!!,
+                feeTrans = feeTrans
+            )
+        }
+        viewModel.insertTransferTrans(
+            trans = newTrans,
+            to = selectedToAccount!!,
+            from = selectedAccount!!
+        )
+    }
+
+    private fun createFeeTrans(feeAmount: Double, to: String, from: String): Trans {
+        return Trans(
+            amount = feeAmount,
+            account_name = from,
+            category = "Others",
+            note = "Fees",
+            description = "",
+            type = TransTypes.EXPENSE,
+            photo = "",
+            currency = selectedCurrency,
+            date_in_millis = dateAndTime.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli(),
+            day = dateAndTime.dayOfMonth,
+            month = dateAndTime.monthValue,
+            year = dateAndTime.year,
+            time = parseTimeDate(dateAndTime)
+        )
+    }
+
+    private fun createTransferTrans(): Trans {
+        val fee = _binding.fees.text.toString()
+        return Trans(
+            amount = selectedAmount,
+            category = selectedToAccount!!.name,
+            account_name = selectedAccount!!.name,
+            subcategory = selectedSubCategory,
+            note = _binding.note.text.toString(),
+            description = _binding.description.text.toString(),
+            photo = "",
+            fee_amount = if (fee.isNotBlank() && fee.toDouble() != 0.00) fee.toDouble() else null,
+            currency = selectedCurrency,
+            type = getTransType(),
+            date_in_millis = dateAndTime.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli(),
+            day = dateAndTime.dayOfMonth,
+            month = dateAndTime.monthValue,
+            year = dateAndTime.year,
+            time = parseTimeDate(dateAndTime)
+        )
+    }
+
+    private fun createTrans(): Trans {
+        return Trans(
+            amount = selectedAmount,
+            category = selectedCategory,
+            account_name = selectedAccount!!.name,
+            subcategory = selectedSubCategory,
+            note = _binding.note.text.toString(),
+            description = _binding.description.text.toString(),
+            photo = "",
+            currency = selectedCurrency,
+            type = getTransType(),
+            date_in_millis = dateAndTime.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli(),
+            day = dateAndTime.dayOfMonth,
+            month = dateAndTime.monthValue,
+            year = dateAndTime.year,
+            time = parseTimeDate(dateAndTime)
+        )
+    }
+
+    private fun getTransType(): String {
+        return when (transType) {
+            TransType.Expense -> TransTypes.EXPENSE
+            TransType.Income -> TransTypes.INCOME
+            TransType.Transfer -> TransTypes.TRANSFER
+        }
     }
 
     private fun isValid(): Boolean {
@@ -107,7 +222,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                 }
                 false
             }
-            _binding.amount.text.toString().isBlank() -> {
+            selectedCurrency.isBlank() || selectedAmount == 0.00 -> {
                 requireView().showSnackBar(getString(R.string.invalid_amount))
                 false
             }
@@ -145,7 +260,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
         timePicker.addOnPositiveButtonClickListener {
             val calendar = Calendar.getInstance()
             calendar.timeInMillis = date
-            val dateAndTime = LocalDateTime.of(
+            val selectedDateAndTime = LocalDateTime.of(
                 LocalDate.of(
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH) + 1,
@@ -155,7 +270,8 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                     timePicker.minute
                 )
             )
-            _binding.date.setText(parseFullDate(dateAndTime))
+            dateAndTime = selectedDateAndTime
+            _binding.date.setText(parseFullDate(selectedDateAndTime))
         }
     }
 
@@ -216,6 +332,12 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             amount.setText("")
             note.setText("")
             description.setText("")
+            selectedAccount = null
+            selectedToAccount = null
+            selectedCategory = ""
+            selectedSubCategory = null
+            selectedCurrency = ""
+            selectedAmount = 0.00
         }
     }
 

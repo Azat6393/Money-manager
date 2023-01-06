@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.woynex.parasayar.R
 import com.woynex.parasayar.databinding.BottomAmountInputBinding
 
-class AmountInputBottomSheet(private val input: (String) -> Unit) : BottomSheetDialogFragment() {
+class AmountInputBottomSheet(private val input: (String, Double) -> Unit) : BottomSheetDialogFragment() {
 
     private lateinit var _binding: BottomAmountInputBinding
     private var inputNumber = ""
@@ -27,7 +26,7 @@ class AmountInputBottomSheet(private val input: (String) -> Unit) : BottomSheetD
         _binding = BottomAmountInputBinding.bind(view)
 
         _binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            updateCallNumber()
+            updateAmount()
         }
         initButtons()
     }
@@ -36,89 +35,88 @@ class AmountInputBottomSheet(private val input: (String) -> Unit) : BottomSheetD
         _binding.apply {
             deleteBtn.setOnClickListener {
                 inputNumber = inputNumber.dropLast(1)
-                updateCallNumber()
+                updateAmount()
             }
             oneBtn.setOnClickListener {
                 inputNumber += "1"
-                updateCallNumber()
+                updateAmount()
             }
             twoBtn.setOnClickListener {
                 inputNumber += "2"
-                updateCallNumber()
+                updateAmount()
             }
             threeBtn.setOnClickListener {
                 inputNumber += "3"
-                updateCallNumber()
+                updateAmount()
             }
             fourBtn.setOnClickListener {
                 inputNumber += "4"
-                updateCallNumber()
+                updateAmount()
             }
             fiveBtn.setOnClickListener {
                 inputNumber += "5"
-                updateCallNumber()
+                updateAmount()
             }
             sixBtn.setOnClickListener {
                 inputNumber += "6"
-                updateCallNumber()
+                updateAmount()
             }
             sevenBtn.setOnClickListener {
                 inputNumber += "7"
-                updateCallNumber()
+                updateAmount()
             }
             eightBtn.setOnClickListener {
                 inputNumber += "8"
-                updateCallNumber()
+                updateAmount()
             }
             nineBtn.setOnClickListener {
                 inputNumber += "9"
-                updateCallNumber()
+                updateAmount()
             }
             zeroBtn.setOnClickListener {
                 inputNumber += "0"
-                updateCallNumber()
+                updateAmount()
             }
             zeroBtn.setOnLongClickListener {
                 inputNumber += "+"
-                updateCallNumber()
+                updateAmount()
                 true
             }
             starBtn.setOnClickListener {
                 inputNumber += "*"
-                updateCallNumber()
+                updateAmount()
             }
             dotBtn.setOnClickListener {
                 if (!inputNumber.contains(".")) {
                     inputNumber += "."
-                    updateCallNumber()
+                    updateAmount()
                 }
             }
             minusBtn.setOnClickListener {
                 if (inputNumber.isBlank()) {
-                    inputNumber += "-"
-                    updateCallNumber()
+                    inputNumber = (inputNumber.toFloat() * (-1)).toString()
+                    updateAmount()
                 }
+            }
+            doneBtn.setOnClickListener {
+                this@AmountInputBottomSheet.dismiss()
             }
         }
     }
 
-    private fun updateCallNumber() {
+    private fun updateAmount() {
         when (_binding.radioGroup.checkedRadioButtonId) {
             R.id.dollar -> {
-                val fullInput = "\$ $inputNumber"
-                input(fullInput)
+                input("\$", if (inputNumber.isBlank()) 0.00 else inputNumber.toDouble())
             }
             R.id.euro -> {
-                val fullInput = "€ $inputNumber"
-                input(fullInput)
+                input("€", if (inputNumber.isBlank()) 0.00 else inputNumber.toDouble())
             }
             R.id.pound -> {
-                val fullInput = "£ $inputNumber"
-                input(fullInput)
+                input("£", if (inputNumber.isBlank()) 0.00 else inputNumber.toDouble())
             }
             R.id.lira -> {
-                val fullInput = "₺ $inputNumber"
-                input(fullInput)
+                input("₺", if (inputNumber.isBlank()) 0.00 else inputNumber.toDouble())
             }
         }
     }

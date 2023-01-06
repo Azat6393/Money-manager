@@ -5,13 +5,14 @@ import androidx.room.PrimaryKey
 import com.woynex.parasayar.core.utils.RoomConstants
 
 @Entity(tableName = RoomConstants.TRANS_TABLE_NAME)
-data class Trans(
+data class  Trans(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val amount: Double,
-    val category: String,
     val account_name: String,
-    val subcategory: String,
+    val category: String,
+    val subcategory: String? = null,
+    val fee_amount: Double? = null,
     val note: String,
     val description: String,
     val photo: String,

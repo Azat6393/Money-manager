@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 class CategoriesDialog(
     private val categoryWithSubcategories: StateFlow<List<CategoryWithSubCategories>>,
-    private val selectedCategory: (String) -> Unit
+    private val selectedCategory: (String, String?) -> Unit
 ) : DialogFragment(), OnItemClickListener<SubCategory>,
     CategoryAdapter.CategoryOnItemClickListener {
 
@@ -80,7 +80,7 @@ class CategoriesDialog(
     }
 
     override fun onClick(item: SubCategory) {
-        selectedCategory("${item.category_name}/${item.name}")
+        selectedCategory(item.category_name,item.name)
         this.dismiss()
     }
 
@@ -92,7 +92,7 @@ class CategoriesDialog(
     }
 
     override fun onSelect(category: String) {
-        selectedCategory(category)
+        selectedCategory(category, null)
         this.dismiss()
     }
 }

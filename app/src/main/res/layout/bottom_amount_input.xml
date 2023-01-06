@@ -258,24 +258,27 @@
 
             </androidx.cardview.widget.CardView>
 
+
+
             <androidx.cardview.widget.CardView
-                android:id="@+id/minus_btn"
+                android:id="@+id/done_btn"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="@color/secondary"
                 app:cardCornerRadius="30dp">
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="-"
+                    android:text="@string/done"
                     android:textColor="@color/primary"
-                    android:textSize="25sp" />
+                    android:textSize="15sp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -355,6 +358,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_marginStart="10dp"
+                android:visibility="invisible"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="3"
                 app:cardBackgroundColor="@color/primary_container"
@@ -442,24 +446,24 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/done_btn"
+                android:id="@+id/minus_btn"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_marginStart="10dp"
+                android:visibility="invisible"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/secondary"
+                app:cardBackgroundColor="@color/primary_container"
                 app:cardCornerRadius="30dp">
-
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
-                    android:text="@string/done"
+                    android:text="-"
                     android:textColor="@color/primary"
-                    android:textSize="15sp" />
+                    android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
 
