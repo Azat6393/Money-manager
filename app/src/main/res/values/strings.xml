@@ -51,4 +51,11 @@
     <string name="invalid_to_account_name">Please choose \"to\" account</string>
     <string name="invalid_amount">Please input amount</string>
     <string name="done">Done</string>
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thur">Thur</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
 </resources>

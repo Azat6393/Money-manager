@@ -16,7 +16,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:alpha="0.5"
+            android:alpha="0.3"
             android:background="@color/surface" />
 
         <LinearLayout
@@ -35,7 +35,7 @@
                 android:layout_weight="1"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 tools:text="06" />
 
@@ -48,7 +48,8 @@
                 android:fontFamily="sans-serif-medium"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:padding="2dp"
+                android:textSize="13sp"
                 android:textStyle="normal"
                 tools:text="Fri" />
 
@@ -60,7 +61,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:textAlignment="textStart"
                 android:paddingStart="10dp"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textStyle="normal"
                 tools:text="01.2023"
                 tools:ignore="RtlSymmetry" />
@@ -82,7 +83,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="15dp"
                 android:textColor="@color/red"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="15sp"
@@ -94,7 +95,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:alpha="0.5"
+            android:alpha="0.3"
             android:background="@color/surface" />
 
         <androidx.recyclerview.widget.RecyclerView
