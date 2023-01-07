@@ -27,7 +27,6 @@ class SelectMonthDialog(private var date: LocalDate, private val onSelect: (Loca
         return dialog
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = DialogSelectMonthBinding.bind(view)
@@ -40,77 +39,66 @@ class SelectMonthDialog(private var date: LocalDate, private val onSelect: (Loca
             dateLeftBtn.setOnClickListener {
                 date = date.minusYears(1)
                 dateTv.text = date.year.toString()
+                onSelect(date)
             }
             dateRightBtn.setOnClickListener {
                 date = date.plusYears(1)
                 dateTv.text = date.year.toString()
+                onSelect(date)
             }
             initSelectedMonth()
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun initSelectedMonth() {
         _binding.apply {
             jan.setOnClickListener {
                 date = date.withMonth(Month.JANUARY.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             feb.setOnClickListener {
                 date = date.withMonth(Month.FEBRUARY.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             mar.setOnClickListener {
                 date = date.withMonth(Month.MARCH.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             apr.setOnClickListener {
                 date = date.withMonth(Month.APRIL.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             may.setOnClickListener {
                 date = date.withMonth(Month.MAY.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             jun.setOnClickListener {
                 date = date.withMonth(Month.JUNE.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             jul.setOnClickListener {
                 date = date.withMonth(Month.JULY.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             aug.setOnClickListener {
                 date = date.withMonth(Month.AUGUST.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
-            SEP.setOnClickListener {
+            sep.setOnClickListener {
                 date = date.withMonth(Month.SEPTEMBER.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             oct.setOnClickListener {
                 date = date.withMonth(Month.OCTOBER.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             nov.setOnClickListener {
                 date = date.withMonth(Month.NOVEMBER.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
             dec.setOnClickListener {
                 date = date.withMonth(Month.DECEMBER.value)
                 onSelect(date)
-                this@SelectMonthDialog.dismiss()
             }
         }
     }

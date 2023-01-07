@@ -37,7 +37,41 @@ class TransRepositoryImpl @Inject constructor(
         return dao.getAllTrans()
     }
 
-    override fun getTransByMonth(month: Int): Flow<List<Trans>> {
-        return dao.getTransByMonth(month)
+    override fun getTransByMonth(month: Int, year: Int): Flow<List<Trans>> {
+        return dao.getTransByMonth(month, year)
+    }
+
+    override fun filterTransByMonthAndAccount(
+        month: Int,
+        accountName: String,
+        year: Int
+    ): Flow<List<Trans>> {
+        return dao.filterTransByMonthAndAccount(month, accountName, year)
+    }
+
+    override fun filterTransByMonthAndExpensesOrIncome(
+        month: Int,
+        type: String,
+        year: Int
+    ): Flow<List<Trans>> {
+        return dao.filterTransByMonthAndExpensesOrIncome(month, type, year)
+    }
+
+    override fun filterTransByMonthAndExpensesCategory(
+        month: Int,
+        category: String,
+        type: String,
+        year: Int
+    ): Flow<List<Trans>> {
+        return dao.filterTransByMonthAndExpensesCategory(month, category, type, year)
+    }
+
+    override fun filterTransByMonthAndIncomeCategory(
+        month: Int,
+        category: String,
+        type: String,
+        year: Int
+    ): Flow<List<Trans>> {
+        return dao.filterTransByMonthAndIncomeCategory(month, category, type, year)
     }
 }

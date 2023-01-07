@@ -1,6 +1,7 @@
 package com.woynex.parasayar.feature_trans.data.room
 
 import androidx.room.*
+import com.woynex.parasayar.core.utils.TransTypes
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import kotlinx.coroutines.flow.Flow
 import java.time.Year
@@ -29,27 +30,28 @@ interface TransDao {
     @Query("SELECT * FROM trans")
     fun getAllTrans(): Flow<List<Trans>>
 
-    @Query("SELECT * FROM trans WHERE month=:month")
-    fun getTransByMonth(month: Int): Flow<List<Trans>>
+    @Query("SELECT * FROM trans WHERE month=:month AND year=:year")
+    fun getTransByMonth(month: Int, year: Int): Flow<List<Trans>>
 
-    @Query("SELECT * FROM trans WHERE month=:month AND account_name=:accountName")
-    fun filterTransByMonthAndAccount(month: Int, accountName: String): Flow<List<Trans>>
+    @Query("SELECT * FROM trans WHERE month=:month AND account_name=:accountName AND year=:year")
+    fun filterTransByMonthAndAccount(month: Int, accountName: String, year: Int): Flow<List<Trans>>
 
-    @Query("SELECT * FROM trans WHERE month=:month AND type=:type")
-    fun filterTransByMonthAndExpensesOrIncome(month: Int, type: String): Flow<List<Trans>>
+    @Query("SELECT * FROM trans WHERE month=:month AND type=:type AND year=:year")
+    fun filterTransByMonthAndExpensesOrIncome(month: Int, type: String, year: Int): Flow<List<Trans>>
 
-    @Query("SELECT * FROM trans WHERE month=:month AND type=:type AND category=:category")
+    @Query("SELECT * FROM trans WHERE month=:month AND type=:type AND category=:category AND year=:year")
     fun filterTransByMonthAndExpensesCategory(
         month: Int,
         category: String,
-        type: String = "expense"
+        type: String = TransTypes.EXPENSE,
+        year: Int
     ): Flow<List<Trans>>
 
-    @Query("SELECT * FROM trans WHERE month=:month AND type=:type AND category=:category")
+    @Query("SELECT * FROM trans WHERE month=:month AND type=:type AND category=:category AND year=:year")
     fun filterTransByMonthAndIncomeCategory(
         month: Int,
         category: String,
-        type: String = "income"
+        type: String = TransTypes.INCOME,
+        year: Int
     ): Flow<List<Trans>>
-
 }

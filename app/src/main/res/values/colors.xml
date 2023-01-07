@@ -10,6 +10,7 @@
 
 
     <color name="background_color">#FFFFFBFE</color>
+    <color name="gray_background_color">#E3E3E3</color>
     <color name="primary">#FF6750A4</color>
     <color name="primary_container">#FFF7F2F9</color>
     <color name="surface">#FF625D67</color>

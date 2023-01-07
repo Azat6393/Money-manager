@@ -30,7 +30,10 @@ object TransModule {
     @Provides
     @Singleton
     fun provideDailyUseCases(repo: TransRepository): DailyUseCases {
-        return DailyUseCases(getTransByMonth = GetTransByMonth(repo))
+        return DailyUseCases(
+            getTransByMonth = GetTransByMonth(repo),
+            getTransByYear = GetTransByYear(repo)
+        )
     }
 
     @Provides
