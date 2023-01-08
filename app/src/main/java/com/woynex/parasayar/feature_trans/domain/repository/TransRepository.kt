@@ -15,7 +15,7 @@ interface TransRepository {
 
     suspend fun getTransById(id: Int): Trans
 
-    fun getTransByDay(day: Int): Flow<List<Trans>>
+    fun getTransByDay(day: Int, month: Int, year: Int): Flow<List<Trans>>
 
     fun getTransByYear(year: Int): Flow<List<Trans>>
 

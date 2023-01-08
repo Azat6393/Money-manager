@@ -32,7 +32,8 @@ object TransModule {
     fun provideDailyUseCases(repo: TransRepository): DailyUseCases {
         return DailyUseCases(
             getTransByMonth = GetTransByMonth(repo),
-            getTransByYear = GetTransByYear(repo)
+            getTransByYear = GetTransByYear(repo),
+            getTransByDay = GetTransByDay(repo)
         )
     }
 

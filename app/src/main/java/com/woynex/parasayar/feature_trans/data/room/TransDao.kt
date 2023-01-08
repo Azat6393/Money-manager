@@ -21,8 +21,8 @@ interface TransDao {
     @Query("SELECT * FROM trans WHERE id=:id")
     suspend fun getTransById(id: Int): Trans
 
-    @Query("SELECT * FROM trans WHERE day=:day")
-    fun getTransByDay(day: Int): Flow<List<Trans>>
+    @Query("SELECT * FROM trans WHERE day=:day AND month=:month AND year=:year")
+    fun getTransByDay(day: Int, month: Int, year: Int): Flow<List<Trans>>
 
     @Query("SELECT * FROM trans WHERE year=:year")
     fun getTransByYear(year: Int): Flow<List<Trans>>

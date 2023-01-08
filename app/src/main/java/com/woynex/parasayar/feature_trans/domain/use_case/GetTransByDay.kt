@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetTransByDay @Inject constructor(
     private val repo: TransRepository
 ) {
-    operator fun invoke(day: Int) = repo.getTransByDay(day)
+    operator fun invoke(day: Int, month: Int, year: Int) = repo.getTransByDay(day, month, year)
 }

@@ -59,7 +59,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), OnItemClickListen
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.transList.collect { result ->
-                    when(result){
+                    when (result) {
                         is Resource.Empty -> {
                             selectedDate?.let {
                                 setTransToMonth(date = it, transList = emptyList())
@@ -85,6 +85,10 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), OnItemClickListen
     }
 
     override fun onClick(item: CalendarDay) {
+        if (item.income != null && item.expense != null){
+            DailyTransBottomSheet(item.date, viewModel) {
 
+            }.show(childFragmentManager, "Calendar Bottom Sheet")
+        }
     }
 }
