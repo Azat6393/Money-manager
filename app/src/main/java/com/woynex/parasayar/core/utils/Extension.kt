@@ -5,6 +5,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.woynex.parasayar.feature_trans.domain.model.DailyTrans
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import com.woynex.parasayar.feature_trans.domain.model.YearInfo
+import com.woynex.parasayar.feature_trans.domain.model.YearTrans
+import java.time.LocalDate
+import java.time.Month
 import kotlin.math.exp
 
 
@@ -39,4 +42,27 @@ fun List<Trans>.convertToYearInfo(): YearInfo {
         expence = expence,
         total = income - expence
     )
+}
+
+fun List<Trans>.convertToYearTrans(date: LocalDate): List<YearTrans> {
+    val yearTransList = arrayListOf<YearTrans>()
+    for (i in 1..12) {
+        val monthTrans = this.filter { it.month == i }
+        val income = monthTrans.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
+        val expense = monthTrans.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
+        val total = income - expense
+        yearTransList.add(
+            YearTrans(
+                date = LocalDate.of(
+                    date.year,
+                    i,
+                    date.dayOfMonth
+                ),
+                income = income,
+                expence = expense,
+                total = total
+            )
+        )
+    }
+    return yearTransList
 }

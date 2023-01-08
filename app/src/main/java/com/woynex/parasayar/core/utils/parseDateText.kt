@@ -24,6 +24,10 @@ fun parseTimeDate(date: LocalDateTime): String {
     return DateTimeFormatter.ofPattern("HH:mm").format(date)
 }
 
+fun parseMonth(date: LocalDate): String {
+    return DateTimeFormatter.ofPattern("LLLL").format(date)
+}
+
 @SuppressLint("SimpleDateFormat")
 fun parseDayOfMonthDate(date: Long): String {
     val formatter = SimpleDateFormat("dd")

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_background_color" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="5dp"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="3"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            tools:text="30.01 - 05.02" />
+
+        <TextView
+            android:id="@+id/income_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="3.5"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textAlignment="textEnd"
+            android:textColor="@color/blue"
+            android:textSize="15sp"
+            tools:text="$ 0.00" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="3.5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/expence_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textAlignment="textEnd"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                tools:text="$ 0.00" />
+
+            <TextView
+                android:id="@+id/total_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="2dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                tools:text="$ 0.00" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
