@@ -33,7 +33,8 @@ object TransModule {
         return DailyUseCases(
             getTransByMonth = GetTransByMonth(repo),
             getTransByYear = GetTransByYear(repo),
-            getTransByDay = GetTransByDay(repo)
+            getTransByDay = GetTransByDay(repo),
+            getWeeklyTrans = GetWeeklyTrans(repo)
         )
     }
 

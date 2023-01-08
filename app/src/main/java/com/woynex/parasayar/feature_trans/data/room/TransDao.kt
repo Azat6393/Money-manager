@@ -33,6 +33,9 @@ interface TransDao {
     @Query("SELECT * FROM trans WHERE month=:month AND year=:year")
     fun getTransByMonth(month: Int, year: Int): Flow<List<Trans>>
 
+    @Query("SELECT * FROM trans WHERE month=:month OR month=:nextMonth OR month=:previousMonth AND year=:year")
+    fun getTransByWeek(month: Int, year: Int, nextMonth: Int, previousMonth: Int): Flow<List<Trans>>
+
     @Query("SELECT * FROM trans WHERE month=:month AND account_name=:accountName AND year=:year")
     fun filterTransByMonthAndAccount(month: Int, accountName: String, year: Int): Flow<List<Trans>>
 

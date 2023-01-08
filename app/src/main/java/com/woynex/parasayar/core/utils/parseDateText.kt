@@ -16,6 +16,10 @@ fun parseYear(date: LocalDate): String {
     return DateTimeFormatter.ofPattern("y").format(date)
 }
 
+fun parseWeek(date: LocalDate): String {
+    return DateTimeFormatter.ofPattern("d.LL").format(date)
+}
+
 fun parseFullDate(date: LocalDateTime): String {
     return DateTimeFormatter.ofPattern("d/LL/y (E)  HH:mm").format(date)
 }

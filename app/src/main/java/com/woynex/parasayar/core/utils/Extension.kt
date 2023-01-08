@@ -2,12 +2,13 @@ package com.woynex.parasayar.core.utils
 
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
-import com.woynex.parasayar.feature_trans.domain.model.DailyTrans
-import com.woynex.parasayar.feature_trans.domain.model.Trans
-import com.woynex.parasayar.feature_trans.domain.model.YearInfo
-import com.woynex.parasayar.feature_trans.domain.model.YearTrans
+import com.woynex.parasayar.feature_trans.domain.model.*
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
+import java.time.YearMonth
+import java.time.temporal.TemporalAdjuster
+import java.time.temporal.TemporalAdjusters
 import kotlin.math.exp
 
 
@@ -65,4 +66,46 @@ fun List<Trans>.convertToYearTrans(date: LocalDate): List<YearTrans> {
         )
     }
     return yearTransList
+}
+
+
+fun List<Trans>.convertToWeekTrans(today: LocalDate): List<WeekTrans> {
+    val weekTrans = arrayListOf<WeekTrans>()
+
+    val ym: YearMonth = YearMonth.of(today.year, today.month)
+
+    val firstOfMonth: LocalDate = ym.atDay(1)
+    val ta: TemporalAdjuster = TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY)
+    val previousOrSameMonday = firstOfMonth.with(ta)
+
+    val endOfMonth = ym.atEndOfMonth()
+    var weekStart = previousOrSameMonday
+    do {
+        val weekStop = weekStart.plusDays(6)
+        var income = 0.00
+        var expense = 0.00
+        var total = 0.00
+        var currentDate = weekStart
+        do {
+            income += this.filter {
+                it.type == TransTypes.INCOME && it.day == currentDate.dayOfMonth && it.month == currentDate.monthValue
+            }.sumOf { it.amount }
+            expense += this.filter {
+                it.type == TransTypes.EXPENSE && it.day == currentDate.dayOfMonth && it.month == currentDate.monthValue
+            }.sumOf { it.amount }
+            currentDate = currentDate.plusDays(1)
+        } while (currentDate.dayOfWeek.value <= weekStop.dayOfWeek.value)
+        total = income - expense
+        weekTrans.add(
+            WeekTrans(
+                startWeek = weekStart,
+                endWeek = weekStop,
+                income = income,
+                expense = expense,
+                total = total
+            )
+        )
+        weekStart = weekStart.plusWeeks(1)
+    } while (!weekStart.isAfter(endOfMonth))
+    return weekTrans
 }

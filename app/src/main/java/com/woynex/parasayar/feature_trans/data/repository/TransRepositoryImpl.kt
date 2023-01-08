@@ -29,6 +29,15 @@ class TransRepositoryImpl @Inject constructor(
         return dao.getTransByDay(day, month, year)
     }
 
+    override fun getTransByWeek(month: Int, year: Int): Flow<List<Trans>> {
+        return dao.getTransByWeek(
+            month,
+            year,
+            if (month == 12) 1 else month + 1,
+            if (month == 1) 12 else month - 1
+        )
+    }
+
     override fun getTransByYear(year: Int): Flow<List<Trans>> {
         return dao.getTransByYear(year)
     }

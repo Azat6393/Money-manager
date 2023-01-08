@@ -23,6 +23,8 @@ interface TransRepository {
 
     fun getTransByMonth(month: Int, year: Int): Flow<List<Trans>>
 
+    fun getTransByWeek(month: Int, year: Int): Flow<List<Trans>>
+
     fun filterTransByMonthAndAccount(month: Int, accountName: String, year: Int): Flow<List<Trans>>
 
     fun filterTransByMonthAndExpensesOrIncome(month: Int, type: String, year: Int): Flow<List<Trans>>
