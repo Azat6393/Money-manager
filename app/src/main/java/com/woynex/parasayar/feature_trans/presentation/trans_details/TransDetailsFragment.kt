@@ -7,6 +7,9 @@ import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -24,6 +27,8 @@ import com.woynex.parasayar.feature_settings.domain.model.Category
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_account.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -45,7 +50,6 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
     private var selectedCurrency = ""
     private var selectedAmount = 0.00
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTransDetailsBinding.bind(view)
@@ -97,7 +101,6 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                         TransType.Income -> doIncome()
                         TransType.Transfer -> doTransfer()
                     }
-                    findNavController().popBackStack()
                 }
             }
             backBtn.setOnClickListener {
@@ -105,6 +108,24 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             }
         }
         onTypeChange()
+        observe()
+    }
+
+    private fun observe() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.saveStatus.collect { result ->
+                    when (result) {
+                        is Resource.Empty -> Unit
+                        is Resource.Error -> Unit
+                        is Resource.Loading -> Unit
+                        is Resource.Success -> {
+                            findNavController().popBackStack()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun doExpense() {
@@ -119,7 +140,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
 
     private fun doTransfer() {
         val newTrans = createTransferTrans()
-        if (newTrans.fee_amount == null){
+        if (newTrans.fee_amount == null) {
             viewModel.insertTransferTrans(
                 trans = newTrans,
                 to = selectedToAccount!!,
@@ -135,11 +156,6 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                 feeTrans = feeTrans
             )
         }
-        viewModel.insertTransferTrans(
-            trans = newTrans,
-            to = selectedToAccount!!,
-            from = selectedAccount!!
-        )
     }
 
     private fun createFeeTrans(feeAmount: Double, to: String, from: String): Trans {
@@ -232,7 +248,6 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun showDatePicker() {
         val datePicker =
             MaterialDatePicker.Builder.datePicker()
@@ -246,7 +261,6 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun showTimePicker(date: Long) {
         val timePicker =
             MaterialTimePicker.Builder()
