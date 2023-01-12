@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.woynex.parasayar.databinding.ItemCategoryBinding
+import com.woynex.parasayar.feature_settings.domain.model.Category
 import com.woynex.parasayar.feature_settings.domain.model.CategoryWithSubCategories
 import com.woynex.parasayar.feature_settings.domain.model.SubCategory
 
@@ -40,9 +41,9 @@ class CategoryAdapter(private val listener: CategoryOnItemClickListener) :
                     val item = getItem(position)
                     if (item != null) {
                         if (item.subCategoryList.isEmpty()) {
-                            listener.onSelect(item.category.name)
+                            listener.onSelect(item.category)
                         } else {
-                            listener.onClickCategory(item.subCategoryList)
+                            listener.onClickCategory(item.category, item.subCategoryList)
                         }
                     }
                 }
@@ -76,7 +77,7 @@ class CategoryAdapter(private val listener: CategoryOnItemClickListener) :
     }
 
     interface CategoryOnItemClickListener {
-        fun onClickCategory(subCategories: List<SubCategory>)
-        fun onSelect(category: String)
+        fun onClickCategory(category: Category, subCategories: List<SubCategory>)
+        fun onSelect(category: Category)
     }
 }

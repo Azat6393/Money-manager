@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_transFragment_to_transDetailsFragment"
             app:destination="@id/transDetailsFragment" />
+        <action
+            android:id="@+id/action_transFragment_to_transEditFragment"
+            app:destination="@id/transEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
@@ -43,4 +46,12 @@
         android:name="com.woynex.parasayar.feature_trans.presentation.trans_details.TransDetailsFragment"
         android:label="fragment_trans_details"
         tools:layout="@layout/fragment_trans_details" />
+    <fragment
+        android:id="@+id/transEditFragment"
+        android:name="com.woynex.parasayar.feature_trans.presentation.trans_details.TransEditFragment"
+        android:label="TransEditFragment" >
+        <argument
+            android:name="trans"
+            app:argType="com.woynex.parasayar.feature_trans.domain.model.Trans" />
+    </fragment>
 </navigation>

@@ -17,13 +17,14 @@ import com.woynex.parasayar.core.utils.adapter.CategoryAdapter
 import com.woynex.parasayar.core.utils.adapter.SubCategoryAdapter
 import com.woynex.parasayar.databinding.DialogCategoriesBinding
 import com.woynex.parasayar.feature_accounts.domain.model.Account
+import com.woynex.parasayar.feature_settings.domain.model.Category
 import com.woynex.parasayar.feature_settings.domain.model.CategoryWithSubCategories
 import com.woynex.parasayar.feature_settings.domain.model.SubCategory
 import kotlinx.coroutines.flow.StateFlow
 
 class CategoriesDialog(
     private val categoryWithSubcategories: StateFlow<List<CategoryWithSubCategories>>,
-    private val selectedCategory: (String, String?) -> Unit
+    private val selectedCategory: (Category, SubCategory?) -> Unit
 ) : DialogFragment(), OnItemClickListener<SubCategory>,
     CategoryAdapter.CategoryOnItemClickListener {
 
@@ -35,6 +36,7 @@ class CategoriesDialog(
         SubCategoryAdapter(this)
     }
 
+    private var category: Category? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,18 +82,21 @@ class CategoriesDialog(
     }
 
     override fun onClick(item: SubCategory) {
-        selectedCategory(item.category_name,item.name)
-        this.dismiss()
+        if (category != null) {
+            selectedCategory(category!!, item)
+            this.dismiss()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onClickCategory(subCategories: List<SubCategory>) {
+    override fun onClickCategory(category: Category, subCategories: List<SubCategory>) {
+        this.category = category
         subcategoryAdapter.submitList(emptyList())
         subcategoryAdapter.notifyDataSetChanged()
         subcategoryAdapter.submitList(subCategories)
     }
 
-    override fun onSelect(category: String) {
+    override fun onSelect(category: Category) {
         selectedCategory(category, null)
         this.dismiss()
     }

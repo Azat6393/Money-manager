@@ -1,5 +1,6 @@
 package com.woynex.parasayar.feature_trans.data.repository
 
+import com.woynex.parasayar.core.utils.TransTypes
 import com.woynex.parasayar.feature_trans.data.room.TransDao
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import com.woynex.parasayar.feature_trans.domain.repository.TransRepository
@@ -15,6 +16,9 @@ class TransRepositoryImpl @Inject constructor(
 
     override suspend fun updateTrans(trans: Trans) {
         dao.updateTrans(trans)
+        if (trans.type == TransTypes.EXPENSE && trans.fee_trans_id != null) {
+            dao.updateFeeAmountFromTrans(trans.amount, trans.fee_trans_id)
+        }
     }
 
     override suspend fun deleteTrans(trans: Trans) {
@@ -82,5 +86,13 @@ class TransRepositoryImpl @Inject constructor(
         year: Int
     ): Flow<List<Trans>> {
         return dao.filterTransByMonthAndIncomeCategory(month, category, type, year)
+    }
+
+    override suspend fun updateFeeAmount(amount: Double, transId: String) {
+        dao.updateFeeAmount(amount, transId)
+    }
+
+    override suspend fun deleteFeeTrans(transId: String) {
+        dao.deleteFeeTrans(transId)
     }
 }

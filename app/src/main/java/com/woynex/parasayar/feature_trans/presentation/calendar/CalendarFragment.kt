@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.CalendarUtils
@@ -19,6 +20,7 @@ import com.woynex.parasayar.feature_trans.TransCoreViewModel
 import com.woynex.parasayar.feature_trans.domain.model.CalendarDay
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import com.woynex.parasayar.feature_trans.presentation.adapter.CalendarAdapter
+import com.woynex.parasayar.feature_trans.presentation.trans.TransFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -87,8 +89,9 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), OnItemClickListen
 
     override fun onClick(item: CalendarDay) {
         if (item.income != null && item.expense != null){
-            DailyTransBottomSheet(item.date, viewModel) {
-
+            DailyTransBottomSheet(item.date, viewModel) { trans ->
+                val action = TransFragmentDirections.actionTransFragmentToTransEditFragment(trans)
+                findNavController().navigate(action)
             }.show(childFragmentManager, "Calendar Bottom Sheet")
         }
     }

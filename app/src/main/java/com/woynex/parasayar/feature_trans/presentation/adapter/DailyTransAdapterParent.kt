@@ -13,7 +13,7 @@ import com.woynex.parasayar.databinding.ItemDailyTransParentBinding
 import com.woynex.parasayar.feature_trans.domain.model.DailyTrans
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 
-class DailyTransAdapterParent(private val listener: OnItemClickListener<Int>) :
+class DailyTransAdapterParent(private val listener: OnItemClickListener<Trans>) :
     ListAdapter<DailyTrans, DailyTransAdapterParent.DailyTransParentViewHolder>(
         DIFF_CALL_BACK
     ), OnItemClickListener<Trans> {
@@ -69,6 +69,6 @@ class DailyTransAdapterParent(private val listener: OnItemClickListener<Int>) :
     }
 
     override fun onClick(item: Trans) {
-        listener.onClick(item.id!!)
+        listener.onClick(item)
     }
 }

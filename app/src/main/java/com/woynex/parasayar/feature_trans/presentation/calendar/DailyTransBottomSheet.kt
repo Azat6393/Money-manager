@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.OnItemClickListener
 import com.woynex.parasayar.databinding.BottomSheetCalendarDetailsBinding
+import com.woynex.parasayar.feature_trans.domain.model.Trans
 import com.woynex.parasayar.feature_trans.presentation.adapter.DailyTransAdapterParent
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -21,8 +22,8 @@ import java.time.LocalDate
 class DailyTransBottomSheet(
     private val date: LocalDate,
     private val calendarViewModel: CalendarViewModel,
-    private val onClickTrans: (Int) -> Unit
-) : BottomSheetDialogFragment(), OnItemClickListener<Int> {
+    private val onClickTrans: (Trans) -> Unit
+) : BottomSheetDialogFragment(), OnItemClickListener<Trans> {
 
     private lateinit var _binding: BottomSheetCalendarDetailsBinding
     private val mAdapter: DailyTransAdapterParent by lazy { DailyTransAdapterParent(this) }
@@ -76,7 +77,7 @@ class DailyTransBottomSheet(
         calendarViewModel.clearDailyTrans()
     }
 
-    override fun onClick(item: Int) {
+    override fun onClick(item: Trans) {
         onClickTrans(item)
         this.dismiss()
     }

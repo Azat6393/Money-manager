@@ -79,11 +79,12 @@ class DailyTransAdapterChild(private val listener: OnItemClickListener<Trans>) :
                         accountNameTv.text = item.account_name
                     }
                     TransTypes.TRANSFER -> {
+                        categoryNameTv.text = context!!.getString(R.string.transfer)
                         amountNameTv.setTextColor(ContextCompat.getColor(context!!, R.color.black))
                         transferContainer.isVisible = true
                         accountNameTv.isVisible = false
                         fromAccountTv.text = item.account_name
-                        toAccountTv.text = item.category
+                        toAccountTv.text = item.to_account_name
                     }
                 }
             }

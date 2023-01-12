@@ -42,4 +42,8 @@ interface TransRepository {
         type: String = TransTypes.INCOME,
         year: Int
     ): Flow<List<Trans>>
+
+    suspend fun updateFeeAmount(amount: Double, transId: String)
+
+    suspend fun deleteFeeTrans(transId: String)
 }

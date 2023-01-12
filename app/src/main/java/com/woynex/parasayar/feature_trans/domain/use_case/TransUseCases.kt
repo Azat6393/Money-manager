@@ -4,5 +4,7 @@ data class TransUseCases(
     val insertTrans: InsertTrans,
     val deleteTrans: DeleteTrans,
     val updateTrans: UpdateTrans,
-    val getTransById: GetTransById
+    val getTransById: GetTransById,
+    val updateFeeAmount: UpdateFeeAmount,
+    val deleteFeeTrans: DeleteFeeTrans
 )

@@ -1,5 +1,6 @@
 package com.woynex.parasayar.feature_trans.presentation.trans_details
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -10,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -26,34 +28,107 @@ import com.woynex.parasayar.feature_settings.domain.model.SubCategory
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.ZoneId
-import java.time.ZoneOffset
+import java.time.*
 import java.util.*
 
 @AndroidEntryPoint
-class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
+class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
 
     private lateinit var _binding: FragmentTransDetailsBinding
     private var transType: TransType = TransType.Expense
     private lateinit var dateAndTime: LocalDateTime
     private val viewModel: TransDetailsViewModel by viewModels()
 
-    private var selectedAccount: Account? = null
-    private var selectedToAccount: Account? = null
-    private var selectedCategory: Category? = null
-    private var selectedSubCategory: SubCategory? = null
+    private val args: TransEditFragmentArgs by navArgs()
+
+    private var selectedAccount: Pair<Int?, String>? = null
+    private var selectedToAccount: Pair<Int?, String?>? = null
+    private var selectedCategory: Pair<Int?, String?>? = null
+    private var selectedSubCategory: Pair<Int?, String?>? = null
     private var selectedCurrency = ""
     private var selectedAmount = 0.00
     private var feeAmount: Double? = null
+
+    private var hasFee = false
+    private var feeState: FeeState = FeeState.EmptyFee
+
+    private fun initTrans() {
+        val trans = args.trans
+        when (trans.type) {
+            TransTypes.INCOME -> {
+                transType = TransType.Income
+                selectedAmount = trans.amount
+                selectedCurrency = trans.currency
+                selectedAccount = Pair(trans.account_id, trans.account_name)
+                selectedCategory = Pair(trans.category_id, trans.category)
+                if (trans.subcategory != null)
+                    selectedSubCategory = Pair(trans.subcategory_id, trans.subcategory)
+            }
+            TransTypes.EXPENSE -> {
+                transType = TransType.Expense
+                selectedAmount = trans.amount
+                selectedCurrency = trans.currency
+                selectedAccount = Pair(trans.account_id, trans.account_name)
+                selectedCategory = Pair(trans.category_id, trans.category)
+                if (trans.subcategory != null)
+                    selectedSubCategory = Pair(trans.subcategory_id, trans.subcategory)
+            }
+            TransTypes.TRANSFER -> {
+                transType = TransType.Transfer
+                selectedAmount = trans.amount
+                selectedCurrency = trans.currency
+                selectedAccount = Pair(trans.account_id, trans.account_name)
+                selectedToAccount = Pair(trans.to_account_id, trans.to_account_name)
+                if (trans.fee_amount != null) {
+                    feeAmount = trans.fee_amount
+                    hasFee = true
+                    feeState = FeeState.UpdateFee
+                }
+            }
+        }
+        initView(trans = trans)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initView(trans: Trans) {
+        when (trans.type) {
+            TransTypes.TRANSFER -> {
+                _binding.apply {
+                    amount.setText("${trans.currency} ${trans.amount}")
+                    category.setText(trans.to_account_name)
+                    account.setText(trans.account_name)
+                    note.setText(trans.note)
+                    description.setText(trans.description)
+                    title.text = getString(R.string.transfer)
+                    if (hasFee) {
+                        fees.setText(trans.fee_amount.toString())
+                        feesBtn.isVisible = false
+                        feesContainer.isVisible = true
+                        closeFeesBtn.isVisible = true
+                    }
+                }
+            }
+            else -> {
+                _binding.apply {
+                    amount.setText("${trans.currency} ${trans.amount}")
+                    category.setText(if (trans.subcategory.isNullOrBlank()) trans.category else "${trans.category} ${trans.subcategory}")
+                    account.setText(trans.account_name)
+                    note.setText(trans.note)
+                    description.setText(trans.description)
+                    title.text =
+                        if (trans.type == TransTypes.INCOME) getString(R.string.income) else getString(
+                            R.string.expense
+                        )
+                }
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTransDetailsBinding.bind(view)
 
-        dateAndTime = LocalDateTime.now()
+        dateAndTime = millisecondToLocalDateTime(args.trans.date_in_millis)
         _binding.apply {
             date.setText(parseFullDate(dateAndTime))
             date.setOnClickListener {
@@ -61,14 +136,14 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             }
             account.setOnClickListener {
                 AccountsDialog(viewModel.accounts) {
-                    selectedAccount = it
+                    selectedAccount = Pair(it.id, it.name)
                     _binding.account.setText(it.name)
                 }.show(childFragmentManager, "Accounts Dialog")
             }
             category.setOnClickListener {
                 if (transType == TransType.Transfer) {
                     AccountsDialog(viewModel.accounts) {
-                        selectedToAccount = it
+                        selectedToAccount = Pair(it.id, it.name)
                         _binding.category.setText(it.name)
                     }.show(childFragmentManager, "Accounts Dialog")
                 } else {
@@ -78,8 +153,8 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                         viewModel.getExpenseCategories()
                     }
                     CategoriesDialog(viewModel.categoryWithSubCategories) { category, subCategory ->
-                        selectedCategory = category
-                        selectedSubCategory = subCategory
+                        selectedCategory = Pair(category.id, category.name)
+                        selectedSubCategory = Pair(subCategory?.id, subCategory?.name)
                         _binding.category.setText(
                             if (subCategory != null) "${category.name}/${subCategory.name}" else category.name
                         )
@@ -108,12 +183,13 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
         }
         onTypeChange()
         observe()
+        initTrans()
     }
 
     private fun observe() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.saveStatus.collect { result ->
+                viewModel.updateStatus.collect { result ->
                     when (result) {
                         is Resource.Empty -> Unit
                         is Resource.Error -> Unit
@@ -129,27 +205,42 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
 
     private fun doExpense() {
         val newTrans = createTrans()
-        viewModel.insertTrans(trans = newTrans)
+        viewModel.updateTrans(trans = newTrans)
     }
 
     private fun doIncome() {
         val newTrans = createTrans()
-        viewModel.insertTrans(trans = newTrans)
+        viewModel.updateTrans(trans = newTrans)
     }
 
     private fun doTransfer() {
-        val newTrans = createTransferTrans()
-        if (newTrans.fee_amount == null) {
-            viewModel.insertTransferTrans(
-                trans = newTrans
-            )
-        } else {
-            val feeTrans =
-                createFeeTrans(newTrans.fee_amount, newTrans.trans_id)
-            viewModel.insertTransferTrans(
-                trans = newTrans,
-                feeTrans = feeTrans
-            )
+        when (feeState) {
+            FeeState.DeleteFee -> {
+                val trans = createTransferTrans()
+                viewModel.deleteFeeTrans(trans.trans_id)
+                viewModel.updateTrans(trans)
+            }
+            FeeState.EmptyFee -> {
+                val trans = createTransferTrans()
+                viewModel.updateTrans(trans)
+            }
+            FeeState.NewFee -> {
+                val trans = createTransferTrans()
+                if (trans.fee_amount != null) {
+                    val feeTrans = createFeeTrans(trans.fee_amount, trans.trans_id)
+                    viewModel.insertFromTrans(feeTrans)
+                }
+                viewModel.updateTrans(trans)
+            }
+            FeeState.UpdateFee -> {
+                val trans = createTransferTrans()
+                if (trans.fee_amount != null) {
+                    viewModel.updateFeeAmount(trans.fee_amount, trans.trans_id)
+                } else {
+                    viewModel.deleteFeeTrans(trans.trans_id)
+                }
+                viewModel.updateTrans(trans)
+            }
         }
     }
 
@@ -160,8 +251,8 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             amount = feeAmount,
             currency = selectedCurrency,
             type = TransTypes.EXPENSE,
-            account_name = selectedAccount!!.name,
-            account_id = selectedAccount!!.id!!,
+            account_name = selectedAccount!!.second,
+            account_id = selectedAccount!!.first!!,
             category = getString(R.string.Others),
             fee_trans_id = fromUUID,
             note = getString(R.string.fees),
@@ -176,15 +267,14 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
     }
 
     private fun createTransferTrans(): Trans {
-        return Trans(
-            trans_id = generateUUID(),
+        return args.trans.copy(
             amount = selectedAmount,
             currency = selectedCurrency,
             type = getTransType(),
-            account_name = selectedAccount!!.name,
-            account_id = selectedAccount!!.id!!,
-            to_account_name = selectedToAccount?.name,
-            to_account_id = selectedToAccount?.id,
+            account_name = selectedAccount!!.second,
+            account_id = selectedAccount!!.first!!,
+            to_account_name = selectedToAccount?.second,
+            to_account_id = selectedToAccount?.first,
             fee_amount = if (feeAmount == null || feeAmount != 0.00) feeAmount else null,
             note = _binding.note.text.toString(),
             photo = "",
@@ -193,22 +283,25 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             day = dateAndTime.dayOfMonth,
             month = dateAndTime.monthValue,
             year = dateAndTime.year,
-            time = parseTimeDate(dateAndTime)
+            time = parseTimeDate(dateAndTime),
+            category_id = null,
+            category = null,
+            subcategory_id = null,
+            subcategory = null
         )
     }
 
     private fun createTrans(): Trans {
-        return Trans(
-            trans_id = generateUUID(),
+        return args.trans.copy(
             amount = selectedAmount,
             currency = selectedCurrency,
             type = getTransType(),
-            account_name = selectedAccount!!.name,
-            account_id = selectedAccount!!.id!!,
-            category = selectedCategory?.name,
-            category_id = selectedCategory?.id,
-            subcategory = selectedSubCategory?.name,
-            subcategory_id = selectedSubCategory?.id,
+            account_name = selectedAccount!!.second,
+            account_id = selectedAccount!!.first!!,
+            category = selectedCategory?.second,
+            category_id = selectedCategory?.first,
+            subcategory = selectedSubCategory?.second,
+            subcategory_id = selectedSubCategory?.first,
             note = _binding.note.text.toString(),
             photo = "",
             description = _binding.description.text.toString(),
@@ -216,7 +309,14 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             day = dateAndTime.dayOfMonth,
             month = dateAndTime.monthValue,
             year = dateAndTime.year,
-            time = parseTimeDate(dateAndTime)
+            time = parseTimeDate(dateAndTime),
+            fee_trans_id = if (args.trans.fee_trans_id != null && args.trans.type == TransTypes.EXPENSE && args.trans.category == getString(
+                    R.string.Others
+                ) && args.trans.note == getString(R.string.fees)
+            ) args.trans.fee_trans_id else null,
+            fee_amount = null,
+            to_account_id = null,
+            to_account_name = null
         )
     }
 
@@ -246,7 +346,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                 requireView().showSnackBar(getString(R.string.invalid_amount))
                 false
             }
-            transType == TransType.Transfer && selectedAccount?.id == selectedToAccount?.id -> {
+            transType == TransType.Transfer && selectedAccount?.first == selectedToAccount?.first -> {
                 requireView().showSnackBar(getString(R.string.same_account_error))
                 false
             }
@@ -305,6 +405,11 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                 R.id.transfer -> onTransfer()
             }
         }
+        when (args.trans.type) {
+            TransTypes.INCOME -> _binding.radioGroup.check(R.id.income)
+            TransTypes.EXPENSE -> _binding.radioGroup.check(R.id.expense)
+            TransTypes.TRANSFER -> _binding.radioGroup.check(R.id.transfer)
+        }
     }
 
     private fun onIncome() {
@@ -341,8 +446,10 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                 feesBtn.isVisible = false
                 feesContainer.isVisible = true
                 closeFeesBtn.isVisible = true
+                feeState = if (hasFee) FeeState.UpdateFee else FeeState.NewFee
             }
             closeFeesBtn.setOnClickListener {
+                feeState = if (hasFee) FeeState.DeleteFee else FeeState.EmptyFee
                 feesContainer.isVisible = false
                 feesBtn.isVisible = true
                 fees.setText("")
@@ -353,9 +460,9 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             closeFeesBtn.isVisible = feeAmount != null
             title.text = getString(R.string.transfer)
             fees.doAfterTextChanged { text ->
-                feeAmount = if(text.toString().isBlank()){
+                feeAmount = if (text.toString().isBlank()) {
                     null
-                }else {
+                } else {
                     text.toString().toDouble()
                 }
             }

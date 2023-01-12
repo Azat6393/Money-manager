@@ -11,6 +11,7 @@ import com.woynex.parasayar.feature_settings.domain.use_case.CategoryUseCases
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import com.woynex.parasayar.feature_trans.domain.use_case.TransUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -35,47 +36,47 @@ class TransDetailsViewModel @Inject constructor(
     private val _saveStatus = MutableStateFlow<Resource<String>>(Resource.Empty())
     val saveStatus = _saveStatus.asStateFlow()
 
+    private val _updateStatus = MutableStateFlow<Resource<String>>(Resource.Empty())
+    val updateStatus = _saveStatus.asStateFlow()
+
     init {
         getAccounts()
     }
 
-    fun insertTrans(trans: Trans, account: Account) = viewModelScope.launch {
+    fun insertTrans(trans: Trans) = viewModelScope.launch {
         transUseCases.insertTrans(trans)
-        when (trans.type) {
-            TransTypes.EXPENSE -> {
-                accountsUseCases.updateAccount(
-                    account.copy(
-                        withdrawal = account.withdrawal + trans.amount
-                    )
-                )
-                _saveStatus.value = Resource.Success<String>("Success")
-            }
-            TransTypes.INCOME -> {
-                accountsUseCases.updateAccount(
-                    account.copy(
-                        deposit = account.deposit + trans.amount
-                    )
-                )
-                _saveStatus.value = Resource.Success<String>("Success")
-            }
-        }
-    }
-
-    fun insertTransferTrans(trans: Trans, to: Account, from: Account) = viewModelScope.launch {
-        transUseCases.insertTrans(trans = trans)
-        accountsUseCases.updateAccount(to.copy(deposit = to.deposit + trans.amount))
-        accountsUseCases.updateAccount(from.copy(withdrawal = from.withdrawal + trans.amount))
         _saveStatus.value = Resource.Success<String>("Success")
     }
 
-    fun insertTransferTrans(trans: Trans, to: Account, from: Account, feeTrans: Trans) =
+    fun insertFromTrans(trans: Trans) = viewModelScope.launch {
+        transUseCases.insertTrans(trans)
+        _updateStatus.value = Resource.Success<String>("Success")
+    }
+
+    fun updateTrans(trans: Trans) = viewModelScope.launch {
+        transUseCases.updateTrans(trans)
+        _updateStatus.value = Resource.Success<String>("Success")
+    }
+
+    fun insertTransferTrans(trans: Trans) = viewModelScope.launch {
+        transUseCases.insertTrans(trans = trans)
+        _saveStatus.value = Resource.Success<String>("Success")
+    }
+
+    fun insertTransferTrans(trans: Trans, feeTrans: Trans) =
         viewModelScope.launch {
             transUseCases.insertTrans(trans = trans)
             transUseCases.insertTrans(trans = feeTrans)
-            accountsUseCases.updateAccount(to.copy(deposit = to.deposit + trans.amount))
-            accountsUseCases.updateAccount(from.copy(withdrawal = from.withdrawal + trans.amount + trans.fee_amount!!))
             _saveStatus.value = Resource.Success<String>("Success")
         }
+
+    fun updateFeeAmount(amount: Double, transId: String) = viewModelScope.launch {
+        transUseCases.updateFeeAmount(amount, transId)
+    }
+
+    fun deleteFeeTrans(transId: String) = viewModelScope.launch {
+        transUseCases.deleteFeeTrans(transId)
+    }
 
     fun getExpenseCategories() {
         categoriesUseCases.getExpenseCategoryWithSubCategories().onEach {

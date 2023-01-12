@@ -58,4 +58,6 @@
     <string name="thur">Thur</string>
     <string name="fri">Fri</string>
     <string name="sat">Sat</string>
+    <string name="same_account_error">From account and To account cannot be same</string>
+    <string name="Others">Others</string>
 </resources>

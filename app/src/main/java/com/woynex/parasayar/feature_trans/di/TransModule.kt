@@ -45,7 +45,9 @@ object TransModule {
             insertTrans = InsertTrans(repo),
             deleteTrans = DeleteTrans(repo),
             updateTrans = UpdateTrans(repo),
-            getTransById = GetTransById(repo)
+            getTransById = GetTransById(repo),
+            updateFeeAmount = UpdateFeeAmount(repo),
+            deleteFeeTrans = DeleteFeeTrans(repo)
         )
     }
 }

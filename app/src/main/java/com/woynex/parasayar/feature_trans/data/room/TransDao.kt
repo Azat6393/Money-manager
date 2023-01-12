@@ -57,4 +57,13 @@ interface TransDao {
         type: String = TransTypes.INCOME,
         year: Int
     ): Flow<List<Trans>>
+
+    @Query("UPDATE trans SET amount=:amount WHERE fee_trans_id=:transId")
+    suspend fun updateFeeAmount(amount: Double, transId: String)
+
+    @Query("UPDATE trans SET fee_amount=:amount WHERE trans_id=:transId")
+    suspend fun updateFeeAmountFromTrans(amount: Double, transId: String)
+
+    @Query("DELETE FROM trans WHERE fee_trans_id=:transId")
+    suspend fun deleteFeeTrans(transId: String)
 }
