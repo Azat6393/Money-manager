@@ -1,7 +1,13 @@
 package com.woynex.parasayar.feature_trans.presentation.trans_details
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -49,6 +55,29 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
     private var selectedAmount = 0.00
     private var feeAmount: Double? = null
 
+    private var selectedBitmap: Bitmap? = null
+
+    private val requestGetContentPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                if (PhotoPickerAvailabilityChecker.isPhotoPickerAvailable())
+                    singlePhotoPickerLauncher
+                else getImageBeforeAndroid11.launch("image/*")
+            }
+        }
+
+    private val singlePhotoPickerLauncher =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { imageUri: Uri? ->
+            selectedBitmap = imageUri?.uriToBitmap(requireContext())
+            setImage()
+        }
+
+    private val getImageBeforeAndroid11: ActivityResultLauncher<String> =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { imageUri: Uri? ->
+            selectedBitmap = imageUri?.uriToBitmap(requireContext())
+            setImage()
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTransDetailsBinding.bind(view)
@@ -87,11 +116,18 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                 }
             }
             amount.setOnClickListener {
-                AmountInputBottomSheet { currency, amount ->
-                    selectedCurrency = currency
-                    selectedAmount = amount
-                    _binding.amount.setText("$currency $amount")
-                }.show(childFragmentManager, "Amount Input Bottom Sheet")
+                AmountInputBottomSheet(
+                    input = { currency, amount ->
+                        selectedCurrency = currency
+                        selectedAmount = amount
+                        _binding.amount.setText("$currency $amount")
+                    },
+                    navigateToListCurrency = {
+                        val action =
+                            TransDetailsFragmentDirections.actionTransDetailsFragmentToCurrenciesFragment()
+                        findNavController().navigate(action)
+                    }
+                ).show(childFragmentManager, "Amount Input Bottom Sheet")
             }
             saveBtn.setOnClickListener {
                 if (isValid()) {
@@ -105,9 +141,36 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             backBtn.setOnClickListener {
                 findNavController().popBackStack()
             }
+            imageBtn.setOnClickListener {
+                if (requireContext().checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED
+                ) {
+                    if (PhotoPickerAvailabilityChecker.isPhotoPickerAvailable())
+                        singlePhotoPickerLauncher
+                    else getImageBeforeAndroid11.launch("image/*")
+                } else {
+                    requestGetContentPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                }
+            }
+            closeBtn.setOnClickListener {
+                removeImage()
+            }
         }
         onTypeChange()
         observe()
+    }
+
+    private fun removeImage() {
+        _binding.selectedImage.setImageBitmap(null)
+        _binding.selectedImageContainer.isVisible = false
+        _binding.closeBtn.isVisible = false
+        selectedBitmap = null
+    }
+
+    private fun setImage() {
+        _binding.selectedImage.setImageBitmap(selectedBitmap)
+        _binding.selectedImageContainer.isVisible = true
+        _binding.closeBtn.isVisible = true
     }
 
     private fun observe() {
@@ -166,7 +229,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             fee_trans_id = fromUUID,
             note = getString(R.string.fees),
             description = "",
-            photo = "",
+            photo = selectedBitmap,
             date_in_millis = feeDate.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
             day = feeDate.dayOfMonth,
             month = feeDate.monthValue,
@@ -187,7 +250,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             to_account_id = selectedToAccount?.id,
             fee_amount = if (feeAmount == null || feeAmount != 0.00) feeAmount else null,
             note = _binding.note.text.toString(),
-            photo = "",
+            photo = selectedBitmap,
             description = _binding.description.text.toString(),
             date_in_millis = dateAndTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
             day = dateAndTime.dayOfMonth,
@@ -210,7 +273,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             subcategory = selectedSubCategory?.name,
             subcategory_id = selectedSubCategory?.id,
             note = _binding.note.text.toString(),
-            photo = "",
+            photo = selectedBitmap,
             description = _binding.description.text.toString(),
             date_in_millis = dateAndTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
             day = dateAndTime.dayOfMonth,
@@ -353,9 +416,9 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
             closeFeesBtn.isVisible = feeAmount != null
             title.text = getString(R.string.transfer)
             fees.doAfterTextChanged { text ->
-                feeAmount = if(text.toString().isBlank()){
+                feeAmount = if (text.toString().isBlank()) {
                     null
-                }else {
+                } else {
                     text.toString().toDouble()
                 }
             }

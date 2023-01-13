@@ -45,13 +45,26 @@
         android:id="@+id/transDetailsFragment"
         android:name="com.woynex.parasayar.feature_trans.presentation.trans_details.TransDetailsFragment"
         android:label="fragment_trans_details"
-        tools:layout="@layout/fragment_trans_details" />
+        tools:layout="@layout/fragment_trans_details" >
+        <action
+            android:id="@+id/action_transDetailsFragment_to_currenciesFragment"
+            app:destination="@id/currenciesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currenciesFragment"
+        android:name="com.woynex.parasayar.core.presentation.currency.CurrenciesFragment"
+        android:label="fragment_currencies"
+        tools:layout="@layout/fragment_currencies" />
     <fragment
         android:id="@+id/transEditFragment"
         android:name="com.woynex.parasayar.feature_trans.presentation.trans_details.TransEditFragment"
-        android:label="TransEditFragment" >
+        android:label="fragment_trans_details"
+        tools:layout="@layout/fragment_trans_details" >
         <argument
             android:name="trans"
             app:argType="com.woynex.parasayar.feature_trans.domain.model.Trans" />
+        <action
+            android:id="@+id/action_transEditFragment_to_currenciesFragment"
+            app:destination="@id/currenciesFragment" />
     </fragment>
 </navigation>

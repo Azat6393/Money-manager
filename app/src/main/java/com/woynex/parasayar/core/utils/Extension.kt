@@ -1,16 +1,28 @@
 package com.woynex.parasayar.core.utils
 
+import android.content.Context
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.feature_trans.domain.model.*
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.Month
 import java.time.YearMonth
 import java.time.temporal.TemporalAdjuster
 import java.time.temporal.TemporalAdjusters
-import kotlin.math.exp
 
+fun String.fromJsonToCurrency(): List<Currency> {
+    val gson = Gson()
+    return gson.fromJson(this, Array<Currency>::class.java).asList()
+}
 
 fun View.showSnackBar(text: String) {
     Snackbar.make(this, text, Snackbar.LENGTH_LONG).show()
@@ -108,4 +120,23 @@ fun List<Trans>.convertToWeekTrans(today: LocalDate): List<WeekTrans> {
         weekStart = weekStart.plusWeeks(1)
     } while (!weekStart.isAfter(endOfMonth))
     return weekTrans
+}
+
+fun Context.checkPermission(permission: String): Int {
+    if (ContextCompat.checkSelfPermission(
+            this, permission
+        ) == PackageManager.PERMISSION_GRANTED
+    ) {
+        return 0
+    }
+    return -1
+}
+
+fun Uri.uriToBitmap(context: Context): Bitmap {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        val source = ImageDecoder.createSource(context.contentResolver, this)
+        ImageDecoder.decodeBitmap(source)
+    } else {
+        MediaStore.Images.Media.getBitmap(context.contentResolver, this)
+    }
 }

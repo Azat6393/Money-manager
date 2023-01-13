@@ -60,4 +60,6 @@
     <string name="sat">Sat</string>
     <string name="same_account_error">From account and To account cannot be same</string>
     <string name="Others">Others</string>
+    <string name="add_currency">Add currency</string>
+    <string name="currencies">Currencies</string>
 </resources>

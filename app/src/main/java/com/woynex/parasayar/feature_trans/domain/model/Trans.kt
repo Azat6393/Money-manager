@@ -1,5 +1,6 @@
 package com.woynex.parasayar.feature_trans.domain.model
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -26,7 +27,7 @@ data class  Trans(
     val fee_amount: Double? = null,
     val fee_trans_id: String? = null,
     val note: String,
-    val photo: String,
+    val photo: Bitmap? = null,
     val description: String,
     val date_in_millis: Long,
     val day: Int,

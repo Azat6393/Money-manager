@@ -8,7 +8,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.woynex.parasayar.R
 import com.woynex.parasayar.databinding.BottomAmountInputBinding
 
-class AmountInputBottomSheet(private val input: (String, Double) -> Unit) : BottomSheetDialogFragment() {
+class AmountInputBottomSheet(
+    private val input: (String, Double) -> Unit,
+    private val navigateToListCurrency: () -> Unit
+) : BottomSheetDialogFragment() {
 
     private lateinit var _binding: BottomAmountInputBinding
     private var inputNumber = ""
@@ -28,6 +31,7 @@ class AmountInputBottomSheet(private val input: (String, Double) -> Unit) : Bott
         _binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             updateAmount()
         }
+        _binding.currencyListBtn.setOnClickListener { navigateToListCurrency() }
         initButtons()
     }
 

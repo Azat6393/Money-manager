@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature_trans.presentation.trans_details.TransDetailsFragment">
+    tools:context=".feature_trans.presentation.trans_details.TransEditFragment">
 
     <ImageView
         android:id="@+id/back_btn"
@@ -322,6 +322,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/description" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/selected_image_container"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="20dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/image_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/selected_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/close_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:layout_gravity="end|top"
+            app:tint="@color/white"
+            android:src="@drawable/ic_baseline_close_24"/>
+
+    </androidx.cardview.widget.CardView>
+
+
     <Button
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
@@ -331,6 +361,6 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/selected_image_container" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

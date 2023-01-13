@@ -64,7 +64,7 @@ class DailyTransAdapterChild(private val listener: OnItemClickListener<Trans>) :
                 amountNameTv.text = "${item.currency} ${item.amount}"
                 noteTv.text = item.note
                 noteTv.isVisible = item.note.isNotBlank()
-                hasImageIv.isVisible = item.photo.isNotBlank()
+                hasImageIv.isVisible = item.photo != null
                 when (item.type) {
                     TransTypes.INCOME -> {
                         amountNameTv.setTextColor(ContextCompat.getColor(context!!, R.color.blue))
