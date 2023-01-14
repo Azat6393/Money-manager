@@ -1,5 +1,6 @@
 package com.woynex.parasayar.feature_trans.di
 
+import com.woynex.parasayar.core.data.room.CurrencyDao
 import com.woynex.parasayar.core.data.room.ParaSayarDatabase
 import com.woynex.parasayar.feature_trans.data.repository.TransRepositoryImpl
 import com.woynex.parasayar.feature_trans.data.room.TransDao
@@ -23,8 +24,8 @@ object TransModule {
 
     @Provides
     @Singleton
-    fun provideTransRepo(dao: TransDao): TransRepository {
-        return TransRepositoryImpl(dao)
+    fun provideTransRepo(dao: TransDao, currencyDao: CurrencyDao): TransRepository {
+        return TransRepositoryImpl(dao, currencyDao)
     }
 
     @Provides

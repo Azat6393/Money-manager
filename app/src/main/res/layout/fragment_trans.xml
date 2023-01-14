@@ -6,42 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".feature_trans.presentation.trans.TransFragment">
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background_color"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/date_left_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_baseline_keyboard_arrow_left_24" />
-
-        <TextView
-            android:id="@+id/date_tv"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Sep 2022"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
-        <ImageView
-            android:id="@+id/date_right_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/date_left_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_baseline_keyboard_arrow_left_24" />
+
+            <TextView
+                android:id="@+id/date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                tools:text="Sep 2022" />
+
+            <ImageView
+                android:id="@+id/date_right_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/currency_filter"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_height="50dp">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbarSize="10sp"
+                android:textSize="10sp"
+                android:inputType="none"
+                tools:ignore="SmallSp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </FrameLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"

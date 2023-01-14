@@ -43,8 +43,8 @@ class DailyTransAdapterParent(private val listener: OnItemClickListener<Trans>) 
                     dayTv.text = item.day
                     dayOfWeekTv.text = item.dayOfWeek
                     dateTv.text = item.date
-                    incomeTv.text = "\$ ${item.income}"
-                    expenseTv.text = "\$ ${item.expenses}"
+                    incomeTv.text = "${item.arrayList[0].currency} ${item.income}"
+                    expenseTv.text = "${item.arrayList[0].currency} ${item.expenses}"
                     val transAdapter = DailyTransAdapterChild(this@DailyTransAdapterParent)
                     transRv.apply {
                         adapter = transAdapter

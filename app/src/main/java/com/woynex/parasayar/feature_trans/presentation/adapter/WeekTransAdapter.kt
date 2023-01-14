@@ -39,9 +39,9 @@ class WeekTransAdapter :
             fun bind(item: WeekTrans){
                 _binding.apply {
                     titleTv.text = "${parseWeek(item.startWeek)} ~ ${parseWeek(item.endWeek)}"
-                    incomeTv.text = "\$ ${item.income}"
-                    expenceTv.text ="\$ ${item.expense}"
-                    totalTv.text = "\$ ${item.total}"
+                    incomeTv.text = "${item.currency} ${item.income}"
+                    expenceTv.text ="${item.currency} ${item.expense}"
+                    totalTv.text = "${item.currency} ${item.total}"
                 }
             }
     }

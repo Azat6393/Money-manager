@@ -35,6 +35,7 @@ import com.woynex.parasayar.databinding.FragmentTransDetailsBinding
 import com.woynex.parasayar.feature_accounts.domain.model.Account
 import com.woynex.parasayar.feature_settings.domain.model.Category
 import com.woynex.parasayar.feature_settings.domain.model.SubCategory
+import com.woynex.parasayar.feature_trans.TransCoreViewModel
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -48,6 +49,7 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
     private var transType: TransType = TransType.Expense
     private lateinit var dateAndTime: LocalDateTime
     private val viewModel: TransDetailsViewModel by viewModels()
+    private val coreViewModel: TransCoreViewModel by viewModels()
 
     private val args: TransEditFragmentArgs by navArgs()
 
@@ -201,6 +203,7 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
             }
             amount.setOnClickListener {
                 AmountInputBottomSheet(
+                    coreViewModel = coreViewModel,
                     input = { currency, amount ->
                         selectedCurrency = currency
                         selectedAmount = amount
@@ -245,14 +248,14 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
         initTrans()
     }
 
-    private fun removeImage(){
+    private fun removeImage() {
         _binding.selectedImage.setImageBitmap(null)
         _binding.selectedImageContainer.isVisible = false
         _binding.closeBtn.isVisible = true
         selectedBitmap = null
     }
 
-    private fun setImage(){
+    private fun setImage() {
         _binding.selectedImage.setImageBitmap(selectedBitmap)
         _binding.selectedImageContainer.isVisible = true
         _binding.closeBtn.isVisible = true

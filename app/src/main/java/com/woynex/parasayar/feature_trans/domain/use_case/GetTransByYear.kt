@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetTransByYear @Inject constructor(
     private val repo: TransRepository
 ) {
-    operator fun invoke(year: Int) = repo.getTransByYear(year)
+    operator fun invoke(year: Int, currency: String) = repo.getTransByYear(year, currency)
 }

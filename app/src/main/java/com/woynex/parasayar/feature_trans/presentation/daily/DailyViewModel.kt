@@ -23,8 +23,8 @@ class DailyViewModel @Inject constructor(
     private val _dailyTrans = MutableStateFlow<List<DailyTrans>>(emptyList())
     val dailyTrans = _dailyTrans.asStateFlow()
 
-    fun getMonthlyTrans(month: Int, year: Int) = viewModelScope.launch {
-        dailyTransUseCases.getTransByMonth(month, year).onEach { result ->
+    fun getMonthlyTrans(month: Int, year: Int, currency: String) = viewModelScope.launch {
+        dailyTransUseCases.getTransByMonth(month, year, currency).onEach { result ->
             _dailyTrans.value = result.convertToDailyTransList()
         }.launchIn(viewModelScope)
     }

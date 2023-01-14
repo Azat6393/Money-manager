@@ -21,9 +21,9 @@ class MonthlyViewModel @Inject constructor(
     private val _yearTrans = MutableStateFlow<List<YearTrans>>(emptyList())
     val yearTrans = _yearTrans.asStateFlow()
 
-    fun getYearTrans(date: LocalDate){
-        dailyTransUseCases.getTransByYear(date.year).onEach { result ->
-            _yearTrans.value = result.convertToYearTrans(date)
+    fun getYearTrans(date: LocalDate, currency: String){
+        dailyTransUseCases.getTransByYear(date.year, currency).onEach { result ->
+            _yearTrans.value = result.convertToYearTrans(date, currency)
         }.launchIn(viewModelScope)
     }
 }

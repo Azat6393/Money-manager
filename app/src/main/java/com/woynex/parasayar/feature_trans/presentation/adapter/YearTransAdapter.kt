@@ -37,9 +37,9 @@ class YearTransAdapter :
             fun bind(item: YearTrans){
                 _binding.apply {
                     titleTv.text = parseMonth(item.date)
-                    incomeTv.text = "\$ ${item.income}"
-                    expenceTv.text ="\$ ${item.expence}"
-                    totalTv.text = "\$ ${item.total}"
+                    incomeTv.text = "${item.currency} ${item.income}"
+                    expenceTv.text ="${item.currency} ${item.expence}"
+                    totalTv.text = "${item.currency} ${item.total}"
                 }
             }
     }

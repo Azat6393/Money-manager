@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetWeeklyTrans @Inject constructor(
     private val repo: TransRepository
 ) {
-    operator fun invoke(month: Int, year: Int) = repo.getTransByWeek(month, year)
+    operator fun invoke(month: Int, year: Int, currency: String) = repo.getTransByWeek(month, year, currency)
 }

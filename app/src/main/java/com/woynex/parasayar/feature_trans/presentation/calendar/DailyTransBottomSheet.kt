@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.woynex.parasayar.R
+import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.OnItemClickListener
 import com.woynex.parasayar.databinding.BottomSheetCalendarDetailsBinding
 import com.woynex.parasayar.feature_trans.domain.model.Trans
@@ -22,6 +23,7 @@ import java.time.LocalDate
 class DailyTransBottomSheet(
     private val date: LocalDate,
     private val calendarViewModel: CalendarViewModel,
+    private val currency: Currency,
     private val onClickTrans: (Trans) -> Unit
 ) : BottomSheetDialogFragment(), OnItemClickListener<Trans> {
 
@@ -45,7 +47,8 @@ class DailyTransBottomSheet(
         calendarViewModel.getDailyTrans(
             day = date.dayOfMonth,
             month = date.monthValue,
-            year = date.year
+            year = date.year,
+            currency = currency.symbol
         )
     }
 

@@ -1,6 +1,6 @@
 package com.woynex.parasayar.feature_trans.domain.repository
 
-import androidx.room.Query
+import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.TransTypes
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import kotlinx.coroutines.flow.Flow
@@ -15,15 +15,15 @@ interface TransRepository {
 
     suspend fun getTransById(id: Int): Trans
 
-    fun getTransByDay(day: Int, month: Int, year: Int): Flow<List<Trans>>
+    fun getTransByDay(day: Int, month: Int, year: Int, currency: String): Flow<List<Trans>>
 
-    fun getTransByYear(year: Int): Flow<List<Trans>>
+    fun getTransByYear(year: Int, currency: String): Flow<List<Trans>>
 
-    fun getAllTrans(): Flow<List<Trans>>
+    fun getAllTrans(currency: String): Flow<List<Trans>>
 
-    fun getTransByMonth(month: Int, year: Int): Flow<List<Trans>>
+    fun getTransByMonth(month: Int, year: Int, currency: String): Flow<List<Trans>>
 
-    fun getTransByWeek(month: Int, year: Int): Flow<List<Trans>>
+    fun getTransByWeek(month: Int, year: Int, currency: String): Flow<List<Trans>>
 
     fun filterTransByMonthAndAccount(month: Int, accountName: String, year: Int): Flow<List<Trans>>
 
@@ -46,4 +46,6 @@ interface TransRepository {
     suspend fun updateFeeAmount(amount: Double, transId: String)
 
     suspend fun deleteFeeTrans(transId: String)
+
+    fun getAllCurrency(): Flow<List<Currency>>
 }

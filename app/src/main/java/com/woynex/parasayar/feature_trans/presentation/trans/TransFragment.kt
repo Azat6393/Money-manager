@@ -2,6 +2,9 @@ package com.woynex.parasayar.feature_trans.presentation.trans
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -11,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.woynex.parasayar.R
+import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.parseDateText
 import com.woynex.parasayar.core.utils.parseYear
 import com.woynex.parasayar.databinding.FragmentTransBinding
@@ -28,6 +32,8 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
     private val coreViewModel: TransCoreViewModel by activityViewModels()
     private lateinit var date: LocalDate
 
+    private var currencyList: List<Currency> = emptyList()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTransBinding.bind(view)
@@ -39,6 +45,14 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
             addTransFab.setOnClickListener {
                 val action = TransFragmentDirections.actionTransFragmentToTransDetailsFragment()
                 findNavController().navigate(action)
+            }
+        }
+
+        _binding.currencyFilter.editText?.doAfterTextChanged { text ->
+            val currency = currencyList.find { it.symbol == text.toString() }
+            currency?.let {
+                coreViewModel.updateCurrency(it)
+                coreViewModel.getTransByYear()
             }
         }
 
@@ -57,6 +71,28 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
                 }
             }
         }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                coreViewModel.currencies.collect { result ->
+                    currencyList = result
+                    initCurrencySelector(result)
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                coreViewModel.selectedCurrency.collect { result ->
+                    _binding.currencyFilter.editText?.setText(result?.symbol)
+                }
+            }
+        }
+    }
+
+    private fun initCurrencySelector(currencyList: List<Currency>) {
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_select_currency,
+            currencyList.map { it.symbol }
+        )
+        (_binding.currencyFilter.editText as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     private fun parseOnlyYear() {
@@ -101,6 +137,7 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
     }
 
     private fun updateDate() {
+        coreViewModel.getCurrencies()
         coreViewModel.updateDate(date)
         coreViewModel.getTransByYear()
     }

@@ -57,7 +57,7 @@ fun List<Trans>.convertToYearInfo(): YearInfo {
     )
 }
 
-fun List<Trans>.convertToYearTrans(date: LocalDate): List<YearTrans> {
+fun List<Trans>.convertToYearTrans(date: LocalDate, currency: String): List<YearTrans> {
     val yearTransList = arrayListOf<YearTrans>()
     for (i in 1..12) {
         val monthTrans = this.filter { it.month == i }
@@ -73,7 +73,8 @@ fun List<Trans>.convertToYearTrans(date: LocalDate): List<YearTrans> {
                 ),
                 income = income,
                 expence = expense,
-                total = total
+                total = total,
+                currency = currency
             )
         )
     }
@@ -81,7 +82,7 @@ fun List<Trans>.convertToYearTrans(date: LocalDate): List<YearTrans> {
 }
 
 
-fun List<Trans>.convertToWeekTrans(today: LocalDate): List<WeekTrans> {
+fun List<Trans>.convertToWeekTrans(today: LocalDate, currency: String): List<WeekTrans> {
     val weekTrans = arrayListOf<WeekTrans>()
 
     val ym: YearMonth = YearMonth.of(today.year, today.month)
@@ -100,10 +101,10 @@ fun List<Trans>.convertToWeekTrans(today: LocalDate): List<WeekTrans> {
         var currentDate = weekStart
         do {
             income += this.filter {
-                it.type == TransTypes.INCOME && it.day == currentDate.dayOfMonth && it.month == currentDate.monthValue
+                it.type == TransTypes.INCOME && it.day == currentDate.dayOfMonth && it.month == currentDate.monthValue && it.currency == currency
             }.sumOf { it.amount }
             expense += this.filter {
-                it.type == TransTypes.EXPENSE && it.day == currentDate.dayOfMonth && it.month == currentDate.monthValue
+                it.type == TransTypes.EXPENSE && it.day == currentDate.dayOfMonth && it.month == currentDate.monthValue && it.currency == currency
             }.sumOf { it.amount }
             currentDate = currentDate.plusDays(1)
         } while (currentDate.dayOfWeek.value <= weekStop.dayOfWeek.value)
@@ -114,7 +115,8 @@ fun List<Trans>.convertToWeekTrans(today: LocalDate): List<WeekTrans> {
                 endWeek = weekStop,
                 income = income,
                 expense = expense,
-                total = total
+                total = total,
+                currency = currency
             )
         )
         weekStart = weekStart.plusWeeks(1)

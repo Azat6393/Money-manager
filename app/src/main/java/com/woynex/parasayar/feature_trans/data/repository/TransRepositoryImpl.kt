@@ -1,5 +1,7 @@
 package com.woynex.parasayar.feature_trans.data.repository
 
+import com.woynex.parasayar.core.data.room.CurrencyDao
+import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.TransTypes
 import com.woynex.parasayar.feature_trans.data.room.TransDao
 import com.woynex.parasayar.feature_trans.domain.model.Trans
@@ -8,7 +10,8 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TransRepositoryImpl @Inject constructor(
-    private val dao: TransDao
+    private val dao: TransDao,
+    private val currencyDao: CurrencyDao
 ) : TransRepository {
     override suspend fun insertTrans(trans: Trans) {
         dao.insertTrans(trans)
@@ -29,29 +32,29 @@ class TransRepositoryImpl @Inject constructor(
         return dao.getTransById(id)
     }
 
-    override fun getTransByDay(day: Int, month: Int, year: Int): Flow<List<Trans>> {
-        return dao.getTransByDay(day, month, year)
+    override fun getTransByDay(day: Int, month: Int, year: Int, currency: String): Flow<List<Trans>> {
+        return dao.getTransByDay(day, month, year, currency)
     }
 
-    override fun getTransByWeek(month: Int, year: Int): Flow<List<Trans>> {
+    override fun getTransByWeek(month: Int, year: Int, currency: String): Flow<List<Trans>> {
         return dao.getTransByWeek(
             month,
             year,
             if (month == 12) 1 else month + 1,
-            if (month == 1) 12 else month - 1
+            if (month == 1) 12 else month - 1, currency
         )
     }
 
-    override fun getTransByYear(year: Int): Flow<List<Trans>> {
-        return dao.getTransByYear(year)
+    override fun getTransByYear(year: Int, currency: String): Flow<List<Trans>> {
+        return dao.getTransByYear(year, currency)
     }
 
-    override fun getAllTrans(): Flow<List<Trans>> {
-        return dao.getAllTrans()
+    override fun getAllTrans(currency: String): Flow<List<Trans>> {
+        return dao.getAllTrans(currency)
     }
 
-    override fun getTransByMonth(month: Int, year: Int): Flow<List<Trans>> {
-        return dao.getTransByMonth(month, year)
+    override fun getTransByMonth(month: Int, year: Int, currency: String): Flow<List<Trans>> {
+        return dao.getTransByMonth(month, year, currency)
     }
 
     override fun filterTransByMonthAndAccount(
@@ -94,5 +97,9 @@ class TransRepositoryImpl @Inject constructor(
 
     override suspend fun deleteFeeTrans(transId: String) {
         dao.deleteFeeTrans(transId)
+    }
+
+    override fun getAllCurrency(): Flow<List<Currency>> {
+        return currencyDao.getAllCurrency()
     }
 }

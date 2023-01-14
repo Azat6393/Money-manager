@@ -13,86 +13,42 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="10">
 
-            <RadioGroup
-                android:id="@+id/radio_group"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:weightSum="18"
-                app:layout_constraintTop_toBottomOf="@+id/back_btn">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/currency_filter"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="50dp">
 
-                <RadioButton
-                    android:id="@+id/dollar"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="3"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@drawable/radio_button_background"
-                    android:checked="true"
-                    android:gravity="center"
-                    android:text="$"
-                    android:textColor="@drawable/radio_button_text_color" />
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbarSize="10sp"
+                    android:textSize="10sp"
+                    android:inputType="none"
+                    tools:ignore="SmallSp" />
 
-                <RadioButton
-                    android:id="@+id/euro"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_weight="3"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@drawable/radio_button_background"
-                    android:checked="false"
-                    android:gravity="center"
-                    android:text="€"
-                    android:textColor="@drawable/radio_button_text_color" />
-
-                <RadioButton
-                    android:id="@+id/pound"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="3"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@drawable/radio_button_background"
-                    android:checked="false"
-                    android:gravity="center"
-                    android:text="£"
-                    android:textColor="@drawable/radio_button_text_color" />
-
-                <RadioButton
-                    android:id="@+id/lira"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="3"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@drawable/radio_button_background"
-                    android:checked="false"
-                    android:gravity="center"
-                    android:text="₺"
-                    android:textColor="@drawable/radio_button_text_color" />
-
-            </RadioGroup>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
                 android:id="@+id/currency_list_btn"
-                android:layout_width="0dp"
+                android:layout_width="22dp"
                 android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
+                android:layout_gravity="start|center_vertical"
+                android:layout_margin="10dp"
                 android:src="@drawable/earth_icon"
                 app:tint="@color/primary" />
 
-        </LinearLayout>
+        </FrameLayout>
 
         <View
             android:layout_width="match_parent"

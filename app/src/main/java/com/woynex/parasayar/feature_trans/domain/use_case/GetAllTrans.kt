@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetAllTrans @Inject constructor(
     private val repo: TransRepository
 ) {
-    operator fun invoke() = repo.getAllTrans()
+    operator fun invoke(currency: String) = repo.getAllTrans(currency)
 }

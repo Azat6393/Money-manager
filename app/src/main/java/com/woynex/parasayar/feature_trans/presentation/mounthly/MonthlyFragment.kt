@@ -10,12 +10,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.woynex.parasayar.R
+import com.woynex.parasayar.core.domain.model.Currency
+import com.woynex.parasayar.core.utils.SharedPreferencesHelper
 import com.woynex.parasayar.databinding.FragmentMonthlyBinding
 import com.woynex.parasayar.feature_trans.TransCoreViewModel
 import com.woynex.parasayar.feature_trans.presentation.adapter.YearTransAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MonthlyFragment : Fragment(R.layout.fragment_monthly) {
@@ -24,6 +28,12 @@ class MonthlyFragment : Fragment(R.layout.fragment_monthly) {
     private val mAdapter: YearTransAdapter by lazy { YearTransAdapter() }
     private val viewModel: MonthlyViewModel by viewModels()
     private val coreViewModel: TransCoreViewModel by activityViewModels()
+
+    private var selectedDate: LocalDate? = null
+    private var selectedCurrency: Currency? = null
+
+    @Inject
+    lateinit var preferencesHelper: SharedPreferencesHelper
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +61,22 @@ class MonthlyFragment : Fragment(R.layout.fragment_monthly) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 coreViewModel.selectedDate.collect { date ->
-                    viewModel.getYearTrans(date)
+                    selectedDate = date
+                    viewModel.getYearTrans(
+                        date,
+                        selectedCurrency?.symbol ?: preferencesHelper.getDefaultCurrency().symbol
+                    )
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                coreViewModel.selectedCurrency.collect { result ->
+                    selectedCurrency = result
+                    viewModel.getYearTrans(
+                        selectedDate ?: LocalDate.now(),
+                        selectedCurrency?.symbol ?: preferencesHelper.getDefaultCurrency().symbol
+                    )
                 }
             }
         }

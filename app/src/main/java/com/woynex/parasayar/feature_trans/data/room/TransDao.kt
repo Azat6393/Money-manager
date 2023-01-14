@@ -21,20 +21,20 @@ interface TransDao {
     @Query("SELECT * FROM trans WHERE id=:id")
     suspend fun getTransById(id: Int): Trans
 
-    @Query("SELECT * FROM trans WHERE day=:day AND month=:month AND year=:year")
-    fun getTransByDay(day: Int, month: Int, year: Int): Flow<List<Trans>>
+    @Query("SELECT * FROM trans WHERE day=:day AND month=:month AND year=:year AND currency=:currency")
+    fun getTransByDay(day: Int, month: Int, year: Int, currency: String): Flow<List<Trans>>
 
-    @Query("SELECT * FROM trans WHERE year=:year")
-    fun getTransByYear(year: Int): Flow<List<Trans>>
+    @Query("SELECT * FROM trans WHERE year=:year AND currency=:currency")
+    fun getTransByYear(year: Int, currency: String): Flow<List<Trans>>
 
-    @Query("SELECT * FROM trans")
-    fun getAllTrans(): Flow<List<Trans>>
+    @Query("SELECT * FROM trans WHERE currency=:currency")
+    fun getAllTrans(currency: String): Flow<List<Trans>>
 
-    @Query("SELECT * FROM trans WHERE month=:month AND year=:year")
-    fun getTransByMonth(month: Int, year: Int): Flow<List<Trans>>
+    @Query("SELECT * FROM trans WHERE month=:month AND year=:year AND currency=:currency")
+    fun getTransByMonth(month: Int, year: Int, currency: String): Flow<List<Trans>>
 
-    @Query("SELECT * FROM trans WHERE month=:month OR month=:nextMonth OR month=:previousMonth AND year=:year")
-    fun getTransByWeek(month: Int, year: Int, nextMonth: Int, previousMonth: Int): Flow<List<Trans>>
+    @Query("SELECT * FROM trans WHERE month=:month OR month=:nextMonth OR month=:previousMonth AND year=:year AND currency=:currency")
+    fun getTransByWeek(month: Int, year: Int, nextMonth: Int, previousMonth: Int, currency: String): Flow<List<Trans>>
 
     @Query("SELECT * FROM trans WHERE month=:month AND account_name=:accountName AND year=:year")
     fun filterTransByMonthAndAccount(month: Int, accountName: String, year: Int): Flow<List<Trans>>

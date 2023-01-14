@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.adapter.CurrencyAdapter
@@ -67,5 +68,19 @@ class CurrenciesFragment : Fragment(R.layout.fragment_currencies),
 
     override fun onDelete(item: Currency) {
         viewModel.deleteCurrency(currency = item)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        requireActivity()
+            .findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            .visibility = View.GONE
+    }
+
+    override fun onStop() {
+        super.onStop()
+        requireActivity()
+            .findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            .visibility = View.VISIBLE
     }
 }

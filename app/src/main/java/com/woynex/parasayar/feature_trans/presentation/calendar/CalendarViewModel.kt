@@ -25,8 +25,8 @@ class CalendarViewModel @Inject constructor(
     private val _dailyTrans = MutableStateFlow<List<DailyTrans>>(emptyList())
     val dailyTrans = _dailyTrans.asStateFlow()
 
-    fun getTransByMonth(month: Int, year: Int) {
-        dailyUseCases.getTransByMonth(month, year).onEach { result ->
+    fun getTransByMonth(month: Int, year: Int, currency: String) {
+        dailyUseCases.getTransByMonth(month, year, currency).onEach { result ->
             if (result.isEmpty()) {
                 _transList.value = Resource.Empty<List<Trans>>()
             } else {
@@ -35,8 +35,8 @@ class CalendarViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun getDailyTrans(day: Int, month: Int, year: Int) {
-        dailyUseCases.getTransByDay(day = day, month = month, year = year).onEach {
+    fun getDailyTrans(day: Int, month: Int, year: Int, currency: String) {
+        dailyUseCases.getTransByDay(day = day, month = month, year = year, currency = currency).onEach {
             _dailyTrans.value = it.convertToDailyTransList()
         }.launchIn(viewModelScope)
     }

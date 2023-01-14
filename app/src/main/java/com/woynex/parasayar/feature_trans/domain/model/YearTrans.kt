@@ -7,4 +7,5 @@ data class YearTrans(
     val income: Double? = null,
     val expence: Double? = null,
     val total: Double? = null,
+    val currency: String
 )
