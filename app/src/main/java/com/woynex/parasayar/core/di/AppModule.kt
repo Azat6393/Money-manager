@@ -3,12 +3,12 @@ package com.woynex.parasayar.core.di
 import android.app.Application
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import androidx.room.Room
 import com.woynex.parasayar.core.data.repository.CurrencyRepository
 import com.woynex.parasayar.core.data.room.CurrencyDao
 import com.woynex.parasayar.core.data.room.ParaSayarDatabase
 import com.woynex.parasayar.core.domain.repository.CurrencyRepositoryImpl
+import com.woynex.parasayar.core.utils.RoomConstants.PARA_SAYAR_DEFAULT_DB
 import com.woynex.parasayar.core.utils.SharedPreferencesHelper
 import dagger.Module
 import dagger.Provides
@@ -30,7 +30,7 @@ object AppModule {
         app,
         ParaSayarDatabase::class.java,
         "para_sayar_database"
-    ).createFromAsset("database/para_sayar.db").build()
+    ).createFromAsset(PARA_SAYAR_DEFAULT_DB).build()
 
     @Provides
     @Singleton

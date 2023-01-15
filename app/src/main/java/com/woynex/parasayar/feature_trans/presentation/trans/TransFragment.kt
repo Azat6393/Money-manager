@@ -59,6 +59,7 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
         parseWithMonth()
         initViewPager()
         observe()
+        coreViewModel.getCurrencies()
     }
 
     private fun observe() {
@@ -137,7 +138,6 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
     }
 
     private fun updateDate() {
-        coreViewModel.getCurrencies()
         coreViewModel.updateDate(date)
         coreViewModel.getTransByYear()
     }

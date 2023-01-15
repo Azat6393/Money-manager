@@ -25,6 +25,7 @@ class AmountInputBottomSheet(
 
     private lateinit var _binding: BottomAmountInputBinding
     private var inputNumber = ""
+    private var firstTime = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +43,7 @@ class AmountInputBottomSheet(
         initButtons()
         observe()
         _binding.currencyFilter.editText?.doAfterTextChanged { text ->
-            updateAmount()
+            if (firstTime) firstTime = false else updateAmount()
         }
         _binding.currencyFilter.editText?.setText("\$")
         coreViewModel.getCurrencies()
@@ -141,19 +142,5 @@ class AmountInputBottomSheet(
     private fun updateAmount() {
         val currency = _binding.currencyFilter.editText?.text.toString()
         input(currency, if (inputNumber.isBlank()) 0.00 else inputNumber.toDouble())
-
-        /*when (_binding.radioGroup.checkedRadioButtonId) {
-            R.id.dollar -> {
-            }
-            R.id.euro -> {
-                input("€", if (inputNumber.isBlank()) 0.00 else inputNumber.toDouble())
-            }
-            R.id.pound -> {
-                input("£", if (inputNumber.isBlank()) 0.00 else inputNumber.toDouble())
-            }
-            R.id.lira -> {
-                input("₺", if (inputNumber.isBlank()) 0.00 else inputNumber.toDouble())
-            }
-        }*/
     }
 }

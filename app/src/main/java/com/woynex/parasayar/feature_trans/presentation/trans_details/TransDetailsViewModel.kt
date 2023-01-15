@@ -37,7 +37,7 @@ class TransDetailsViewModel @Inject constructor(
     val saveStatus = _saveStatus.asStateFlow()
 
     private val _updateStatus = MutableStateFlow<Resource<String>>(Resource.Empty())
-    val updateStatus = _saveStatus.asStateFlow()
+    val updateStatus = _updateStatus.asStateFlow()
 
     init {
         getAccounts()

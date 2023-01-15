@@ -13,6 +13,8 @@ import com.woynex.parasayar.core.utils.custom_dialog.AccountGroupsDialog
 import com.woynex.parasayar.core.utils.showSnackBar
 import com.woynex.parasayar.databinding.FragmentAddAccountBinding
 import com.woynex.parasayar.feature_accounts.domain.model.Account
+import com.woynex.parasayar.feature_accounts.domain.model.AccountDto
+import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +22,8 @@ class AddAccountFragment : Fragment(R.layout.fragment_add_account) {
 
     private lateinit var _binding: FragmentAddAccountBinding
     private val viewModel: AddAccountViewModel by viewModels()
+
+    private var selectedAccountGroup: AccountGroup? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,9 +38,10 @@ class AddAccountFragment : Fragment(R.layout.fragment_add_account) {
                     viewModel.addAccount(
                         Account(
                             name = _binding.name.text.toString(),
-                            deposit = _binding.amount.text.toString().toDouble(),
-                            withdrawal = 0.0,
-                            group_name = _binding.group.text.toString()
+                            group_name = selectedAccountGroup?.name!!,
+                            group_id = selectedAccountGroup?.id!!,
+                            deposit = 0.00,
+                            withdrawal = 0.00
                         )
                     )
                     findNavController().popBackStack()
@@ -52,6 +57,7 @@ class AddAccountFragment : Fragment(R.layout.fragment_add_account) {
     private fun showGroupList() {
         AccountGroupsDialog(viewModel.accountGroup) {
             _binding.group.setText(it.name)
+            selectedAccountGroup = it
         }.show(childFragmentManager, "AccountGroup")
     }
 
