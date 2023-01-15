@@ -56,4 +56,8 @@ class AccountsRepositoryImpl @Inject constructor(
     override suspend fun getExpenceTransfers(accountId: Int): List<Trans> {
         return dao.getExpenceTransfers(accountId)
     }
+
+    override fun getAllAccountsDto(): Flow<List<AccountDto>>{
+        return dao.getAllAccountsDto()
+    }
 }

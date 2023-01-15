@@ -1,8 +1,5 @@
 package com.woynex.parasayar.feature_accounts.domain.repository
 
-import androidx.room.Query
-import com.woynex.parasayar.core.utils.TransTypes
-import com.woynex.parasayar.feature_accounts.domain.model.Account
 import com.woynex.parasayar.feature_accounts.domain.model.AccountDto
 import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
 import com.woynex.parasayar.feature_accounts.domain.model.AccountWithTrans
@@ -37,4 +34,6 @@ interface AccountsRepository {
     suspend fun getExpenceTransfers(
         accountId: Int
     ): List<Trans>
+
+    fun getAllAccountsDto(): Flow<List<AccountDto>>
 }

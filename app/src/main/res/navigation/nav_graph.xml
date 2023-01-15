@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_accountsFragment_to_addAccountFragment"
             app:destination="@id/addAccountFragment" />
+        <action
+            android:id="@+id/action_accountsFragment_to_accountSettingFragment"
+            app:destination="@id/accountSettingFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -66,5 +69,18 @@
         <action
             android:id="@+id/action_transEditFragment_to_currenciesFragment"
             app:destination="@id/currenciesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountSettingFragment"
+        android:name="com.woynex.parasayar.feature_accounts.presentation.account_setting.AccountSettingFragment"
+        android:label="fragment_accounts_setting"
+        tools:layout="@layout/fragment_accounts_setting" >
+        <argument
+            android:name="isDeleteMode"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_accountSettingFragment_to_addAccountFragment"
+            app:destination="@id/addAccountFragment" />
     </fragment>
 </navigation>

@@ -41,6 +41,9 @@ interface AccountsDao {
         expense: String = TransTypes.EXPENSE
     ): List<Trans>
 
+    @Query("SELECT * FROM account")
+    fun getAllAccountsDto(): Flow<List<AccountDto>>
+
     @Transaction
     @Query("SELECT * FROM account")
     fun getAccountWithTrans(): Flow<List<AccountWithTrans>>

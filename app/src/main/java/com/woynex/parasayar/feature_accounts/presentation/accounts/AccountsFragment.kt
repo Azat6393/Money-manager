@@ -115,7 +115,9 @@ class AccountsFragment : Fragment(R.layout.fragment_accounts), OnItemClickListen
                     findNavController().navigate(action)
                 }
                 1 -> {
-                    Toast.makeText(requireContext(), "Delete", Toast.LENGTH_SHORT).show()
+                    val action =
+                        AccountsFragmentDirections.actionAccountsFragmentToAccountSettingFragment(false)
+                    findNavController().navigate(action)
                     powerMenu.dismiss()
                 }
             }

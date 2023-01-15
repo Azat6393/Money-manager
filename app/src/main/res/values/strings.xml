@@ -62,4 +62,9 @@
     <string name="Others">Others</string>
     <string name="add_currency">Add currency</string>
     <string name="currencies">Currencies</string>
+    <string name="account_setting">Account Setting</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="delete_account_title">Delete Account</string>
+    <string name="delete_account_message">Are you sure to delete Account</string>
 </resources>

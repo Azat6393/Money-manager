@@ -1,6 +1,7 @@
 package com.woynex.parasayar.core.utils
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -8,9 +9,11 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.feature_trans.domain.model.*
 import java.time.DayOfWeek
@@ -132,6 +135,24 @@ fun Context.checkPermission(permission: String): Int {
         return 0
     }
     return -1
+}
+
+fun Context.showAlertDialog(
+    title: String,
+    message: String,
+    onPositive: () -> Unit
+) {
+    val dialog = AlertDialog.Builder(this)
+    dialog
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton(
+            getString(R.string.yes)
+        ) { dialog, which -> onPositive() }
+        .setNegativeButton(
+            getString(R.string.no)
+        ) { dialog, which -> dialog.dismiss() }
+    dialog.show()
 }
 
 fun Uri.uriToBitmap(context: Context): Bitmap {
