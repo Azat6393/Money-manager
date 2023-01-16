@@ -29,4 +29,5 @@ interface SettingsRepository {
 
     fun getIncomeCategoryWithSubCategories(): Flow<List<CategoryWithSubCategories>>
 
+    fun getCategoryWithSubCategoriesByIn(id: Int): Flow<CategoryWithSubCategories>
 }

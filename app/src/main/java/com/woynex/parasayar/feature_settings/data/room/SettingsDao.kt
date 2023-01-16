@@ -36,4 +36,8 @@ interface SettingsDao {
     @Transaction
     @Query("SELECT * FROM category WHERE type=:type")
     fun getCategoryWithSubCategories(type: String): Flow<List<CategoryWithSubCategories>>
+
+    @Transaction
+    @Query("SELECT * FROM category WHERE id=:id")
+    fun getCategoryWithSubCategoriesByIn(id: Int): Flow<CategoryWithSubCategories>
 }

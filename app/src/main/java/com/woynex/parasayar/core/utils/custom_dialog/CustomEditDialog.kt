@@ -1,4 +1,4 @@
-package com.woynex.parasayar.feature_accounts.presentation.account_group_setting
+package com.woynex.parasayar.core.utils.custom_dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,53 +8,45 @@ import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.showToastMessage
-import com.woynex.parasayar.databinding.DialogAddEditAccountGroupBinding
-import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
+import com.woynex.parasayar.databinding.DialogCustomEditBinding
 
-class EditAccountGroupDialog(
+class CustomEditDialog(
     private val titleText: String,
     private val isEditMode: Boolean,
-    private val accountGroup: AccountGroup? = null,
-    private val save: (AccountGroup) -> Unit,
-    private val update: (AccountGroup) -> Unit
+    private val editText: String? = null,
+    private val save: (String) -> Unit,
+    private val update: (String) -> Unit
 ) : DialogFragment() {
 
-    private lateinit var _binding: DialogAddEditAccountGroupBinding
+    private lateinit var _binding: DialogCustomEditBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_add_edit_account_group, container, false)
+        return inflater.inflate(R.layout.dialog_custom_edit, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = DialogAddEditAccountGroupBinding.bind(view)
+        _binding = DialogCustomEditBinding.bind(view)
 
         _binding.apply {
-            if (accountGroup != null && isEditMode){
-                inputText.editText?.setText(accountGroup.name)
+            if (editText != null && isEditMode) {
+                inputText.editText?.setText(editText)
             }
             saveBtn.setOnClickListener {
                 val text = inputText.editText?.text.toString()
                 if (text.isNotBlank()) {
                     if (isEditMode) {
-                        accountGroup?.let {
-                            update(it.copy(name = text))
-                        }
+                        update(text)
+
                     } else {
-                        save(
-                            AccountGroup(
-                                name = text
-                            )
-                        )
+                        save(text)
                     }
-                } else {
-                    requireContext().showToastMessage(getString(R.string.name_cannot_be_empty))
+                    this@CustomEditDialog.dismiss()
                 }
-                this@EditAccountGroupDialog.dismiss()
             }
             title.text = titleText
         }

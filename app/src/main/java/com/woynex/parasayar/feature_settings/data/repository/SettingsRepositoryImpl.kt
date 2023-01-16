@@ -55,4 +55,8 @@ class SettingsRepositoryImpl @Inject constructor(
     override fun getIncomeCategoryWithSubCategories(): Flow<List<CategoryWithSubCategories>> {
         return dao.getCategoryWithSubCategories(CategoryTypes.INCOME)
     }
+
+    override fun getCategoryWithSubCategoriesByIn(id: Int): Flow<CategoryWithSubCategories> {
+        return dao.getCategoryWithSubCategoriesByIn(id)
+    }
 }

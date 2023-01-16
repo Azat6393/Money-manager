@@ -11,11 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.woynex.parasayar.R
+import com.woynex.parasayar.core.utils.custom_dialog.CustomEditDialog
 import com.woynex.parasayar.core.utils.showAlertDialog
 import com.woynex.parasayar.databinding.FragmentAccountGroupBinding
 import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
 import com.woynex.parasayar.feature_accounts.presentation.adapter.AccountGroupSettingAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.item_accout.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -47,11 +49,11 @@ class AccountGroupFragment : Fragment(R.layout.fragment_account_group),
     private fun initView() {
         _binding.apply {
             addBtn.setOnClickListener {
-                EditAccountGroupDialog(
+                CustomEditDialog(
                     titleText = getString(R.string.add_account_group),
                     isEditMode = false,
                     save = {
-                        viewModel.insertAccountGroup(it)
+                        viewModel.insertAccountGroup(AccountGroup(name = it))
                     },
                     update = {}
                 ).show(childFragmentManager, "EditAccountGroupDialog")
@@ -66,13 +68,13 @@ class AccountGroupFragment : Fragment(R.layout.fragment_account_group),
     }
 
     override fun onClick(accountGroup: AccountGroup) {
-        EditAccountGroupDialog(
+        CustomEditDialog(
             titleText = getString(R.string.add_account_group),
             isEditMode = true,
             save = {},
-            accountGroup = accountGroup,
+            editText = accountGroup.name,
             update = {
-                viewModel.updateAccountGroup(it)
+                viewModel.updateAccountGroup(accountGroup.copy(name = it))
             }
         ).show(childFragmentManager, "EditAccountGroupDialog")
     }

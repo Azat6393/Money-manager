@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_accountGroupFragment"
             app:destination="@id/accountGroupFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_categorySettingFragment"
+            app:destination="@id/categorySettingFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAccountFragment"
@@ -92,4 +95,25 @@
         android:name="com.woynex.parasayar.feature_accounts.presentation.account_group_setting.AccountGroupFragment"
         android:label="fragment_account_group"
         tools:layout="@layout/fragment_account_group" />
+    <fragment
+        android:id="@+id/categorySettingFragment"
+        android:name="com.woynex.parasayar.feature_settings.presentation.category.CategorySettingFragment"
+        android:label="fragment_category_setting"
+        tools:layout="@layout/fragment_category_setting" >
+        <action
+            android:id="@+id/action_categorySettingFragment_to_subcategorySettingFragment"
+            app:destination="@id/subcategorySettingFragment" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/subcategorySettingFragment"
+        android:name="com.woynex.parasayar.feature_settings.presentation.subcategory.SubcategorySettingFragment"
+        android:label="fragment_subcategory_setting"
+        tools:layout="@layout/fragment_subcategory_setting" >
+        <argument
+            android:name="category_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>
