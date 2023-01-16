@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.woynex.parasayar.core.utils.Resource
 import com.woynex.parasayar.core.utils.TransTypes
+import com.woynex.parasayar.feature_accounts.data.room.toAccount
 import com.woynex.parasayar.feature_accounts.domain.model.Account
+import com.woynex.parasayar.feature_accounts.domain.repository.AccountsRepository
 import com.woynex.parasayar.feature_accounts.domain.use_case.AccountsUseCases
 import com.woynex.parasayar.feature_settings.domain.model.CategoryWithSubCategories
 import com.woynex.parasayar.feature_settings.domain.use_case.CategoryUseCases
@@ -23,7 +25,8 @@ import javax.inject.Inject
 class TransDetailsViewModel @Inject constructor(
     private val accountsUseCases: AccountsUseCases,
     private val transUseCases: TransUseCases,
-    private val categoriesUseCases: CategoryUseCases
+    private val categoriesUseCases: CategoryUseCases,
+    private val repo: AccountsRepository
 ) : ViewModel() {
 
     private val _accounts = MutableStateFlow<List<Account>>(emptyList())
@@ -91,8 +94,8 @@ class TransDetailsViewModel @Inject constructor(
     }
 
     private fun getAccounts() {
-        accountsUseCases.getAccounts().onEach {
-            _accounts.value = it
+        repo.getAccounts().onEach { list ->
+            _accounts.value = list.map { it.toAccount() }
         }.launchIn(viewModelScope)
     }
 }

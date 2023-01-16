@@ -22,7 +22,6 @@
             android:orientation="horizontal"
             android:paddingTop="10dp">
 
-
             <ImageView
                 android:id="@+id/date_left_btn"
                 android:layout_width="30dp"
@@ -53,16 +52,16 @@
             android:id="@+id/currency_filter"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="20dp"
-            android:layout_height="50dp">
+            android:layout_marginEnd="20dp">
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="none"
                 android:scrollbarSize="10sp"
                 android:textSize="10sp"
-                android:inputType="none"
                 tools:ignore="SmallSp" />
 
         </com.google.android.material.textfield.TextInputLayout>

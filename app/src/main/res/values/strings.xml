@@ -67,4 +67,6 @@
     <string name="no">No</string>
     <string name="delete_account_title">Delete Account</string>
     <string name="delete_account_message">Are you sure to delete Account</string>
+    <string name="delete_currency_title">Delete Currency</string>
+    <string name="delete_currency_message">Are you sure to delete Currency?</string>
 </resources>

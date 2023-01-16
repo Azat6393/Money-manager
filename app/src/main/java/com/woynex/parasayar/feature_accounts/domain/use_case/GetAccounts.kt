@@ -12,13 +12,13 @@ import javax.inject.Inject
 class GetAccounts @Inject constructor(
     private val repo: AccountsRepository
 ) {
-    operator fun invoke(): Flow<List<Account>> = flow {
+    operator fun invoke(currency: String): Flow<List<Account>> = flow {
         repo.getAccountWithTrans().collect { accountWIthTrans ->
             val accountList = mutableListOf<Account>()
             accountWIthTrans.forEach { accountWithTrans ->
-                var income = accountWithTrans.trans_list.filter { it.type == TransTypes.INCOME }
+                var income = accountWithTrans.trans_list.filter { it.type == TransTypes.INCOME && it.currency == currency }
                     .sumOf { it.amount }
-                var expence = accountWithTrans.trans_list.filter { it.type == TransTypes.EXPENSE }
+                var expence = accountWithTrans.trans_list.filter { it.type == TransTypes.EXPENSE && it.currency == currency }
                     .sumOf { it.amount }
                 income += repo.getIncomeTransfers(accountWithTrans.accountDto.id!!).sumOf { it.amount }
                 expence += repo.getExpenceTransfers(accountWithTrans.accountDto.id).sumOf { it.amount }

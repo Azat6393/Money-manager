@@ -14,6 +14,7 @@ import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.adapter.CurrencyAdapter
 import com.woynex.parasayar.core.utils.custom_dialog.AddCurrencyDialog
+import com.woynex.parasayar.core.utils.showAlertDialog
 import com.woynex.parasayar.databinding.FragmentCurrenciesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -67,7 +68,12 @@ class CurrenciesFragment : Fragment(R.layout.fragment_currencies),
     }
 
     override fun onDelete(item: Currency) {
-        viewModel.deleteCurrency(currency = item)
+        requireContext().showAlertDialog(
+            getString(R.string.delete_currency_title),
+            getString(R.string.delete_currency_message)
+        ){
+            viewModel.deleteCurrency(currency = item)
+        }
     }
 
     override fun onStart() {
