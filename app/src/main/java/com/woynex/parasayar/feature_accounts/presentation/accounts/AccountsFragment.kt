@@ -152,7 +152,7 @@ class AccountsFragment : Fragment(R.layout.fragment_accounts), OnItemClickListen
                 }
                 1 -> {
                     val action =
-                        AccountsFragmentDirections.actionAccountsFragmentToAccountSettingFragment(false)
+                        AccountsFragmentDirections.actionAccountsFragmentToAccountSettingFragment(true)
                     findNavController().navigate(action)
                     powerMenu.dismiss()
                 }

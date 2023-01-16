@@ -38,7 +38,11 @@
         android:id="@+id/settingsFragment"
         android:name="com.woynex.parasayar.feature_settings.presentation.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_accountGroupFragment"
+            app:destination="@id/accountGroupFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addAccountFragment"
         android:name="com.woynex.parasayar.feature_accounts.presentation.add_account.AddAccountFragment"
@@ -83,4 +87,9 @@
             android:id="@+id/action_accountSettingFragment_to_addAccountFragment"
             app:destination="@id/addAccountFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/accountGroupFragment"
+        android:name="com.woynex.parasayar.feature_accounts.presentation.account_group_setting.AccountGroupFragment"
+        android:label="fragment_account_group"
+        tools:layout="@layout/fragment_account_group" />
 </navigation>

@@ -69,4 +69,9 @@
     <string name="delete_account_message">Are you sure to delete Account</string>
     <string name="delete_currency_title">Delete Currency</string>
     <string name="delete_currency_message">Are you sure to delete Currency?</string>
+    <string name="cash">Cash</string>
+    <string name="delete_account_group_title">Delete Account Group</string>
+    <string name="delete_account_group_message">Are you sure to delete Account Group</string>
+    <string name="name_cannot_be_empty">Name cannot be empty</string>
+    <string name="add_account_group">Add Account Group</string>
 </resources>

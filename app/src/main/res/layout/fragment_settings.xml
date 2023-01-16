@@ -7,9 +7,10 @@
     tools:context=".feature_settings.presentation.settings.SettingsFragment">
 
     <TextView
+        android:id="@+id/account_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settins"
+        android:text="@string/account_group"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
@@ -153,6 +154,12 @@ fun Context.showAlertDialog(
             getString(R.string.no)
         ) { dialog, which -> dialog.dismiss() }
     dialog.show()
+}
+
+fun Context.showToastMessage(
+    message: String
+){
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
 fun Uri.uriToBitmap(context: Context): Bitmap {
