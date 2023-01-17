@@ -60,5 +60,7 @@ interface AccountsDao {
         type: String = TransTypes.TRANSFER
     ): List<Trans>
 
+    @Query("SELECT * FROM trans WHERE month=:month AND year=:year AND account_id=:accountId AND currency=:currency")
+    fun getAccountsTrans(month: Int, year: Int, accountId: Int, currency: String): Flow<List<Trans>>
 
 }

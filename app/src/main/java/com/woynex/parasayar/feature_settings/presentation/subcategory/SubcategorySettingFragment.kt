@@ -64,7 +64,11 @@ class SubcategorySettingFragment : Fragment(R.layout.fragment_subcategory_settin
                 setHasFixedSize(true)
             }
             addBtn.setOnClickListener {
-
+                val action =
+                    SubcategorySettingFragmentDirections.actionSubcategorySettingFragmentToAddSubcategoryFragment(
+                        categoryWithSubCategories.category, null, categoryWithSubCategories.category.type
+                    )
+                findNavController().navigate(action)
             }
             editBtn.setOnClickListener {
                 CustomEditDialog(
@@ -87,7 +91,11 @@ class SubcategorySettingFragment : Fragment(R.layout.fragment_subcategory_settin
     }
 
     override fun onClick(item: SubCategory) {
-
+        val action =
+            SubcategorySettingFragmentDirections.actionSubcategorySettingFragmentToAddSubcategoryFragment(
+                categoryWithSubCategories.category, item, categoryWithSubCategories.category.type
+            )
+        findNavController().navigate(action)
     }
 
     override fun onDelete(item: SubCategory) {

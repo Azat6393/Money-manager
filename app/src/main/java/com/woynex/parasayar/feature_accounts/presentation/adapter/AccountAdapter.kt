@@ -68,7 +68,7 @@ class AccountAdapter(private val listener: OnItemClickListener<Account>) :
         RecyclerView.ViewHolder(_binding.root) {
 
         init {
-            _binding.root.setOnClickListener {
+            _binding.accountContainer.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)

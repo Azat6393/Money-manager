@@ -8,6 +8,7 @@ import com.woynex.parasayar.feature_accounts.domain.model.AccountWithTrans
 import com.woynex.parasayar.feature_accounts.domain.repository.AccountsRepository
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 import javax.inject.Inject
 
 class AccountsRepositoryImpl @Inject constructor(
@@ -57,7 +58,15 @@ class AccountsRepositoryImpl @Inject constructor(
         return dao.getExpenceTransfers(accountId)
     }
 
-    override fun getAllAccountsDto(): Flow<List<AccountDto>>{
+    override fun getAllAccountsDto(): Flow<List<AccountDto>> {
         return dao.getAllAccountsDto()
+    }
+
+    override fun getAccountsTrans(
+        month: Int, year: Int,
+        accountId: Int,
+        currency: String
+    ): Flow<List<Trans>> {
+        return dao.getAccountsTrans(month, year, accountId, currency)
     }
 }

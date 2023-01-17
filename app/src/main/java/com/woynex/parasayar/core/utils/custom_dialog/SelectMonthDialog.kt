@@ -1,14 +1,12 @@
-package com.woynex.parasayar.feature_trans.presentation.trans
+package com.woynex.parasayar.core.utils.custom_dialog
 
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.woynex.parasayar.R
 import com.woynex.parasayar.databinding.DialogSelectMonthBinding

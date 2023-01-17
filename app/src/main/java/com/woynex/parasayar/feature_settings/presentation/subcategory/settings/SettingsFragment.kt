@@ -1,4 +1,4 @@
-package com.woynex.parasayar.feature_settings.presentation.settings
+package com.woynex.parasayar.feature_settings.presentation.subcategory.settings
 
 import android.os.Bundle
 import android.view.View

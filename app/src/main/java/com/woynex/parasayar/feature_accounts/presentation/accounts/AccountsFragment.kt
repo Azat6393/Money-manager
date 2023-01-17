@@ -152,7 +152,9 @@ class AccountsFragment : Fragment(R.layout.fragment_accounts), OnItemClickListen
                 }
                 1 -> {
                     val action =
-                        AccountsFragmentDirections.actionAccountsFragmentToAccountSettingFragment(true)
+                        AccountsFragmentDirections.actionAccountsFragmentToAccountSettingFragment(
+                            true
+                        )
                     findNavController().navigate(action)
                     powerMenu.dismiss()
                 }
@@ -160,6 +162,8 @@ class AccountsFragment : Fragment(R.layout.fragment_accounts), OnItemClickListen
         }
 
     override fun onClick(item: Account) {
-
+        val action =
+            AccountsFragmentDirections.actionAccountsFragmentToAccountsTransFragment(account = item)
+        findNavController().navigate(action)
     }
 }

@@ -5,6 +5,7 @@ import com.woynex.parasayar.feature_accounts.domain.model.AccountGroup
 import com.woynex.parasayar.feature_accounts.domain.model.AccountWithTrans
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 
 interface AccountsRepository {
 
@@ -36,4 +37,7 @@ interface AccountsRepository {
     ): List<Trans>
 
     fun getAllAccountsDto(): Flow<List<AccountDto>>
+
+    fun getAccountsTrans(month: Int, year: Int, accountId: Int, currency: String): Flow<List<Trans>>
+
 }

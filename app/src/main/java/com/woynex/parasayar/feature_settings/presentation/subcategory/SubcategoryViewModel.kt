@@ -32,14 +32,6 @@ class SubcategoryViewModel @Inject constructor(
         repo.updateCategory(category)
     }
 
-    fun updateSubcategory(subcategory: SubCategory) = viewModelScope.launch {
-        repo.updateSubCategory(subcategory)
-    }
-
-    fun insertSubcategory(subcategory: SubCategory) = viewModelScope.launch {
-        repo.insertSubCategory(category = subcategory)
-    }
-
     fun deleteSubcategory(subcategory: SubCategory) = viewModelScope.launch {
         repo.deleteSubCategory(category = subcategory)
     }

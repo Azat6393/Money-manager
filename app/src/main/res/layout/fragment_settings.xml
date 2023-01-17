@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".feature_settings.presentation.settings.SettingsFragment">
+    tools:context=".feature_settings.presentation.subcategory.settings.SettingsFragment">
 
     <TextView
         android:id="@+id/account_group"

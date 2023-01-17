@@ -15,13 +15,13 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
+import com.woynex.parasayar.core.utils.custom_dialog.SelectMonthDialog
 import com.woynex.parasayar.core.utils.parseDateText
 import com.woynex.parasayar.core.utils.parseYear
 import com.woynex.parasayar.databinding.FragmentTransBinding
 import com.woynex.parasayar.feature_trans.TransCoreViewModel
 import com.woynex.parasayar.feature_trans.presentation.adapter.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 

@@ -80,4 +80,8 @@
     <string name="income_category">Income Category</string>
     <string name="delete_subcategory_title">Delete Subcategory</string>
     <string name="delete_subcategory_message">Are you sure to delete Subcategory</string>
+    <string name="subcategory">Subcategory</string>
+    <string name="modify_subcategory">Modify Subcategory</string>
+    <string name="balance">Balance</string>
+    <string name="statement">Statement</string>
 </resources>

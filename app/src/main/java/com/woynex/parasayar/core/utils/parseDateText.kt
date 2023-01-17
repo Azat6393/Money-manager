@@ -55,3 +55,12 @@ fun parseMonthYearDate(date: Long): String {
     calendar.timeInMillis = date
     return formatter.format(calendar.time)
 }
+
+fun parseStartAndEndDateOfMonth(date: LocalDate): String{
+    val start = date.withDayOfMonth(1)
+    val end = date.withDayOfMonth(date.month.length(date.isLeapYear))
+
+    val startText = DateTimeFormatter.ofPattern("d.LL.yy").format(start)
+    val endText = DateTimeFormatter.ofPattern("d.LL.yy").format(end)
+    return "$startText ~ $endText"
+}

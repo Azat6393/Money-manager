@@ -33,10 +33,13 @@
         <action
             android:id="@+id/action_accountsFragment_to_accountSettingFragment"
             app:destination="@id/accountSettingFragment" />
+        <action
+            android:id="@+id/action_accountsFragment_to_accountsTransFragment"
+            app:destination="@id/accountsTransFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.woynex.parasayar.feature_settings.presentation.settings.SettingsFragment"
+        android:name="com.woynex.parasayar.feature_settings.presentation.subcategory.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -115,5 +118,36 @@
         <argument
             android:name="category_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_subcategorySettingFragment_to_addSubcategoryFragment"
+            app:destination="@id/addSubcategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSubcategoryFragment"
+        android:name="com.woynex.parasayar.feature_settings.presentation.add_subcategory.AddSubcategoryFragment"
+        android:label="fragment_add_subcategory"
+        tools:layout="@layout/fragment_add_subcategory" >
+        <argument
+            android:name="category"
+            app:argType="com.woynex.parasayar.feature_settings.domain.model.Category" />
+        <argument
+            android:name="subcategory"
+            app:argType="com.woynex.parasayar.feature_settings.domain.model.SubCategory"
+            app:nullable="true" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountsTransFragment"
+        android:name="com.woynex.parasayar.feature_accounts.presentation.accounts_trans.AccountsTransFragment"
+        android:label="fragment_accounts_trans"
+        tools:layout="@layout/fragment_accounts_trans" >
+        <action
+            android:id="@+id/action_accountsTransFragment_to_transEditFragment"
+            app:destination="@id/transEditFragment" />
+        <argument
+            android:name="account"
+            app:argType="com.woynex.parasayar.feature_accounts.domain.model.Account" />
     </fragment>
 </navigation>
