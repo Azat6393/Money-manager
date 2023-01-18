@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.temporal.WeekFields
 import java.util.*
 
 
@@ -63,4 +64,17 @@ fun parseStartAndEndDateOfMonth(date: LocalDate): String{
     val startText = DateTimeFormatter.ofPattern("d.LL.yy").format(start)
     val endText = DateTimeFormatter.ofPattern("d.LL.yy").format(end)
     return "$startText ~ $endText"
+}
+
+fun parseStartAndEndWeekOfMonth(date: LocalDate): String {
+    val start = date.with(WeekFields.of(Locale.US).dayOfWeek(), 1L)
+    val end = date.with(WeekFields.of(Locale.US).dayOfWeek(), 7L)
+
+    val startText = DateTimeFormatter.ofPattern("d.LL.yy").format(start)
+    val endText = DateTimeFormatter.ofPattern("d.LL.yy").format(end)
+    return "$startText ~ $endText"
+}
+
+fun parseFullDate(date: LocalDate): String{
+    return DateTimeFormatter.ofPattern("d.LL.yy").format(date)
 }

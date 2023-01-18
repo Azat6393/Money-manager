@@ -14,6 +14,7 @@ import com.woynex.parasayar.feature_settings.data.room.SettingsDao
 import com.woynex.parasayar.feature_trans.data.room.TransDao
 import com.woynex.parasayar.feature_settings.domain.model.Category
 import com.woynex.parasayar.feature_settings.domain.model.SubCategory
+import com.woynex.parasayar.feature_statistics.data.room.StatisticsDao
 import com.woynex.parasayar.feature_trans.data.room.BitmapConverters
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 
@@ -28,4 +29,5 @@ abstract class ParaSayarDatabase : RoomDatabase() {
     abstract val transDao: TransDao
     abstract val settingsDao: SettingsDao
     abstract val currencyDao: CurrencyDao
+    abstract val statistics: StatisticsDao
 }

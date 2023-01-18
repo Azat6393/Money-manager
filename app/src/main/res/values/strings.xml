@@ -84,4 +84,6 @@
     <string name="modify_subcategory">Modify Subcategory</string>
     <string name="balance">Balance</string>
     <string name="statement">Statement</string>
+    <string name="annually">Annually</string>
+    <string name="period">Period</string>
 </resources>
