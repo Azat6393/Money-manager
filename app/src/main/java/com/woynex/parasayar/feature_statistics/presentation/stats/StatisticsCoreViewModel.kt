@@ -20,10 +20,19 @@ class StatisticsCoreViewModel @Inject constructor(
     private val statisticsUseCases: StatisticsUseCases,
     private val repo: TransRepository,
     private val preferencesHelper: SharedPreferencesHelper
-): ViewModel() {
+) : ViewModel() {
 
     private val _selectedDate = MutableStateFlow<LocalDate>(LocalDate.now())
     val selectedDate = _selectedDate.asStateFlow()
+
+    private val _selectedStartDate = MutableStateFlow<LocalDate>(LocalDate.now().minusMonths(1))
+    val selectedStartDate = _selectedStartDate.asStateFlow()
+
+    private val _selectedEndDate = MutableStateFlow<LocalDate>(LocalDate.now())
+    val selectedEndDate = _selectedEndDate.asStateFlow()
+
+    private val _filter = MutableStateFlow<StatisticsFilter>(StatisticsFilter.Monthly)
+    val filter = _filter.asStateFlow()
 
     private val _selectedCurrency = MutableStateFlow<Currency?>(null)
     val selectedCurrency = _selectedCurrency.asStateFlow()
@@ -43,6 +52,17 @@ class StatisticsCoreViewModel @Inject constructor(
         _selectedDate.value = date
     }
 
+    fun updateFilter(filter: StatisticsFilter){
+        _filter.value = filter
+    }
+
+    fun updateStartDate(date: LocalDate) {
+        _selectedStartDate.value = date
+    }
+
+    fun updateEndDate(date: LocalDate) {
+        _selectedEndDate.value = date
+    }
     fun getCurrencies() = viewModelScope.launch {
         repo.getAllCurrency().onEach {
             _currencies.value = it

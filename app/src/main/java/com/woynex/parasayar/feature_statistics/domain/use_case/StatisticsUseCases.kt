@@ -1,6 +1,7 @@
 package com.woynex.parasayar.feature_statistics.domain.use_case
 
 data class StatisticsUseCases(
-    val getIncomeTransByMonth: GetIncomeTransByMonth,
-    val getExpensesTransByMonth: GetExpensesTransByMonth
+    val getStatisticsTransByMonth: GetStatisticsTransByMonth,
+    val getStatisticsTransByYear: GetStatisticsTransByYear,
+    val getStatisticsTransByPeriod: GetStatisticsTransByPeriod
 )

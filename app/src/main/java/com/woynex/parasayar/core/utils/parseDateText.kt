@@ -66,7 +66,7 @@ fun parseStartAndEndDateOfMonth(date: LocalDate): String{
     return "$startText ~ $endText"
 }
 
-fun parseStartAndEndWeekOfMonth(date: LocalDate): String {
+fun parseStartAndEndOfWeek(date: LocalDate): String {
     val start = date.with(WeekFields.of(Locale.US).dayOfWeek(), 1L)
     val end = date.with(WeekFields.of(Locale.US).dayOfWeek(), 7L)
 

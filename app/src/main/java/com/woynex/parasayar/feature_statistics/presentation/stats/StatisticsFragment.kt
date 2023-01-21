@@ -1,7 +1,6 @@
 package com.woynex.parasayar.feature_statistics.presentation.stats
 
 import android.os.Bundle
-import android.text.Selection.setSelection
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -100,21 +99,21 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
 
     private fun parseWeekly() {
         _binding.apply {
-            dateTv.text = parseStartAndEndWeekOfMonth(date)
+            dateTv.text = parseStartAndEndOfWeek(date)
             dateLeftBtn.setOnClickListener {
                 date = date.minusWeeks(1)
-                dateTv.text = parseStartAndEndWeekOfMonth(date)
+                dateTv.text = parseStartAndEndOfWeek(date)
                 updateDate()
             }
             dateRightBtn.setOnClickListener {
                 date = date.plusWeeks(1)
-                dateTv.text = parseStartAndEndWeekOfMonth(date)
+                dateTv.text = parseStartAndEndOfWeek(date)
                 updateDate()
             }
             dateTv.setOnClickListener {
                 SelectMonthDialog(date) { newDate ->
                     date = newDate
-                    dateTv.text = parseStartAndEndWeekOfMonth(date)
+                    dateTv.text = parseStartAndEndOfWeek(date)
                     updateDate()
                 }.show(childFragmentManager, "SelectMonthDialog")
             }
@@ -158,6 +157,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 picker.addOnPositiveButtonClickListener {
                     startDate = millisecondToLocalDate(it)
                     startTv.text = parseFullDate(startDate)
+                    coreViewModel.updateStartDate(startDate)
                 }
                 picker.show(childFragmentManager, "Date Picker")
             }
@@ -169,6 +169,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
                 picker.addOnPositiveButtonClickListener {
                     endDate = millisecondToLocalDate(it)
                     endTv.text = parseFullDate(endDate)
+                    coreViewModel.updateEndDate(endDate)
                 }
                 picker.show(childFragmentManager, "Date Picker")
             }
@@ -203,6 +204,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
     }
 
     private fun onSelectWeekly() {
+        coreViewModel.updateFilter(StatisticsFilter.Weekly)
         selectedFilter = StatisticsFilter.Weekly
         dateContainerVisibility(true)
         parseWeekly()
@@ -210,6 +212,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
     }
 
     private fun onSelectMonthly() {
+        coreViewModel.updateFilter(StatisticsFilter.Monthly)
         selectedFilter = StatisticsFilter.Monthly
         dateContainerVisibility(true)
         parseWithMonth()
@@ -217,6 +220,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
     }
 
     private fun onSelectAnnually() {
+        coreViewModel.updateFilter(StatisticsFilter.Annually)
         selectedFilter = StatisticsFilter.Annually
         dateContainerVisibility(true)
         parseOnlyYear()
@@ -224,6 +228,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
     }
 
     private fun onSelectPeriod() {
+        coreViewModel.updateFilter(StatisticsFilter.Period)
         selectedFilter = StatisticsFilter.Period
         dateContainerVisibility(false)
         parsePeriod()

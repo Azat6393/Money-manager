@@ -1,9 +1,9 @@
 package com.woynex.parasayar.core.utils
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -16,12 +16,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
+import com.woynex.parasayar.feature_statistics.domain.model.CategoryStatistics
 import com.woynex.parasayar.feature_trans.domain.model.*
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.YearMonth
+import java.security.Timestamp
+import java.time.*
 import java.time.temporal.TemporalAdjuster
 import java.time.temporal.TemporalAdjusters
+import java.time.temporal.TemporalQueries.localDate
+
 
 fun String.fromJsonToCurrency(): List<Currency> {
     val gson = Gson()
@@ -51,9 +53,42 @@ fun List<Trans>.convertToDailyTransList(): List<DailyTrans> {
     return dailyTransList.sortedByDescending { it.day }
 }
 
+fun List<Trans>.convertToDailyTransListForAccountDetails(accountId: Int): List<DailyTrans> {
+    val dailyTransList = arrayListOf<DailyTrans>()
+    val newList = this.groupBy { it.day }.values
+    newList.forEach { transList ->
+        var allExpense = transList.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
+        var allIncome = transList.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
+        allIncome += transList.filter { it.type == TransTypes.TRANSFER && it.to_account_id == accountId }.sumOf { it.amount }
+        allExpense += transList.filter { it.type == TransTypes.TRANSFER && it.account_id == accountId }.sumOf { it.amount }
+        val newDailyTrans = DailyTrans(
+            day = parseDayOfMonthDate(transList[0].date_in_millis),
+            dayOfWeek = parseDayOfWeekDate(transList[0].date_in_millis),
+            date = parseMonthYearDate(transList[0].date_in_millis),
+            income = allIncome,
+            expenses = allExpense,
+            arrayList = transList.sortedByDescending { it.date_in_millis }
+        )
+        dailyTransList.add(newDailyTrans)
+    }
+    return dailyTransList.sortedByDescending { it.day }
+}
+
 fun List<Trans>.convertToYearInfo(): YearInfo {
     val income = this.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
     val expence = this.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
+    return YearInfo(
+        income = income,
+        expence = expence,
+        total = income - expence
+    )
+}
+
+fun List<Trans>.convertToYearInfoForAccountDetails(accountId: Int): YearInfo {
+    var income = this.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
+    var expence = this.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
+    income += this.filter { it.type == TransTypes.TRANSFER && it.to_account_id == accountId }.sumOf { it.amount }
+    expence += this.filter { it.type == TransTypes.TRANSFER && it.account_id == accountId }.sumOf { it.amount }
     return YearInfo(
         income = income,
         expence = expence,
@@ -158,7 +193,7 @@ fun Context.showAlertDialog(
 
 fun Context.showToastMessage(
     message: String
-){
+) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
@@ -169,4 +204,47 @@ fun Uri.uriToBitmap(context: Context): Bitmap {
     } else {
         MediaStore.Images.Media.getBitmap(context.contentResolver, this)
     }
+}
+
+fun Map<String?, List<Trans>>.convertToCategoryStatisticsList(currency: String): List<CategoryStatistics> {
+
+    val categoryStatistics = mutableListOf<CategoryStatistics>()
+    val total = this.map { it -> it.value.sumOf { it.amount } }.sumOf { it }
+
+    this.forEach { (t, u) ->
+        val totalAmount = u.sumOf { it.amount }
+        val percentage = ((totalAmount / total) * 100).toInt()
+        val color = interpolateColor((totalAmount / total).toFloat())
+        categoryStatistics.add(
+            CategoryStatistics(
+                category_name = t ?: "",
+                category_id = u[0].category_id,
+                total_amount = totalAmount,
+                currency = currency,
+                percentage = percentage,
+                color = color
+            )
+        )
+    }
+    return categoryStatistics.sortedByDescending { it.percentage }
+}
+
+private fun interpolate(a: Float, b: Float, proportion: Float): Float {
+    return a + (b - a) * proportion
+}
+
+
+private fun interpolateColor(proportion: Float): Int {
+    val hsva = FloatArray(3)
+    val hsvb = FloatArray(3)
+    Color.colorToHSV(Color.YELLOW, hsva)
+    Color.colorToHSV(Color.RED, hsvb)
+    for (i in 0..2) {
+        hsvb[i] = interpolate(hsva[i], hsvb[i], proportion)
+    }
+    return Color.HSVToColor(hsvb)
+}
+
+fun LocalDate.toMillisecond(): Long{
+    return this.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
 }

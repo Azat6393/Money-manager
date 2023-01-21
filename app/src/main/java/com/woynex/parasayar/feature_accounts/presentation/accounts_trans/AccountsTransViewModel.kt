@@ -3,10 +3,7 @@ package com.woynex.parasayar.feature_accounts.presentation.accounts_trans
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.woynex.parasayar.core.domain.model.Currency
-import com.woynex.parasayar.core.utils.SharedPreferencesHelper
-import com.woynex.parasayar.core.utils.convertToDailyTransList
-import com.woynex.parasayar.core.utils.convertToYearInfo
-import com.woynex.parasayar.core.utils.convertToYearTrans
+import com.woynex.parasayar.core.utils.*
 import com.woynex.parasayar.feature_accounts.domain.repository.AccountsRepository
 import com.woynex.parasayar.feature_trans.domain.model.DailyTrans
 import com.woynex.parasayar.feature_trans.domain.model.YearInfo
@@ -60,8 +57,8 @@ class AccountsTransViewModel @Inject constructor(
             _selectedDate.value.year , accountId,
             _selectedCurrency.value?.symbol ?: preferencesHelper.getDefaultCurrency().symbol
         ).onEach {
-            _transList.value = it.convertToDailyTransList()
-            _yearInfo.value = it.convertToYearInfo()
+            _transList.value = it.convertToDailyTransListForAccountDetails(accountId)
+            _yearInfo.value = it.convertToYearInfoForAccountDetails(accountId)
         }.launchIn(viewModelScope)
     }
 

@@ -4,8 +4,9 @@ import com.woynex.parasayar.core.data.room.ParaSayarDatabase
 import com.woynex.parasayar.feature_statistics.data.repository.StatisticsRepositoryImpl
 import com.woynex.parasayar.feature_statistics.data.room.StatisticsDao
 import com.woynex.parasayar.feature_statistics.domain.repository.StatisticsRepository
-import com.woynex.parasayar.feature_statistics.domain.use_case.GetExpensesTransByMonth
-import com.woynex.parasayar.feature_statistics.domain.use_case.GetIncomeTransByMonth
+import com.woynex.parasayar.feature_statistics.domain.use_case.GetStatisticsTransByMonth
+import com.woynex.parasayar.feature_statistics.domain.use_case.GetStatisticsTransByPeriod
+import com.woynex.parasayar.feature_statistics.domain.use_case.GetStatisticsTransByYear
 import com.woynex.parasayar.feature_statistics.domain.use_case.StatisticsUseCases
 import dagger.Module
 import dagger.Provides
@@ -33,8 +34,9 @@ object StatisticsModule {
     @Singleton
     fun provideStatisticsUseCases(repo: StatisticsRepository): StatisticsUseCases {
         return StatisticsUseCases(
-            getIncomeTransByMonth = GetIncomeTransByMonth(repo),
-            getExpensesTransByMonth = GetExpensesTransByMonth(repo)
+            getStatisticsTransByMonth = GetStatisticsTransByMonth(repo),
+            getStatisticsTransByYear = GetStatisticsTransByYear(repo),
+            getStatisticsTransByPeriod = GetStatisticsTransByPeriod(repo)
         )
     }
 }

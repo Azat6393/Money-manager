@@ -2,16 +2,20 @@ package com.woynex.parasayar.feature_trans.presentation.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.OnItemClickListener
+import com.woynex.parasayar.core.utils.millisecondToLocalDate
 import com.woynex.parasayar.databinding.ItemDailyTransParentBinding
 import com.woynex.parasayar.feature_trans.domain.model.DailyTrans
 import com.woynex.parasayar.feature_trans.domain.model.Trans
+import java.time.LocalDate
 
 class DailyTransAdapterParent(private val listener: OnItemClickListener<Trans>) :
     ListAdapter<DailyTrans, DailyTransAdapterParent.DailyTransParentViewHolder>(
@@ -29,7 +33,7 @@ class DailyTransAdapterParent(private val listener: OnItemClickListener<Trans>) 
 
     override fun onBindViewHolder(holder: DailyTransParentViewHolder, position: Int) {
         val item = getItem(position)
-        if (item != null){
+        if (item != null) {
             holder.bind(item)
         }
     }
@@ -37,23 +41,29 @@ class DailyTransAdapterParent(private val listener: OnItemClickListener<Trans>) 
     inner class DailyTransParentViewHolder(private val _binding: ItemDailyTransParentBinding) :
         RecyclerView.ViewHolder(_binding.root) {
 
-            @SuppressLint("SetTextI18n")
-            fun bind(item: DailyTrans){
-                _binding.apply {
-                    dayTv.text = item.day
-                    dayOfWeekTv.text = item.dayOfWeek
-                    dateTv.text = item.date
-                    incomeTv.text = "${item.arrayList[0].currency} ${item.income}"
-                    expenseTv.text = "${item.arrayList[0].currency} ${item.expenses}"
-                    val transAdapter = DailyTransAdapterChild(this@DailyTransAdapterParent)
-                    transRv.apply {
-                        adapter = transAdapter
-                        layoutManager = LinearLayoutManager(context)
-                        setHasFixedSize(true)
+        @SuppressLint("SetTextI18n")
+        fun bind(item: DailyTrans) {
+            _binding.apply {
+                dayTv.text = item.day
+                dayOfWeekTv.text = item.dayOfWeek
+                dateTv.text = item.date
+                incomeTv.text = "${item.arrayList[0].currency} ${item.income}"
+                expenseTv.text = "${item.arrayList[0].currency} ${item.expenses}"
+                val transAdapter = DailyTransAdapterChild(this@DailyTransAdapterParent)
+                transRv.apply {
+                    adapter = transAdapter
+                    layoutManager = LinearLayoutManager(context)
+                    setHasFixedSize(true)
+                }
+                transAdapter.submitList(item.arrayList)
+                if (item.arrayList.isNotEmpty()){
+                    if (millisecondToLocalDate(item.arrayList[0].date_in_millis) == LocalDate.now()) {
+                        dayOfWeekTv.setBackgroundResource(R.drawable.radio_button_selected)
+                        dayOfWeekTv.setTextColor(Color.WHITE)
                     }
-                    transAdapter.submitList(item.arrayList)
                 }
             }
+        }
     }
 
     companion object {
