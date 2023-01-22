@@ -36,4 +36,8 @@ class AddAccountViewModel @Inject constructor(
     fun addAccount(account: Account) = viewModelScope.launch {
         accountsUseCases.insertAccount(account)
     }
+
+    fun updateAccount(account: Account) = viewModelScope.launch {
+        accountsUseCases.updateAccount(account)
+    }
 }

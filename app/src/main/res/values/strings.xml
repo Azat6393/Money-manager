@@ -86,4 +86,17 @@
     <string name="statement">Statement</string>
     <string name="annually">Annually</string>
     <string name="period">Period</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="about_us">About us</string>
+    <string name="app_website">App website</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="term_of_service">Term of service</string>
+    <string name="sign_out">Sign out</string>
+    <string name="setting">Setting</string>
+    <string name="configuration">Configuration</string>
+    <string name="income_category_setting">Income Category Setting</string>
+    <string name="expenses_category_setting">Expenses Category Setting</string>
+    <string name="account_group_setting">Account Group Setting</string>
+    <string name="accounts_setting">Accounts Setting</string>
+    <string name="currency_setting">Currency Setting</string>
 </resources>

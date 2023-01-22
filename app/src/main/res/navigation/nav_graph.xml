@@ -39,15 +39,12 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.woynex.parasayar.feature_settings.presentation.subcategory.settings.SettingsFragment"
+        android:name="com.woynex.parasayar.feature_settings.presentation.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
-            android:id="@+id/action_settingsFragment_to_accountGroupFragment"
-            app:destination="@id/accountGroupFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_categorySettingFragment"
-            app:destination="@id/categorySettingFragment" />
+            android:id="@+id/action_settingsFragment_to_configurationFragment"
+            app:destination="@id/configurationFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAccountFragment"
@@ -149,5 +146,23 @@
         <argument
             android:name="account"
             app:argType="com.woynex.parasayar.feature_accounts.domain.model.Account" />
+    </fragment>
+    <fragment
+        android:id="@+id/configurationFragment"
+        android:name="com.woynex.parasayar.feature_settings.presentation.configuration.ConfigurationFragment"
+        android:label="fragment_configuration"
+        tools:layout="@layout/fragment_configuration" >
+        <action
+            android:id="@+id/action_configurationFragment_to_accountGroupFragment"
+            app:destination="@id/accountGroupFragment" />
+        <action
+            android:id="@+id/action_configurationFragment_to_categorySettingFragment"
+            app:destination="@id/categorySettingFragment" />
+        <action
+            android:id="@+id/action_configurationFragment_to_currenciesFragment"
+            app:destination="@id/currenciesFragment" />
+        <action
+            android:id="@+id/action_configurationFragment_to_accountSettingFragment"
+            app:destination="@id/accountSettingFragment" />
     </fragment>
 </navigation>
