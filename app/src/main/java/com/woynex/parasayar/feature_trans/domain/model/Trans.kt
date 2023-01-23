@@ -2,6 +2,7 @@ package com.woynex.parasayar.feature_trans.domain.model
 
 import android.graphics.Bitmap
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.woynex.parasayar.core.utils.RoomConstants

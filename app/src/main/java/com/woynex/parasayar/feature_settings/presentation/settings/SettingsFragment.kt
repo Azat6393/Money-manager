@@ -18,9 +18,19 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSettingsBinding.bind(view)
 
-        _binding.setting.setOnClickListener {
-            val action = SettingsFragmentDirections.actionSettingsFragmentToConfigurationFragment()
-            findNavController().navigate(action)
+        _binding.apply {
+            setting.setOnClickListener {
+                val action = SettingsFragmentDirections.actionSettingsFragmentToConfigurationFragment()
+                findNavController().navigate(action)
+            }
+            webSite.setOnClickListener { navigateToWebView("http://woynapp.com") }
+            privacyPolicy.setOnClickListener { navigateToWebView("http://woynapp.com/gizlilik-politikasi/") }
+            termOfService.setOnClickListener { navigateToWebView("http://woynapp.com/terms-of-service/") }
         }
+    }
+
+    private fun navigateToWebView(url: String) {
+        val action = SettingsFragmentDirections.actionSettingsFragmentToWebViewFragment(url)
+        findNavController().navigate(action)
     }
 }

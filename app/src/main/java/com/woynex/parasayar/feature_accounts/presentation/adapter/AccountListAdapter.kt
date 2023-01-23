@@ -81,7 +81,7 @@ class AccountListAdapter(private val listener: AccountSettingItemListener) :
         RecyclerView.ViewHolder(_binding.root) {
 
         init {
-            _binding.root.setOnClickListener {
+            _binding.container.setOnClickListener {
                 if (!deleteMode) {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {

@@ -45,12 +45,21 @@
         <action
             android:id="@+id/action_settingsFragment_to_configurationFragment"
             app:destination="@id/configurationFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAccountFragment"
         android:name="com.woynex.parasayar.feature_accounts.presentation.add_account.AddAccountFragment"
         android:label="fragment_add_account"
-        tools:layout="@layout/fragment_add_account" />
+        tools:layout="@layout/fragment_add_account" >
+        <argument
+            android:name="account"
+            app:argType="com.woynex.parasayar.feature_accounts.domain.model.Account"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/transDetailsFragment"
         android:name="com.woynex.parasayar.feature_trans.presentation.trans_details.TransDetailsFragment"
@@ -164,5 +173,14 @@
         <action
             android:id="@+id/action_configurationFragment_to_accountSettingFragment"
             app:destination="@id/accountSettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.woynex.parasayar.feature_settings.presentation.web_view.WebViewFragment"
+        android:label="fragment_web_view"
+        tools:layout="@layout/fragment_web_view" >
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 </navigation>

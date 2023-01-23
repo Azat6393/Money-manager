@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.showAlertDialog
+import com.woynex.parasayar.core.utils.showToastMessage
 import com.woynex.parasayar.databinding.FragmentAccountsSettingBinding
 import com.woynex.parasayar.feature_accounts.domain.model.Account
 import com.woynex.parasayar.feature_accounts.presentation.accounts.AccountsFragmentDirections
@@ -66,7 +67,8 @@ class AccountSettingFragment : Fragment(R.layout.fragment_accounts_setting),
         }
         if (args.isDeleteMode) deleteMode() else settingMode()
         _binding.addBtn.setOnClickListener {
-            val action = AccountSettingFragmentDirections.actionAccountSettingFragmentToAddAccountFragment()
+            val action =
+                AccountSettingFragmentDirections.actionAccountSettingFragmentToAddAccountFragment()
             findNavController().navigate(action)
         }
     }
@@ -84,7 +86,9 @@ class AccountSettingFragment : Fragment(R.layout.fragment_accounts_setting),
     }
 
     override fun onClick(item: Account) {
-
+        val action =
+            AccountSettingFragmentDirections.actionAccountSettingFragmentToAddAccountFragment(item)
+        findNavController().navigate(action)
     }
 
     override fun onDelete(item: Account) {

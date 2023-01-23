@@ -216,6 +216,7 @@
                     android:background="@color/black" />
 
                 <LinearLayout
+                    android:id="@+id/web_site"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -266,6 +267,7 @@
                     android:background="@color/black" />
 
                 <LinearLayout
+                    android:id="@+id/privacy_policy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -307,7 +309,9 @@
                         app:tint="@color/surface" />
 
                 </LinearLayout>
+
                 <LinearLayout
+                    android:id="@+id/term_of_service"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
