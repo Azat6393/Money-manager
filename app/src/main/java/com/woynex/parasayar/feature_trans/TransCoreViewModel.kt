@@ -59,7 +59,7 @@ class TransCoreViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
-    fun getCurrencies() = viewModelScope.launch {
+    fun getCurrencies() {
         repo.getAllCurrency().onEach {
             _currencies.value = it
         }.launchIn(viewModelScope)

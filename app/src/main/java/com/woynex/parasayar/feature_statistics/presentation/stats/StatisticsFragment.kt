@@ -57,7 +57,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
 
     private fun observe() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 coreViewModel.currencies.collect { result ->
                     currencyList = result
                     initCurrencySelector(result)

@@ -96,7 +96,7 @@ class AccountsFragment : Fragment(R.layout.fragment_accounts), OnItemClickListen
             }
         }
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.currencies.collect { result ->
                     currencyList = result
                     initCurrencySelector(result)

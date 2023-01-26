@@ -78,10 +78,10 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
             }
         }
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 coreViewModel.currencies.collect { result ->
                     currencyList = result
-                    initCurrencySelector(result)
+                    updateCurrencies(result)
                 }
             }
         }
@@ -94,8 +94,9 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
         }
     }
 
-    private fun initCurrencySelector(currencyList: List<Currency>) {
-        val adapter = ArrayAdapter(requireContext(), R.layout.item_select_currency,
+    private fun updateCurrencies(currencyList: List<Currency>) {
+        val adapter = ArrayAdapter(
+            requireContext(), R.layout.item_select_currency,
             currencyList.map { it.symbol }
         )
         (_binding.currencyFilter.editText as? AutoCompleteTextView)?.setAdapter(adapter)
