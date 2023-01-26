@@ -68,6 +68,12 @@
         <action
             android:id="@+id/action_transDetailsFragment_to_currenciesFragment"
             app:destination="@id/currenciesFragment" />
+        <action
+            android:id="@+id/action_transDetailsFragment_to_accountSettingFragment"
+            app:destination="@id/accountSettingFragment" />
+        <action
+            android:id="@+id/action_transDetailsFragment_to_categorySettingFragment"
+            app:destination="@id/categorySettingFragment" />
     </fragment>
     <fragment
         android:id="@+id/currenciesFragment"
@@ -85,6 +91,12 @@
         <action
             android:id="@+id/action_transEditFragment_to_currenciesFragment"
             app:destination="@id/currenciesFragment" />
+        <action
+            android:id="@+id/action_transEditFragment_to_accountSettingFragment"
+            app:destination="@id/accountSettingFragment" />
+        <action
+            android:id="@+id/action_transEditFragment_to_categorySettingFragment"
+            app:destination="@id/categorySettingFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountSettingFragment"

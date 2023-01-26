@@ -93,7 +93,7 @@ class TransDetailsViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun getAccounts() {
+    fun getAccounts() {
         repo.getAccounts().onEach { list ->
             _accounts.value = list.map { it.toAccount() }
         }.launchIn(viewModelScope)

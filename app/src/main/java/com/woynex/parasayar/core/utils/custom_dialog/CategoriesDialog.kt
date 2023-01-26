@@ -1,34 +1,43 @@
 package com.woynex.parasayar.core.utils.custom_dialog
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.fragment.app.DialogFragment
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.OnItemClickListener
 import com.woynex.parasayar.core.utils.adapter.CategoryAdapter
 import com.woynex.parasayar.core.utils.adapter.SubCategoryAdapter
 import com.woynex.parasayar.databinding.DialogCategoriesBinding
-import com.woynex.parasayar.feature_accounts.domain.model.Account
 import com.woynex.parasayar.feature_settings.domain.model.Category
 import com.woynex.parasayar.feature_settings.domain.model.CategoryWithSubCategories
 import com.woynex.parasayar.feature_settings.domain.model.SubCategory
+import kotlinx.android.synthetic.main.fragment_accounts.view.*
 import kotlinx.coroutines.flow.StateFlow
 
+
 class CategoriesDialog(
-    private val categoryWithSubcategories: StateFlow<List<CategoryWithSubCategories>>,
+    private val _binding: DialogCategoriesBinding,
+    private val context: Context,
+    private val categoryWithSubcategories: List<CategoryWithSubCategories>,
+    private val onClose: () -> Unit,
+    private val onEdit: () -> Unit,
     private val selectedCategory: (Category, SubCategory?) -> Unit
-) : DialogFragment(), OnItemClickListener<SubCategory>,
+) : OnItemClickListener<SubCategory>,
     CategoryAdapter.CategoryOnItemClickListener {
 
-    private lateinit var _binding: DialogCategoriesBinding
     private val categoryAdapter: CategoryAdapter by lazy {
         CategoryAdapter(this)
     }
@@ -38,54 +47,30 @@ class CategoriesDialog(
 
     private var category: Category? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.dialog_categories, container, false)
+    init {
+        initView()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = DialogCategoriesBinding.bind(view)
+    fun initView() {
 
         _binding.categoryRecyclerView.apply {
             adapter = categoryAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
         _binding.subcategoryRecyclerView.apply {
             adapter = subcategoryAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
+        _binding.closeBtn.setOnClickListener { invisible() }
+        _binding.editBtn.setOnClickListener { onEdit() }
         observe()
     }
 
+
     private fun observe() {
-        lifecycleScope.launchWhenStarted {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                categoryWithSubcategories.collect { result ->
-                    categoryAdapter.submitList(result)
-                }
-            }
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.MATCH_PARENT
-        )
-    }
-
-    override fun onClick(item: SubCategory) {
-        if (category != null) {
-            selectedCategory(category!!, item)
-            this.dismiss()
-        }
+        categoryAdapter.submitList(categoryWithSubcategories)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -98,6 +83,20 @@ class CategoriesDialog(
 
     override fun onSelect(category: Category) {
         selectedCategory(category, null)
-        this.dismiss()
+        invisible()
+    }
+
+    fun visible() {
+        _binding.root.isVisible = true
+    }
+
+    fun invisible() {
+        _binding.root.isVisible = false
+        onClose
+    }
+
+    override fun onClick(item: SubCategory) {
+        selectedCategory(category!!, item)
+        invisible()
     }
 }

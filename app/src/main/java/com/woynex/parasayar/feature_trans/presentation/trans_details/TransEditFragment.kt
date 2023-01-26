@@ -2,6 +2,7 @@ package com.woynex.parasayar.feature_trans.presentation.trans_details
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -10,6 +11,8 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -63,6 +66,11 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
 
     private var hasFee = false
     private var feeState: FeeState = FeeState.EmptyFee
+
+    private var categoriesDialog: CategoriesDialog? = null
+    private var accountsDialog: AccountsDialog? = null
+
+    private var isToAccounts = false
 
     private var selectedBitmap: Bitmap? = null
 
@@ -168,53 +176,73 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTransDetailsBinding.bind(view)
 
+        initView()
+        onTypeChange()
+        observe()
+        initTrans()
+        registerBackPressedListener()
+    }
+
+    private fun initView() {
         dateAndTime = millisecondToLocalDateTime(args.trans.date_in_millis)
         _binding.apply {
             date.setText(parseFullDate(dateAndTime))
             date.setOnClickListener {
+                categoriesDialog?.invisible()
+                accountsDialog?.invisible()
                 showDatePicker()
             }
-            account.setOnClickListener {
-                AccountsDialog(viewModel.accounts) {
-                    selectedAccount = Pair(it.id, it.name)
-                    _binding.account.setText(it.name)
-                }.show(childFragmentManager, "Accounts Dialog")
-            }
-            category.setOnClickListener {
-                if (transType == TransType.Transfer) {
-                    AccountsDialog(viewModel.accounts) {
-                        selectedToAccount = Pair(it.id, it.name)
-                        _binding.category.setText(it.name)
-                    }.show(childFragmentManager, "Accounts Dialog")
-                } else {
-                    if (transType == TransType.Income) {
-                        viewModel.getIncomeCategories()
-                    } else {
-                        viewModel.getExpenseCategories()
-                    }
-                    CategoriesDialog(viewModel.categoryWithSubCategories) { category, subCategory ->
-                        selectedCategory = Pair(category.id, category.name)
-                        selectedSubCategory = Pair(subCategory?.id, subCategory?.name)
-                        _binding.category.setText(
-                            if (subCategory != null) "${category.name}/${subCategory.name}" else category.name
-                        )
-                    }.show(childFragmentManager, "Category Dialog")
+            account.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    categoriesDialog?.invisible()
+                    hideKeyboard()
+                    isToAccounts = false
+                    viewModel.getAccounts()
+                    if (accountsDialog != null)
+                        accountsDialog!!.visible()
                 }
             }
-            amount.setOnClickListener {
-                AmountInputBottomSheet(
-                    coreViewModel = coreViewModel,
-                    input = { currency, amount ->
-                        selectedCurrency = currency
-                        selectedAmount = amount
-                        _binding.amount.setText("$currency $amount")
-                    },
-                    navigateToListCurrency = {
-                        val action =
-                            TransEditFragmentDirections.actionTransEditFragmentToCurrenciesFragment()
-                        findNavController().navigate(action)
+            category.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    if (transType == TransType.Transfer) {
+                        categoriesDialog?.invisible()
+                        hideKeyboard()
+                        isToAccounts = true
+                        viewModel.getAccounts()
+                        if (accountsDialog != null)
+                            accountsDialog!!.visible()
+                    } else {
+                        accountsDialog?.invisible()
+                        hideKeyboard()
+                        if (transType == TransType.Income) {
+                            viewModel.getIncomeCategories()
+                        } else {
+                            viewModel.getExpenseCategories()
+                        }
+                        if (categoriesDialog != null) {
+                            categoriesDialog!!.visible()
+                        }
                     }
-                ).show(childFragmentManager, "Amount Input Bottom Sheet")
+                }
+            }
+            amount.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    categoriesDialog?.invisible()
+                    accountsDialog?.invisible()
+                    AmountInputBottomSheet(
+                        coreViewModel = coreViewModel,
+                        input = { currency, amount ->
+                            selectedCurrency = currency
+                            selectedAmount = amount
+                            _binding.amount.setText("$currency $amount")
+                        },
+                        navigateToListCurrency = {
+                            val action =
+                                TransEditFragmentDirections.actionTransEditFragmentToCurrenciesFragment()
+                            findNavController().navigate(action)
+                        }
+                    ).show(childFragmentManager, "Amount Input Bottom Sheet")
+                }
             }
             saveBtn.setOnClickListener {
                 if (isValid()) {
@@ -242,23 +270,57 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
             closeBtn.setOnClickListener {
                 removeImage()
             }
+            note.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    accountsDialog?.invisible()
+                    categoriesDialog?.invisible()
+                }
+            }
+            description.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    accountsDialog?.invisible()
+                    categoriesDialog?.invisible()
+                }
+            }
         }
-        onTypeChange()
-        observe()
-        initTrans()
+    }
+
+    private fun registerBackPressedListener() {
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (_binding.categoryContainer.root.isVisible || _binding.accountContainer.root.isVisible) {
+                        categoriesDialog?.invisible()
+                        accountsDialog?.invisible()
+                    } else {
+                        findNavController().popBackStack()
+                    }
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+    }
+
+    private fun hideKeyboard() {
+        val imm: InputMethodManager =
+            requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = requireActivity().currentFocus
+        if (view == null) {
+            view = View(requireActivity())
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun removeImage() {
-        _binding.selectedImage.setImageBitmap(null)
-        _binding.selectedImageContainer.isVisible = false
-        _binding.closeBtn.isVisible = true
-        selectedBitmap = null
+        /* _binding.selectedImage.setImageBitmap(null)
+         _binding.selectedImageContainer.isVisible = false
+         _binding.closeBtn.isVisible = true
+         selectedBitmap = null*/
     }
 
     private fun setImage() {
-        _binding.selectedImage.setImageBitmap(selectedBitmap)
-        _binding.selectedImageContainer.isVisible = true
-        _binding.closeBtn.isVisible = true
+        /* _binding.selectedImage.setImageBitmap(selectedBitmap)
+         _binding.selectedImageContainer.isVisible = true
+         _binding.closeBtn.isVisible = true*/
     }
 
     private fun observe() {
@@ -276,7 +338,82 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
                 }
             }
         }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.categoryWithSubCategories.collect { result ->
+                    categoriesDialog = CategoriesDialog(
+                        _binding.categoryContainer,
+                        requireContext(),
+                        result,
+                        onClose = {
+                            _binding.category.clearFocus()
+                        },
+                        onEdit = { navigateToEditCategory() }
+                    ) { category, subCategory ->
+                        selectedCategory = Pair(category.id, category.name)
+                        selectedSubCategory = Pair(subCategory?.id, subCategory?.name)
+                        _binding.category.setText(
+                            if (subCategory != null) "${category.name}/${subCategory.name}" else category.name
+                        )
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.accounts.collect { result ->
+                    accountsDialog = AccountsDialog(
+                        context = requireContext(),
+                        _binding = _binding.accountContainer,
+                        accounts = result,
+                        onClose = {
+                            _binding.account.clearFocus()
+                            if (isToAccounts)
+                                _binding.category.clearFocus()
+                        },
+                        onEdit = { navigateToEditAccount() }
+                    ) {
+                        if (isToAccounts) {
+                            selectedToAccount = Pair(it.id, it.name)
+                            _binding.category.setText(it.name)
+                        } else {
+                            selectedAccount = Pair(it.id, it.name)
+                            _binding.account.setText(it.name)
+                        }
+                    }
+                }
+            }
+        }
     }
+
+    private fun navigateToEditAccount() {
+        val action =
+            TransEditFragmentDirections.actionTransEditFragmentToAccountSettingFragment(
+                isDeleteMode = false
+            )
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToEditCategory() {
+        when (transType) {
+            TransType.Expense -> {
+                val action =
+                    TransEditFragmentDirections.actionTransEditFragmentToCategorySettingFragment(
+                        CategoryTypes.EXPENSE
+                    )
+                findNavController().navigate(action)
+            }
+            TransType.Income -> {
+                val action =
+                    TransEditFragmentDirections.actionTransEditFragmentToCategorySettingFragment(
+                        CategoryTypes.INCOME
+                    )
+                findNavController().navigate(action)
+            }
+            TransType.Transfer -> Unit
+        }
+    }
+
 
     private fun doExpense() {
         val newTrans = createTrans()
@@ -546,6 +683,8 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
 
     private fun refreshEditTexts() {
         _binding.apply {
+            categoriesDialog?.invisible()
+            accountsDialog?.invisible()
             category.setText("")
             selectedCategory = null
             selectedSubCategory = null

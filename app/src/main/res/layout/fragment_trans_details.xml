@@ -1,366 +1,396 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".feature_trans.presentation.trans_details.TransEditFragment">
 
-    <ImageView
-        android:id="@+id/back_btn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:src="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/expense"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/back_btn"
-        app:layout_constraintStart_toEndOf="@+id/back_btn"
-        app:layout_constraintTop_toTopOf="@+id/back_btn" />
-
-    <RadioGroup
-        android:id="@+id/radio_group"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="9"
-        app:layout_constraintTop_toBottomOf="@+id/back_btn">
+        android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/income"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:layout_weight="3"
-            android:background="@drawable/radio_button_background"
-            android:button="@drawable/radio_button_background"
-            android:checked="false"
-            android:gravity="center"
-            android:text="@string/income"
-            android:textColor="@drawable/radio_button_text_color" />
-
-        <RadioButton
-            android:id="@+id/expense"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="3"
-            android:background="@drawable/radio_button_background"
-            android:button="@drawable/radio_button_background"
-            android:checked="true"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/expense"
-            android:textColor="@drawable/radio_button_text_color" />
-
-        <RadioButton
-            android:id="@+id/transfer"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:layout_weight="3"
-            android:background="@drawable/radio_button_background"
-            android:button="@drawable/radio_button_background"
-            android:checked="false"
-            android:gravity="center"
-            android:text="@string/transfer"
-            android:textColor="@drawable/radio_button_text_color" />
-
-    </RadioGroup>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radio_group">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:maxLines="1"
-                android:text="@string/date"
-                android:textSize="16sp"
-                app:autoSizeTextType="uniform" />
-
-            <EditText
-                android:id="@+id/date"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:editable="false"
-                android:inputType="none"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                tools:ignore="TextFields" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:id="@+id/account_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:maxLines="1"
-                android:text="@string/account"
-                android:textSize="16sp"
-                app:autoSizeTextType="uniform" />
-
-            <EditText
-                android:id="@+id/account"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:editable="false"
-                android:inputType="none"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:id="@+id/category_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:maxLines="1"
-                android:text="@string/category"
-                android:textSize="16sp"
-                app:autoSizeTextType="uniform" />
-
-            <EditText
-                android:id="@+id/category"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:editable="false"
-                android:inputType="none"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="2"
-                android:maxLines="1"
-                android:text="@string/amount"
-                android:textSize="16sp"
-                app:autoSizeTextType="uniform" />
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8">
-
-                <EditText
-                    android:id="@+id/amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:hint="$ 0.00"
-                    android:inputType="none"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/fees_btn"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="10dp"
-                    android:text="@string/fees"
-                    android:textSize="10sp"
-                    android:visibility="gone"
-                    app:strokeColor="@color/primary"
-                    tools:ignore="SmallSp"
-                    tools:visibility="visible" />
-
-            </FrameLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/fees_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            android:weightSum="10"
-            tools:visibility="visible">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="2"
-                android:maxLines="1"
-                android:text="@string/fees"
-                android:textSize="16sp"
-                app:autoSizeTextType="uniform" />
-
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8">
-
-                <EditText
-                    android:id="@+id/fees"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/close_fees_btn"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="end|center"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_baseline_close_24" />
-
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:maxLines="1"
-                android:text="Note"
-                android:textSize="16sp"
-                app:autoSizeTextType="uniform" />
-
-            <EditText
-                android:id="@+id/note"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:maxLines="4"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_weight="8"
-        android:hint="@string/description"
-        android:maxLines="4"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/image_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-    <ImageView
-        android:id="@+id/image_btn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_baseline_photo_camera_24"
-        app:layout_constraintBottom_toBottomOf="@+id/description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/description" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/selected_image_container"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/image_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:id="@+id/selected_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-        <ImageView
-            android:id="@+id/close_btn"
+            android:id="@+id/back_btn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/expense"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/back_btn"
+            app:layout_constraintStart_toEndOf="@+id/back_btn"
+            app:layout_constraintTop_toTopOf="@+id/back_btn" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="9"
+            app:layout_constraintTop_toBottomOf="@+id/back_btn">
+
+            <RadioButton
+                android:id="@+id/income"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_weight="3"
+                android:background="@drawable/radio_button_background"
+                android:button="@drawable/radio_button_background"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/income"
+                android:textColor="@drawable/radio_button_text_color" />
+
+            <RadioButton
+                android:id="@+id/expense"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="3"
+                android:background="@drawable/radio_button_background"
+                android:button="@drawable/radio_button_background"
+                android:checked="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/expense"
+                android:textColor="@drawable/radio_button_text_color" />
+
+            <RadioButton
+                android:id="@+id/transfer"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_weight="3"
+                android:background="@drawable/radio_button_background"
+                android:button="@drawable/radio_button_background"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/transfer"
+                android:textColor="@drawable/radio_button_text_color" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radio_group">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:text="@string/date"
+                    android:textSize="16sp"
+                    app:autoSizeTextType="uniform" />
+
+                <EditText
+                    android:id="@+id/date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    tools:ignore="TextFields" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/account_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:text="@string/account"
+                    android:textSize="16sp"
+                    app:autoSizeTextType="uniform" />
+
+                <EditText
+                    android:id="@+id/account"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/category_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:text="@string/category"
+                    android:textSize="16sp"
+                    app:autoSizeTextType="uniform" />
+
+                <EditText
+                    android:id="@+id/category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:text="@string/amount"
+                    android:textSize="16sp"
+                    app:autoSizeTextType="uniform" />
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8">
+
+                    <EditText
+                        android:id="@+id/amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:hint="$ 0.00"
+                        android:inputType="none"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/fees_btn"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/fees"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        app:strokeColor="@color/primary"
+                        tools:ignore="SmallSp"
+                        tools:visibility="visible" />
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fees_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="10"
+                tools:visibility="visible">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:text="@string/fees"
+                    android:textSize="16sp"
+                    app:autoSizeTextType="uniform" />
+
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8">
+
+                    <EditText
+                        android:id="@+id/fees"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/close_fees_btn"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="end|center"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_baseline_close_24" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:text="Note"
+                    android:textSize="16sp"
+                    app:autoSizeTextType="uniform" />
+
+                <EditText
+                    android:id="@+id/note"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:maxLines="4"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="8"
+            android:hint="@string/description"
+            android:maxLines="4"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/image_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <ImageView
+            android:id="@+id/image_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_baseline_photo_camera_24"
             android:visibility="gone"
-            android:layout_gravity="end|top"
-            app:tint="@color/white"
-            android:src="@drawable/ic_baseline_close_24"/>
+            app:layout_constraintBottom_toBottomOf="@+id/description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/description" />
 
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/selected_image_container"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="20dp"
+            android:visibility="gone"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_btn">
+
+            <ImageView
+                android:id="@+id/selected_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/close_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end|top"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_baseline_close_24"
+                android:visibility="gone"
+                app:tint="@color/white" />
+
+        </androidx.cardview.widget.CardView>
 
 
-    <Button
-        android:id="@+id/save_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/save"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selected_image_container" />
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@string/save"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selected_image_container" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/category_container"
+            layout="@layout/dialog_categories"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/save_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <include
+            android:id="@+id/account_container"
+            layout="@layout/dialog_accounts"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/save_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
