@@ -44,7 +44,8 @@ class AccountSettingFragment : Fragment(R.layout.fragment_accounts_setting),
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.accounts.collect { result ->
-                    mAdapter.submitList(result)
+                    val sortedList = result.sortedWith(compareBy({ it.group_name }, { it.name }))
+                    mAdapter.submitList(sortedList)
                 }
             }
         }

@@ -41,6 +41,7 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.util.*
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -67,6 +68,9 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
 
     private var isToAccounts = false
 
+    @Inject
+    lateinit var sharedPreferencesHelper: SharedPreferencesHelper
+
     private val requestGetContentPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -92,6 +96,8 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTransDetailsBinding.bind(view)
 
+        selectedCurrency = sharedPreferencesHelper.getDefaultCurrency().symbol
+
         initView()
         onTypeChange()
         observe()
@@ -101,6 +107,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
     private fun initView() {
         dateAndTime = LocalDateTime.now()
         _binding.apply {
+            amount.setText("$selectedCurrency 0.00")
             date.setText(parseFullDate(dateAndTime))
             date.setOnClickListener {
                 categoriesDialog?.invisible()
@@ -145,6 +152,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                     categoriesDialog?.invisible()
                     accountsDialog?.invisible()
                     AmountInputBottomSheet(
+                        defaultCurrency = selectedCurrency,
                         coreViewModel = coreViewModel,
                         input = { currency, amount ->
                             selectedCurrency = currency
@@ -572,6 +580,8 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
         _binding.apply {
             accountsDialog?.invisible()
             categoriesDialog?.invisible()
+            category.clearFocus()
+            account.clearFocus()
             category.setText("")
             selectedCategory = null
             selectedSubCategory = null

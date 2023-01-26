@@ -18,6 +18,7 @@ import com.woynex.parasayar.feature_trans.TransCoreViewModel
 import kotlinx.coroutines.launch
 
 class AmountInputBottomSheet(
+    private val defaultCurrency: String,
     private val coreViewModel: TransCoreViewModel,
     private val input: (String, Double) -> Unit,
     private val navigateToListCurrency: () -> Unit
@@ -45,7 +46,7 @@ class AmountInputBottomSheet(
         _binding.currencyFilter.editText?.doAfterTextChanged { text ->
             if (firstTime) firstTime = false else updateAmount()
         }
-        _binding.currencyFilter.editText?.setText("\$")
+        _binding.currencyFilter.editText?.setText(defaultCurrency)
         coreViewModel.getCurrencies()
     }
 

@@ -13,6 +13,13 @@ import com.woynex.parasayar.databinding.ItemCurrencyDetailsBinding
 class CurrencyAdapter(private val listener: CurrencyItemListener, private val deleteMode: Boolean) :
     ListAdapter<Currency, CurrencyAdapter.CurrencyViewHolder>(DIFF_CALL_BACK) {
 
+    var defaultCurrency: Currency? = null
+
+    fun updateDefaultCurrency(currency: Currency) {
+        defaultCurrency = currency
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
         return CurrencyViewHolder(
             ItemCurrencyDetailsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,7 +41,7 @@ class CurrencyAdapter(private val listener: CurrencyItemListener, private val de
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
-                    if (item != null){
+                    if (item != null) {
                         listener.onClick(item)
                     }
                 }
@@ -43,7 +50,7 @@ class CurrencyAdapter(private val listener: CurrencyItemListener, private val de
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
-                    if (item != null){
+                    if (item != null) {
                         listener.onDelete(item)
                     }
                 }
@@ -55,6 +62,7 @@ class CurrencyAdapter(private val listener: CurrencyItemListener, private val de
             _binding.apply {
                 deleteBtn.isVisible = deleteMode
                 currencyDetails.text = "${item.cc} - ${item.name} (${item.symbol})"
+                dotIcon.isVisible = item.symbol == defaultCurrency?.symbol
             }
         }
     }

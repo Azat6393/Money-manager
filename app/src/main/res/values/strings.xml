@@ -99,4 +99,6 @@
     <string name="account_group_setting">Account Group Setting</string>
     <string name="accounts_setting">Accounts Setting</string>
     <string name="currency_setting">Currency Setting</string>
+    <string name="set_currency_message">Are you sure to set currency as default currency?</string>
+    <string name="set_currency_title">Update default currency</string>
 </resources>

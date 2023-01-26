@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
+import com.woynex.parasayar.core.utils.SharedPreferencesHelper
 import com.woynex.parasayar.core.utils.custom_dialog.SelectMonthDialog
 import com.woynex.parasayar.core.utils.parseDateText
 import com.woynex.parasayar.core.utils.parseYear
@@ -24,6 +25,7 @@ import com.woynex.parasayar.feature_trans.presentation.adapter.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TransFragment : Fragment(R.layout.fragment_trans) {
@@ -33,6 +35,9 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
     private lateinit var date: LocalDate
 
     private var currencyList: List<Currency> = emptyList()
+
+    @Inject
+    lateinit var sharedPreferencesHelper: SharedPreferencesHelper
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

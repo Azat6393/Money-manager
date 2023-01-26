@@ -44,6 +44,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.*
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
@@ -73,6 +74,9 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
     private var isToAccounts = false
 
     private var selectedBitmap: Bitmap? = null
+
+    @Inject
+    lateinit var sharedPreferencesHelper: SharedPreferencesHelper
 
     private val requestGetContentPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -176,6 +180,8 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTransDetailsBinding.bind(view)
 
+        selectedCurrency = sharedPreferencesHelper.getDefaultCurrency().symbol
+
         initView()
         onTypeChange()
         observe()
@@ -186,6 +192,7 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
     private fun initView() {
         dateAndTime = millisecondToLocalDateTime(args.trans.date_in_millis)
         _binding.apply {
+            amount.setText("$selectedCurrency 0.00")
             date.setText(parseFullDate(dateAndTime))
             date.setOnClickListener {
                 categoriesDialog?.invisible()
@@ -230,6 +237,7 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
                     categoriesDialog?.invisible()
                     accountsDialog?.invisible()
                     AmountInputBottomSheet(
+                        defaultCurrency = selectedCurrency,
                         coreViewModel = coreViewModel,
                         input = { currency, amount ->
                             selectedCurrency = currency
@@ -685,6 +693,8 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
         _binding.apply {
             categoriesDialog?.invisible()
             accountsDialog?.invisible()
+            category.clearFocus()
+            account.clearFocus()
             category.setText("")
             selectedCategory = null
             selectedSubCategory = null
