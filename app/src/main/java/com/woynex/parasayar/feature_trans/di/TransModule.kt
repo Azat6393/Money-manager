@@ -2,10 +2,14 @@ package com.woynex.parasayar.feature_trans.di
 
 import com.woynex.parasayar.core.data.room.CurrencyDao
 import com.woynex.parasayar.core.data.room.ParaSayarDatabase
+import com.woynex.parasayar.feature_trans.data.repository.BudgetRepositoryImpl
 import com.woynex.parasayar.feature_trans.data.repository.TransRepositoryImpl
+import com.woynex.parasayar.feature_trans.data.room.BudgetDao
 import com.woynex.parasayar.feature_trans.data.room.TransDao
+import com.woynex.parasayar.feature_trans.domain.repository.BudgetRepository
 import com.woynex.parasayar.feature_trans.domain.repository.TransRepository
-import com.woynex.parasayar.feature_trans.domain.use_case.*
+import com.woynex.parasayar.feature_trans.domain.use_case.budget.*
+import com.woynex.parasayar.feature_trans.domain.use_case.trans.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,8 +28,31 @@ object TransModule {
 
     @Provides
     @Singleton
+    fun provideBudgetDao(database: ParaSayarDatabase): BudgetDao {
+        return database.budgetDao
+    }
+
+    @Provides
+    @Singleton
     fun provideTransRepo(dao: TransDao, currencyDao: CurrencyDao): TransRepository {
         return TransRepositoryImpl(dao, currencyDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBudgetRepository(dao: BudgetDao): BudgetRepository {
+        return BudgetRepositoryImpl(dao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBudgetUseCases(repo: BudgetRepository): BudgetUseCases {
+        return BudgetUseCases(
+            getAllBudget = GetAllBudget(repo),
+            getAllCategoryWithSubcategoryBudget = GetAllCategoryWithSubcategoryBudget(repo),
+            upsetCategoryBudget = UpsetCategoryBudget(repo),
+            upsetSubcategoryBudget = UpsetSubcategoryBudget(repo)
+        )
     }
 
     @Provides

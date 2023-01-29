@@ -6,7 +6,7 @@ import com.woynex.parasayar.core.utils.Resource
 import com.woynex.parasayar.core.utils.convertToDailyTransList
 import com.woynex.parasayar.feature_trans.domain.model.DailyTrans
 import com.woynex.parasayar.feature_trans.domain.model.Trans
-import com.woynex.parasayar.feature_trans.domain.use_case.DailyUseCases
+import com.woynex.parasayar.feature_trans.domain.use_case.trans.DailyUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

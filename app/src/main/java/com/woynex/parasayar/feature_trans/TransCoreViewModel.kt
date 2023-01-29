@@ -7,13 +7,12 @@ import com.woynex.parasayar.core.utils.SharedPreferencesHelper
 import com.woynex.parasayar.core.utils.convertToYearInfo
 import com.woynex.parasayar.feature_trans.domain.model.YearInfo
 import com.woynex.parasayar.feature_trans.domain.repository.TransRepository
-import com.woynex.parasayar.feature_trans.domain.use_case.DailyUseCases
+import com.woynex.parasayar.feature_trans.domain.use_case.trans.DailyUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
 

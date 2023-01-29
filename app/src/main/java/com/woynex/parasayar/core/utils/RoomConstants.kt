@@ -9,6 +9,8 @@ object RoomConstants {
     const val ACCOUNT_TABLE_NAME = "account"
     const val ACCOUNT_GROUP_TABLE_NAME = "account_group"
     const val SUB_CATEGORY_TABLE_NAME = "subcategory"
+    const val CATEGORY_BUDGET_NAME = "category_budget"
+    const val SUBCATEGORY_BUDGET_NAME = "subcategory_budget"
 
 
     @SuppressLint("ConstantLocale")

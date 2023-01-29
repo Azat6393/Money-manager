@@ -24,24 +24,49 @@
             android:padding="10dp"
             android:weightSum="10">
 
-            <TextView
+            <EditText
+                android:id="@+id/name_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="9"
                 android:fontFamily="sans-serif-medium"
-                android:text="Lewis Hamilton"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:background="@color/white"
+                tools:text="Lewis Hamilton"
                 android:textAlignment="center"
                 android:paddingStart="20dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <ImageView
+            <FrameLayout
+                android:id="@+id/edit_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_baseline_edit_24"
-                app:tint="@color/primary" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/edit_button"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    app:tint="@color/primary"  />
+
+                <ImageView
+                    android:id="@+id/save_button"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_baseline_save_alt_24"
+                    android:visibility="gone"
+                    app:tint="@color/primary" />
+
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -99,6 +124,7 @@
                         android:textSize="15sp" />
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/dark_mode_switch"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"/>
@@ -165,6 +191,7 @@
                     android:background="@color/black" />
 
                 <LinearLayout
+                    android:id="@+id/about_us_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -362,9 +389,8 @@
                     android:layout_marginEnd="20dp"
                     android:background="@color/black" />
 
-
-
                 <LinearLayout
+                    android:id="@+id/sign_out_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

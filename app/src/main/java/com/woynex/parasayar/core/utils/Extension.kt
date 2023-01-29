@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
+import com.woynex.parasayar.feature_auth.domain.model.CountryInfo
 import com.woynex.parasayar.feature_statistics.domain.model.CategoryStatistics
 import com.woynex.parasayar.feature_trans.domain.model.*
 import java.security.Timestamp
@@ -108,7 +109,7 @@ fun List<Trans>.convertToYearTrans(date: LocalDate, currency: String): List<Year
                 date = LocalDate.of(
                     date.year,
                     i,
-                    date.dayOfMonth
+                    date.dayOfMonth - 1
                 ),
                 income = income,
                 expence = expense,
@@ -247,4 +248,9 @@ private fun interpolateColor(proportion: Float): Int {
 
 fun LocalDate.toMillisecond(): Long{
     return this.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
+}
+
+fun String.fromJsonToCountyList(): List<CountryInfo> {
+    val gson = Gson()
+    return gson.fromJson(this, Array<CountryInfo>::class.java).asList()
 }

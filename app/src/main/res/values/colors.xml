@@ -14,6 +14,7 @@
     <color name="primary">#FF6750A4</color>
     <color name="primary_container">#FFF7F2F9</color>
     <color name="surface">#FF625D67</color>
+    <color name="light_gray">#e9ecef</color>
     <color name="neutral">#FFE8DEF8</color>
     <color name="secondary">#FFFFD8E4</color>
     <color name="blue">#3a86ff</color>

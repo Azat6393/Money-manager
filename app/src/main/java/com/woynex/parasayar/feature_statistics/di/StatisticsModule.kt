@@ -21,7 +21,7 @@ object StatisticsModule {
     @Singleton
     @Provides
     fun provideStatisticsDao(database: ParaSayarDatabase): StatisticsDao {
-        return database.statistics
+        return database.statisticsDao
     }
 
     @Provides

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_transFragment_to_transEditFragment"
             app:destination="@id/transEditFragment" />
+        <action
+            android:id="@+id/action_transFragment_to_budgetSettingFragment"
+            app:destination="@id/budgetSettingFragment" />
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
@@ -48,6 +51,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_webViewFragment"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAccountFragment"
@@ -194,5 +200,25 @@
         <argument
             android:name="url"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.woynex.parasayar.feature_settings.presentation.settings.AboutUsFragment"
+        android:label="AboutUsFragment" />
+    <fragment
+        android:id="@+id/addBudgetFragment"
+        android:name="com.woynex.parasayar.feature_trans.presentation.total.AddBudgetFragment"
+        android:label="AddBudgetFragment" >
+        <action
+            android:id="@+id/action_addBudgetFragment_to_categorySettingFragment"
+            app:destination="@id/categorySettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/budgetSettingFragment"
+        android:name="com.woynex.parasayar.feature_trans.presentation.total.BudgetSettingFragment"
+        android:label="BudgetSettingFragment" >
+        <action
+            android:id="@+id/action_budgetSettingFragment_to_addBudgetFragment"
+            app:destination="@id/addBudgetFragment" />
     </fragment>
 </navigation>

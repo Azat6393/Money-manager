@@ -36,9 +36,6 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
 
     private var currencyList: List<Currency> = emptyList()
 
-    @Inject
-    lateinit var sharedPreferencesHelper: SharedPreferencesHelper
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTransBinding.bind(view)

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.woynex.parasayar.core.utils.convertToYearTrans
 import com.woynex.parasayar.feature_trans.domain.model.YearTrans
-import com.woynex.parasayar.feature_trans.domain.use_case.DailyUseCases
+import com.woynex.parasayar.feature_trans.domain.use_case.trans.DailyUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

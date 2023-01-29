@@ -1,11 +1,13 @@
 package com.woynex.parasayar.core.utils.bottom_sheet
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +20,7 @@ import com.woynex.parasayar.feature_trans.TransCoreViewModel
 import kotlinx.coroutines.launch
 
 class AmountInputBottomSheet(
+    private val editText: EditText? = null,
     private val defaultCurrency: String,
     private val coreViewModel: TransCoreViewModel,
     private val input: (String, Double) -> Unit,
@@ -138,6 +141,11 @@ class AmountInputBottomSheet(
                 this@AmountInputBottomSheet.dismiss()
             }
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        editText?.clearFocus()
     }
 
     private fun updateAmount() {

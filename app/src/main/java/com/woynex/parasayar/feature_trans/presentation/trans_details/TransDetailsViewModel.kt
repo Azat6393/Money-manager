@@ -3,7 +3,6 @@ package com.woynex.parasayar.feature_trans.presentation.trans_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.woynex.parasayar.core.utils.Resource
-import com.woynex.parasayar.core.utils.TransTypes
 import com.woynex.parasayar.feature_accounts.data.room.toAccount
 import com.woynex.parasayar.feature_accounts.domain.model.Account
 import com.woynex.parasayar.feature_accounts.domain.repository.AccountsRepository
@@ -11,9 +10,8 @@ import com.woynex.parasayar.feature_accounts.domain.use_case.AccountsUseCases
 import com.woynex.parasayar.feature_settings.domain.model.CategoryWithSubCategories
 import com.woynex.parasayar.feature_settings.domain.use_case.CategoryUseCases
 import com.woynex.parasayar.feature_trans.domain.model.Trans
-import com.woynex.parasayar.feature_trans.domain.use_case.TransUseCases
+import com.woynex.parasayar.feature_trans.domain.use_case.trans.TransUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
