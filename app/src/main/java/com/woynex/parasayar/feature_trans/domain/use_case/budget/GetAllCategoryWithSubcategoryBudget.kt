@@ -11,7 +11,17 @@ class GetAllCategoryWithSubcategoryBudget @Inject constructor(
     private val repository: BudgetRepository
 ) {
     operator fun invoke(currency: String): Flow<List<CategoryWithSubcategoryBudget>> = flow {
-        val result = repository.getAllCategoryWithSubcategoryBudget(currency).first()
+        val resultOriginal = repository.getAllCategoryWithSubcategoryBudget(currency).first()
+        val result = arrayListOf<CategoryWithSubcategoryBudget>()
+        resultOriginal.forEach { categoryList ->
+            val newList = categoryList.subcategoryBudgetList.filter { it.currency == currency }
+            result.add(
+                CategoryWithSubcategoryBudget(
+                    categoryBudget = categoryList.categoryBudget,
+                    subcategoryBudgetList = newList
+                )
+            )
+        }
         val newList = arrayListOf<CategoryWithSubcategoryBudget>()
         result.forEach { categoryWithSubcategoryBudget ->
             if (categoryWithSubcategoryBudget.categoryBudget.amount == 0.00) {

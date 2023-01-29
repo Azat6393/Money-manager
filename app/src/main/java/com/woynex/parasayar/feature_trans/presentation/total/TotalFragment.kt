@@ -61,7 +61,7 @@ class TotalFragment : Fragment(R.layout.fragment_total), BudgetParentAdapter.OnI
             childViewState = !childViewState
             mAdapter.updateChildViewState(childViewState)
             _binding.arrowIcon.setImageDrawable(
-                if (!childViewState) ContextCompat.getDrawable(
+                if (childViewState) ContextCompat.getDrawable(
                     requireContext(),
                     R.drawable.ic_baseline_arrow_drop_up_24
                 )
@@ -82,7 +82,7 @@ class TotalFragment : Fragment(R.layout.fragment_total), BudgetParentAdapter.OnI
         _binding.apply {
             val totalBudget = list.sumOf { it.categoryBudget.budgetAmount }
             val totalExpenses = list.sumOf { it.categoryBudget.expenses }
-            val percentage = ((totalExpenses / totalExpenses) * 100).toInt()
+            val percentage = ((totalExpenses / totalBudget) * 100).toInt()
             totalAmount.text =
                 "${selectedCurrency!!.symbol} $totalBudget"
             expensesTv.text =

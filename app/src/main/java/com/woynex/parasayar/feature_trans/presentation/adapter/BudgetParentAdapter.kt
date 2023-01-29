@@ -75,6 +75,11 @@ class BudgetParentAdapter(private val listener: OnItemClickListener) :
         @SuppressLint("SetTextI18n")
         fun bind(item: Budget) {
             _binding.apply {
+                arrowIcon.setImageDrawable(
+                    if (childViewState) ContextCompat.getDrawable(context!!, R.drawable.ic_baseline_arrow_drop_up_24)
+                    else ContextCompat.getDrawable(context!!, R.drawable.ic_baseline_arrow_drop_down_24)
+                )
+                arrowIcon.isVisible = item.subcategoryBudget.isNotEmpty()
                 childRv.isVisible = childViewState
                 categoryNameTv.text = item.categoryBudget.name
                 totalAmount.text =

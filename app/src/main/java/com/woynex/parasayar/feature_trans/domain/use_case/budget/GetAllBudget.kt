@@ -2,6 +2,7 @@ package com.woynex.parasayar.feature_trans.domain.use_case.budget
 
 import com.woynex.parasayar.feature_trans.domain.model.Budget
 import com.woynex.parasayar.feature_trans.domain.model.BudgetItem
+import com.woynex.parasayar.feature_trans.domain.model.CategoryWithSubcategoryBudget
 import com.woynex.parasayar.feature_trans.domain.repository.BudgetRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -12,8 +13,21 @@ class GetAllBudget @Inject constructor(
     private val repo: BudgetRepository
 ) {
     operator fun invoke(month: Int, year: Int, currency: String): Flow<List<Budget>> = flow {
-        val categoryWithSubcategoryBudget =
+        val categoryWithSubcategoryBudgetOriginal =
             repo.getAllCategoryWithSubcategoryBudget(currency).first()
+        val categoryWithSubcategoryBudget = arrayListOf<CategoryWithSubcategoryBudget>()
+        categoryWithSubcategoryBudgetOriginal.forEach { categoryList ->
+            val newList = categoryList.subcategoryBudgetList.filter { it.currency == currency }
+            categoryWithSubcategoryBudget.add(
+                CategoryWithSubcategoryBudget(
+                    categoryBudget = categoryList.categoryBudget,
+                    subcategoryBudgetList = newList
+                )
+            )
+        }
+
+        println(currency)
+        println(categoryWithSubcategoryBudget)
         val budgetList = arrayListOf<Budget>()
         categoryWithSubcategoryBudget.forEach { categoryWithSubcategoryBudget ->
             val categoryExpenses = repo.getCategoriesTrans(
@@ -45,7 +59,7 @@ class GetAllBudget @Inject constructor(
                 ).first()
                 val subcategoryBudgetAmount = subcategoryBudget.amount
                 val subcategoryBudgetExpenses = subcategoryExpenses.sumOf { it.amount }
-                val subcategoryPercentage = (categoryBudgetExpenses / categoryBudgetAmount) * 100
+                val subcategoryPercentage = (subcategoryBudgetExpenses / subcategoryBudgetAmount) * 100
                 val subcategoryBudgetItem = BudgetItem(
                     name = subcategoryBudget.subcategory_name,
                     budgetAmount = subcategoryBudgetAmount,

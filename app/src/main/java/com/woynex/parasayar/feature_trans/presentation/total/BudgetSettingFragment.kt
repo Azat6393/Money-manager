@@ -109,7 +109,7 @@ class BudgetSettingFragment : Fragment(R.layout.fragment_budget_setting),
             childViewState = !childViewState
             mAdapter.updateChildViewState(childViewState)
             _binding.arrowIcon.setImageDrawable(
-                if (!childViewState) ContextCompat.getDrawable(
+                if (childViewState) ContextCompat.getDrawable(
                     requireContext(),
                     R.drawable.ic_baseline_arrow_drop_up_24
                 )
