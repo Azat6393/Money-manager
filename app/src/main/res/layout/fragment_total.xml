@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="?attr/background_color"
     android:orientation="vertical">
 
     <View
@@ -14,13 +14,13 @@
         android:paddingEnd="10dp"
         android:layout_marginTop="10dp"
         android:alpha=".5"
-        android:background="@color/black" />
+        android:background="?attr/black" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/white"
         android:orientation="vertical"
         android:paddingEnd="10dp">
 
@@ -38,7 +38,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:src="@drawable/ic_baseline_drive_file_rename_outline_24"
-                app:tint="@color/surface" />
+                app:tint="?attr/surface" />
 
             <TextView
                 android:layout_width="0dp"
@@ -49,7 +49,7 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:text="@string/budget"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 android:textSize="20sp" />
 
             <Button
@@ -60,11 +60,11 @@
                 android:autoSizeMaxTextSize="11sp"
                 android:autoSizeMinTextSize="7sp"
                 android:autoSizeTextType="uniform"
-                android:backgroundTint="@color/neutral"
+                android:backgroundTint="?attr/neutral"
                 android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
                 android:maxLines="1"
                 android:text="@string/budget_setting"
-                android:textColor="@color/primary" />
+                android:textColor="?attr/primary" />
 
         </LinearLayout>
 
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="8"
                         android:text="@string/total_budget"
-                        android:textColor="@color/surface"
+                        android:textColor="?attr/surface"
                         android:textSize="14sp" />
 
                     <ImageView
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                        app:tint="@color/surface" />
+                        app:tint="?attr/surface" />
 
                 </LinearLayout>
 
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="$ 0.00"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|end"
                         android:layout_marginEnd="10dp"
-                        android:textColor="@color/black"
+                        android:textColor="?attr/black"
                         android:textSize="15sp"
                         tools:text="70%" />
 
@@ -166,7 +166,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
                         android:text="$ 0.00"
-                        android:textColor="@color/blue"
+                        android:textColor="?attr/blue"
                         android:textSize="16sp" />
 
                     <TextView
@@ -176,7 +176,7 @@
                         android:layout_weight="5"
                         android:gravity="end"
                         android:text="$ 0.00"
-                        android:textColor="@color/black"
+                        android:textColor="?attr/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -190,7 +190,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:alpha=".5"
-            android:background="@color/black" />
+            android:background="?attr/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

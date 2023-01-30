@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="?attr/background_color"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".feature_trans.presentation.budget_details.BudgetDetailsFragment">
@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="10dp"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 android:textSize="17sp"
                 tools:text="Food" />
 
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 android:textSize="15sp"
                 tools:text="Sep 2022" />
 
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:text="0.00"
                 android:textAlignment="center"
-                android:textColor="@color/blue"
+                android:textColor="?attr/blue"
                 tools:ignore="HardcodedText" />
 
         </LinearLayout>
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:text="0.00"
                 android:textAlignment="center"
-                android:textColor="@color/red"
+                android:textColor="?attr/red"
                 tools:ignore="HardcodedText" />
 
         </LinearLayout>
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:text="0.00"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 tools:ignore="HardcodedText" />
 
         </LinearLayout>

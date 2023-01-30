@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="?attr/background_color"
     tools:context=".feature_auth.presentation.sign_up.SignUpFragment">
 
     <ImageView
@@ -27,7 +27,7 @@
         android:fontFamily="sans-serif-medium"
         android:text="@string/enter_your_informations"
         android:textAlignment="center"
-        android:textColor="@color/primary"
+        android:textColor="?attr/primary"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,13 +55,13 @@
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            app:cardBackgroundColor="@color/background_color"
+            app:cardBackgroundColor="?attr/background_color"
             app:cardCornerRadius="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.35"
-            app:strokeColor="@color/primary"
+            app:strokeColor="?attr/primary"
             app:strokeWidth="1dp">
 
             <EditText
@@ -74,8 +74,8 @@
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
                 android:singleLine="true"
-                android:textColor="@color/primary"
-                android:textColorHint="@color/primary"
+                android:textColor="?attr/primary"
+                android:textColorHint="?attr/primary"
                 android:textSize="15sp"
                 android:theme="@style/EditTextTheme"
                 tools:ignore="RtlSymmetry" />
@@ -89,27 +89,27 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            app:cardBackgroundColor="@color/background_color"
+            app:cardBackgroundColor="?attr/background_color"
             app:cardCornerRadius="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            app:strokeColor="@color/primary"
+            app:strokeColor="?attr/primary"
             app:strokeWidth="1dp">
 
             <EditText
                 android:id="@+id/password_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/background_color"
+                android:background="?attr/background_color"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
                 android:singleLine="true"
-                android:textColor="@color/primary"
-                android:textColorHint="@color/primary"
+                android:textColor="?attr/primary"
+                android:textColorHint="?attr/primary"
                 android:textSize="15sp"
                 android:theme="@style/EditTextTheme"
                 tools:ignore="RtlSymmetry" />
@@ -124,14 +124,14 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            app:cardBackgroundColor="@color/background_color"
+            app:cardBackgroundColor="?attr/background_color"
             app:cardCornerRadius="5dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView3"
             app:layout_constraintVertical_bias="0.25"
-            app:strokeColor="@color/primary"
+            app:strokeColor="?attr/primary"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -145,7 +145,7 @@
                     android:layout_height="60dp"
                     android:layout_marginStart="10dp"
                     android:layout_weight="4"
-                    android:background="@color/background_color"
+                    android:background="?attr/background_color"
                     android:orientation="horizontal"
                     android:weightSum="12">
 
@@ -166,7 +166,7 @@
                         android:layout_weight="6"
                         android:gravity="center_vertical"
                         android:textAppearance="?attr/textAppearanceSubtitle1"
-                        android:textColor="@color/primary"
+                        android:textColor="?attr/primary"
                         tools:text="+90" />
 
 
@@ -177,7 +177,7 @@
                         android:layout_weight="3"
                         android:padding="5dp"
                         android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                        app:tint="@color/primary"
+                        app:tint="?attr/primary"
                         tools:ignore="NestedWeights" />
 
                 </LinearLayout>
@@ -187,14 +187,14 @@
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="8"
-                    android:background="@color/background_color"
+                    android:background="?attr/background_color"
                     android:hint="@string/phone_number"
                     android:inputType="number"
                     android:maxLines="1"
                     android:paddingStart="30dp"
                     android:paddingEnd="10dp"
-                    android:textColor="@color/primary"
-                    android:textColorHint="@color/primary"
+                    android:textColor="?attr/primary"
+                    android:textColorHint="?attr/primary"
                     android:textSize="15sp"
                     android:theme="@style/EditTextTheme"
                     tools:ignore="RtlSymmetry,TextFields" />
@@ -210,19 +210,19 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            app:cardBackgroundColor="@color/background_color"
+            app:cardBackgroundColor="?attr/background_color"
             app:cardCornerRadius="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phone_card"
-            app:strokeColor="@color/primary"
+            app:strokeColor="?attr/primary"
             app:strokeWidth="1dp">
 
             <EditText
                 android:id="@+id/default_currency"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/background_color"
+                android:background="?attr/background_color"
                 android:hint="@string/default_currency"
                 android:editable="false"
                 android:inputType="none"
@@ -230,8 +230,8 @@
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
                 android:singleLine="true"
-                android:textColor="@color/primary"
-                android:textColorHint="@color/primary"
+                android:textColor="?attr/primary"
+                android:textColorHint="?attr/primary"
                 android:textSize="15sp"
                 android:theme="@style/EditTextTheme"
                 tools:ignore="RtlSymmetry" />
@@ -256,23 +256,23 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="4"
-                app:cardBackgroundColor="@color/background_color"
+                app:cardBackgroundColor="?attr/background_color"
                 app:cardCornerRadius="5dp"
-                app:strokeColor="@color/primary"
+                app:strokeColor="?attr/primary"
                 app:strokeWidth="1dp">
 
                 <EditText
                     android:id="@+id/name_et"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/background_color"
+                    android:background="?attr/background_color"
                     android:hint="@string/name"
                     android:maxLines="1"
                     android:paddingStart="30dp"
                     android:paddingEnd="30dp"
                     android:singleLine="true"
-                    android:textColor="@color/primary"
-                    android:textColorHint="@color/primary"
+                    android:textColor="?attr/primary"
+                    android:textColorHint="?attr/primary"
                     android:textSize="15sp"
                     android:theme="@style/EditTextTheme"
                     tools:ignore="RtlSymmetry" />
@@ -286,23 +286,23 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="6"
-                app:cardBackgroundColor="@color/surface"
+                app:cardBackgroundColor="?attr/surface"
                 app:cardCornerRadius="5dp"
-                app:strokeColor="@color/primary"
+                app:strokeColor="?attr/primary"
                 app:strokeWidth="1dp">
 
                 <EditText
                     android:id="@+id/last_name_et"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/background_color"
+                    android:background="?attr/background_color"
                     android:hint="@string/last_name"
                     android:maxLines="1"
                     android:paddingStart="30dp"
                     android:paddingEnd="30dp"
                     android:singleLine="true"
-                    android:textColor="@color/primary"
-                    android:textColorHint="@color/primary"
+                    android:textColor="?attr/primary"
+                    android:textColorHint="?attr/primary"
                     android:textSize="15sp"
                     android:theme="@style/EditTextTheme"
                     tools:ignore="RtlSymmetry" />
@@ -321,7 +321,7 @@
         android:layout_height="55dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        app:cardBackgroundColor="@color/primary"
+        app:cardBackgroundColor="?attr/primary"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -342,7 +342,7 @@
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:text="@string/sign_up"
-                android:textColor="@color/background_color"
+                android:textColor="?attr/background_color"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -353,7 +353,7 @@
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/primary"
+        android:indeterminateTint="?attr/primary"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/sign_up"
         app:layout_constraintEnd_toEndOf="@+id/sign_up"

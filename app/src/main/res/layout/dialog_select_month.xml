@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@color/background_color"
+        android:background="?attr/background_color"
         app:cardCornerRadius="15dp">
 
         <LinearLayout
@@ -33,7 +33,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_weight="3"
                     android:text="@string/date"
-                    android:textColor="@color/primary_container"
+                    android:textColor="?attr/primary_container"
                     android:textSize="15sp" />
 
                 <TextView
@@ -43,7 +43,7 @@
                     android:layout_weight="6"
                     android:text="@string/this_month"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/primary_container"
+                    android:textColor="?attr/primary_container"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -54,7 +54,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:src="@drawable/ic_baseline_close_24"
-                    app:tint="@color/primary_container" />
+                    app:tint="?attr/primary_container" />
 
             </LinearLayout>
 
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Sep 2022"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/date_right_btn"
@@ -114,7 +114,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/jan"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
@@ -125,7 +125,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/feb"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
@@ -136,7 +136,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/mar"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
@@ -147,7 +147,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/apr"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -167,7 +167,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/may"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
@@ -178,7 +178,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/jun"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
@@ -189,7 +189,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/jul"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
@@ -200,7 +200,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/aug"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -222,7 +222,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/sep"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
@@ -233,7 +233,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/oct"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
@@ -244,7 +244,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/nov"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
@@ -255,7 +255,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/dec"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>

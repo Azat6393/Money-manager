@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:alpha=".5"
-        android:background="@color/black" />
+        android:background="?attr/black" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1.5"
             app:cardCornerRadius="5dp"
-            app:cardBackgroundColor="@color/red">
+            app:cardBackgroundColor="?attr/red">
 
             <TextView
                 android:id="@+id/percentage_tv"
@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:textColor="@color/white"
+                android:textColor="?attr/white"
                 android:textSize="12sp"
                 tools:text="61%" />
 
@@ -52,7 +52,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="5"
-            android:textColor="@color/black"
+            android:textColor="?attr/black"
             android:textSize="14sp"
             tools:text="Self-development" />
 
@@ -67,7 +67,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="3.5"
             android:gravity="end"
-            android:textColor="@color/black"
+            android:textColor="?attr/black"
             android:textSize="14sp"
             tools:text="$ 530.0" />
 

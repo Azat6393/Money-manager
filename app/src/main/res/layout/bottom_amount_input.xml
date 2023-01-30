@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_color"
+    android:background="?attr/background_color"
     android:orientation="vertical">
 
 
@@ -46,7 +46,7 @@
                 android:layout_gravity="start|center_vertical"
                 android:layout_margin="10dp"
                 android:src="@drawable/earth_icon"
-                app:tint="@color/primary" />
+                app:tint="?attr/primary" />
 
         </FrameLayout>
 
@@ -70,7 +70,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="1"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -89,7 +89,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -98,7 +98,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="2"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -109,7 +109,7 @@
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_marginStart="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -118,7 +118,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="3"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -130,7 +130,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary"
+                app:cardBackgroundColor="?attr/primary"
                 app:cardCornerRadius="30dp">
 
 
@@ -139,7 +139,7 @@
                     android:layout_height="match_parent"
                     android:padding="16dp"
                     android:src="@drawable/material_backspace"
-                    app:tint="@color/primary_container" />
+                    app:tint="?attr/primary_container" />
 
             </androidx.cardview.widget.CardView>
 
@@ -161,7 +161,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -170,7 +170,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="4"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -180,7 +180,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -189,7 +189,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="5"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -200,7 +200,7 @@
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_marginStart="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -209,7 +209,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="6"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -223,7 +223,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/secondary"
+                app:cardBackgroundColor="?attr/secondary"
                 app:cardCornerRadius="30dp">
 
 
@@ -233,7 +233,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="@string/done"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="15sp" />
 
             </androidx.cardview.widget.CardView>
@@ -256,7 +256,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -265,7 +265,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="7"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -275,7 +275,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -284,7 +284,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="8"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -295,7 +295,7 @@
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_marginStart="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -304,7 +304,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="9"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -317,7 +317,7 @@
                 android:visibility="invisible"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
 
@@ -326,7 +326,7 @@
                     android:layout_height="match_parent"
                     android:padding="12dp"
                     android:src="@drawable/ic_baseline_calculate_24"
-                    app:tint="@color/primary" />
+                    app:tint="?attr/primary" />
 
             </androidx.cardview.widget.CardView>
 
@@ -347,7 +347,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_weight="3"
                 android:visibility="invisible"
-                app:cardBackgroundColor="@color/primary"
+                app:cardBackgroundColor="?attr/primary"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -356,7 +356,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text=""
-                    android:textColor="@color/primary_container"
+                    android:textColor="?attr/primary_container"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -367,7 +367,7 @@
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_marginBottom="20dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -376,7 +376,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="0"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -387,7 +387,7 @@
                 android:layout_height="@dimen/amount_button_height"
                 android:layout_marginStart="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -396,7 +396,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="."
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>
@@ -409,7 +409,7 @@
                 android:visibility="invisible"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="3"
-                app:cardBackgroundColor="@color/primary_container"
+                app:cardBackgroundColor="?attr/primary_container"
                 app:cardCornerRadius="30dp">
 
                 <TextView
@@ -418,7 +418,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
                     android:text="-"
-                    android:textColor="@color/primary"
+                    android:textColor="?attr/primary"
                     android:textSize="25sp" />
 
             </androidx.cardview.widget.CardView>

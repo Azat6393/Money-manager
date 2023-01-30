@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="?attr/background_color"
     android:orientation="vertical"
     tools:context=".feature_statistics.presentation.stats.StatisticsFragment">
 
@@ -12,7 +12,7 @@
         android:id="@+id/account_settings_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_color"
+        android:background="?attr/background_color"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="10dp"
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp"
                     tools:text="Sep 2022" />
 
@@ -69,7 +69,7 @@
                     android:id="@+id/start_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp"
                     tools:text="1.1.23" />
 
@@ -80,7 +80,7 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:src="@drawable/ic_baseline_calendar_month_24"
-                    app:tint="@color/surface" />
+                    app:tint="?attr/surface" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -88,14 +88,14 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:text="~"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/end_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/black"
                     android:textSize="15sp"
                     tools:text="1.1.23" />
 
@@ -106,7 +106,7 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="5dp"
                     android:src="@drawable/ic_baseline_calendar_month_24"
-                    app:tint="@color/surface" />
+                    app:tint="?attr/surface" />
             </LinearLayout>
 
         </FrameLayout>
@@ -202,12 +202,12 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:backgroundTint="@color/background_color"
+        android:backgroundTint="?attr/background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:tabIndicatorColor="@color/primary"
-        app:tabSelectedTextColor="@color/primary"
+        app:tabIndicatorColor="?attr/primary"
+        app:tabSelectedTextColor="?attr/primary"
         app:tabTextAppearance="@style/MineCustomTabText">
 
         <com.google.android.material.tabs.TabItem

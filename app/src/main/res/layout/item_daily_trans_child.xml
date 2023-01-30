@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
-    android:backgroundTint="@color/background_color"
+    android:backgroundTint="?attr/background_color"
     android:clickable="true"
     android:focusable="true"
     android:orientation="horizontal"
@@ -59,7 +59,7 @@
             android:lines="1"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@color/black"
+            android:textColor="?attr/black"
             android:textSize="15sp"
             android:visibility="gone"
             tools:text="Trans. note"
@@ -105,7 +105,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:src="@drawable/ic_baseline_arrow_right_alt_24"
-                    app:tint="@color/surface" />
+                    app:tint="?attr/surface" />
 
                 <TextView
                     android:id="@+id/to_account_tv"
@@ -123,7 +123,7 @@
                 android:layout_marginStart="5dp"
                 android:src="@drawable/ic_baseline_image_24"
                 android:visibility="gone"
-                app:tint="@color/surface"
+                app:tint="?attr/surface"
                 tools:visibility="visible" />
 
         </LinearLayout>
@@ -140,7 +140,7 @@
         android:lines="1"
         android:maxLines="1"
         android:singleLine="true"
-        android:textColor="@color/blue"
+        android:textColor="?attr/blue"
         android:textSize="15sp"
         tools:text="$ 5000" />
 

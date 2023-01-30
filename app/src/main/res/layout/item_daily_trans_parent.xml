@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/gray_background_color"
+    android:background="?attr/gray_background_color"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_color"
+        android:background="?attr/background_color"
         android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:alpha="0.3"
-            android:background="@color/surface" />
+            android:background="?attr/surface" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 tools:text="06" />
@@ -47,7 +47,7 @@
                 android:background="@drawable/radio_button_unchecked"
                 android:fontFamily="sans-serif-medium"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="?attr/black"
                 android:padding="2dp"
                 android:textSize="13sp"
                 android:textStyle="normal"
@@ -71,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
-                android:textColor="@color/blue"
+                android:textColor="?attr/blue"
                 android:fontFamily="sans-serif-medium"
                 android:layout_marginEnd="5dp"
                 android:textSize="15sp"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
                 android:layout_marginEnd="15dp"
-                android:textColor="@color/red"
+                android:textColor="?attr/red"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="15sp"
                 android:textAlignment="textEnd"
@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:alpha="0.3"
-            android:background="@color/surface" />
+            android:background="?attr/surface" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trans_rv"

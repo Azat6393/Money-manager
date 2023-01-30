@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_currency"
-        android:textColor="@color/black"
+        android:textColor="?attr/black"
         android:textSize="18sp"
         android:textAlignment="center"
         android:layout_margin="15dp"/>

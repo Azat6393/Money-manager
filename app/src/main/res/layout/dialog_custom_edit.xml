@@ -13,7 +13,7 @@
         tools:text="Add Account Group"
         android:textSize="20sp"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="?attr/black"
         android:layout_marginTop="20dp"/>
 
     <com.google.android.material.textfield.TextInputLayout

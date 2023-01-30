@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        android:indeterminateTint="@color/primary"
+        android:indeterminateTint="?attr/primary"
         app:layout_constraintBottom_toBottomOf="@+id/webView"
         app:layout_constraintEnd_toEndOf="@+id/webView"
         app:layout_constraintStart_toStartOf="@+id/webView"

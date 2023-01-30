@@ -5,10 +5,10 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-
     <color name="background_color">#FFFFFBFE</color>
     <color name="gray_background_color">#E3E3E3</color>
     <color name="primary">#FF6750A4</color>
@@ -20,4 +20,33 @@
     <color name="blue">#3a86ff</color>
     <color name="red">#e63946</color>
     <color name="green">#70e000</color>
+
+    <color name="light_theme_black">#FF000000</color>
+    <color name="light_theme_white">#FFFFFFFF</color>
+    <color name="light_theme_background_color">#FFFFFBFE</color>
+    <color name="light_theme_gray_background_color">#E3E3E3</color>
+    <color name="light_theme_primary">#FF6750A4</color>
+    <color name="light_theme_primary_container">#FFF7F2F9</color>
+    <color name="light_theme_surface">#FF625D67</color>
+    <color name="light_theme_light_gray">#e9ecef</color>
+    <color name="light_theme_neutral">#FFE8DEF8</color>
+    <color name="light_theme_secondary">#FFFFD8E4</color>
+    <color name="light_theme_blue">#3a86ff</color>
+    <color name="light_theme_red">#e63946</color>
+    <color name="light_theme_green">#70e000</color>
+
+    <color name="dark_theme_black">#FFFFFFFF</color>
+    <color name="dark_theme_white">#212125</color>
+    <color name="dark_theme_background_color">#FF27282d</color>
+    <color name="dark_theme_gray_background_color">#686868</color>
+    <color name="dark_theme_primary">#FF6750A4</color>
+    <color name="dark_theme_primary_container">#252325</color>
+    <color name="dark_theme_surface">#7C7581</color>
+    <color name="dark_theme_light_gray">#2E2F30</color>
+    <color name="dark_theme_neutral">#444149</color>
+    <color name="dark_theme_secondary">#67565B</color>
+    <color name="dark_theme_blue">#3a86ff</color>
+    <color name="dark_theme_red">#e63946</color>
+    <color name="dark_theme_green">#70e000</color>
+
 </resources>

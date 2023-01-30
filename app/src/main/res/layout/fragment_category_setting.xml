@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background_color"
+    android:background="?attr/background_color"
     tools:context=".feature_settings.presentation.category.CategorySettingFragment"
     android:orientation="vertical">
 
@@ -16,7 +16,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:weightSum="10"
-        android:background="@color/white">
+        android:background="?attr/white">
 
         <ImageView
             android:id="@+id/back_btn"
@@ -36,7 +36,7 @@
             android:textSize="17sp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/black"/>
+            android:textColor="?attr/black"/>
 
         <ImageView
             android:id="@+id/add_btn"
