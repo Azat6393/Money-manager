@@ -1,5 +1,6 @@
 package com.woynex.parasayar.feature_trans.domain.repository
 
+import androidx.room.Query
 import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.TransTypes
 import com.woynex.parasayar.feature_trans.domain.model.Trans
@@ -48,4 +49,30 @@ interface TransRepository {
     suspend fun deleteFeeTrans(transId: String)
 
     fun getAllCurrency(): Flow<List<Currency>>
+
+    fun getTransByCategory(
+        category_id: Int,
+        currency: String,
+        month: Int,
+        year: Int
+    ): Flow<List<Trans>>
+
+    fun getTransBySubcategory(
+        subcategory_id: Int,
+        currency: String,
+        month: Int,
+        year: Int
+    ): Flow<List<Trans>>
+
+    fun getTransByCategoryYearly(
+        category_id: Int,
+        currency: String,
+        year: Int
+    ): Flow<List<Trans>>
+
+    fun getTransBySubcategoryYearly(
+        subcategory_id: Int,
+        currency: String,
+        year: Int
+    ): Flow<List<Trans>>
 }

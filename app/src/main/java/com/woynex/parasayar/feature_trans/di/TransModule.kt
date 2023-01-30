@@ -62,7 +62,8 @@ object TransModule {
             getTransByMonth = GetTransByMonth(repo),
             getTransByYear = GetTransByYear(repo),
             getTransByDay = GetTransByDay(repo),
-            getWeeklyTrans = GetWeeklyTrans(repo)
+            getWeeklyTrans = GetWeeklyTrans(repo),
+            getBarStatistics = GetBarStatistics(repo)
         )
     }
 

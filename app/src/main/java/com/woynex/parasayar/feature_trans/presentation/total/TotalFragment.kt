@@ -144,10 +144,24 @@ class TotalFragment : Fragment(R.layout.fragment_total), BudgetParentAdapter.OnI
     }
 
     override fun selectCategory(budget: Budget) {
-
+        val action = TransFragmentDirections.actionTransFragmentToBudgetDetailsFragment(
+            isCategory = true,
+            id = budget.categoryBudget.category_id!!,
+            name = budget.categoryBudget.category_name,
+            isBudget = true,
+            currency = budget.categoryBudget.currency
+        )
+        findNavController().navigate(action)
     }
 
     override fun selectSubcategory(budgetItem: BudgetItem) {
-
+        val action = TransFragmentDirections.actionTransFragmentToBudgetDetailsFragment(
+            isCategory = false,
+            id = budgetItem.subcategory_id!!,
+            name = budgetItem.subcategory_name!!,
+            isBudget = true,
+            currency = budgetItem.currency
+        )
+        findNavController().navigate(action)
     }
 }

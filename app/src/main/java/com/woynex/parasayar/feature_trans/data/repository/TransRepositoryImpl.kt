@@ -32,7 +32,12 @@ class TransRepositoryImpl @Inject constructor(
         return dao.getTransById(id)
     }
 
-    override fun getTransByDay(day: Int, month: Int, year: Int, currency: String): Flow<List<Trans>> {
+    override fun getTransByDay(
+        day: Int,
+        month: Int,
+        year: Int,
+        currency: String
+    ): Flow<List<Trans>> {
         return dao.getTransByDay(day, month, year, currency)
     }
 
@@ -101,5 +106,39 @@ class TransRepositoryImpl @Inject constructor(
 
     override fun getAllCurrency(): Flow<List<Currency>> {
         return currencyDao.getAllCurrency()
+    }
+
+    override fun getTransByCategory(
+        category_id: Int,
+        currency: String,
+        month: Int,
+        year: Int
+    ): Flow<List<Trans>> {
+        return dao.getTransByCategory(category_id, currency, month, year)
+    }
+
+    override fun getTransBySubcategory(
+        subcategory_id: Int,
+        currency: String,
+        month: Int,
+        year: Int
+    ): Flow<List<Trans>> {
+        return dao.getTransBySubcategory(subcategory_id, currency, month, year)
+    }
+
+    override fun getTransByCategoryYearly(
+        category_id: Int,
+        currency: String,
+        year: Int
+    ): Flow<List<Trans>> {
+        return dao.getTransByCategoryYearly(category_id, currency, year)
+    }
+
+    override fun getTransBySubcategoryYearly(
+        subcategory_id: Int,
+        currency: String,
+        year: Int
+    ): Flow<List<Trans>> {
+        return dao.getTransBySubcategoryYearly(subcategory_id, currency, year)
     }
 }

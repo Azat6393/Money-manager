@@ -19,12 +19,19 @@
         <action
             android:id="@+id/action_transFragment_to_budgetSettingFragment"
             app:destination="@id/budgetSettingFragment" />
+        <action
+            android:id="@+id/action_transFragment_to_budgetDetailsFragment"
+            app:destination="@id/budgetDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.woynex.parasayar.feature_statistics.presentation.stats.StatisticsFragment"
         android:label="fragment_statistics"
-        tools:layout="@layout/fragment_statistics" />
+        tools:layout="@layout/fragment_statistics" >
+        <action
+            android:id="@+id/action_statisticsFragment_to_budgetDetailsFragment"
+            app:destination="@id/budgetDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountsFragment"
         android:name="com.woynex.parasayar.feature_accounts.presentation.accounts.AccountsFragment"
@@ -220,5 +227,28 @@
         <action
             android:id="@+id/action_budgetSettingFragment_to_addBudgetFragment"
             app:destination="@id/addBudgetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/budgetDetailsFragment"
+        android:name="com.woynex.parasayar.feature_trans.presentation.budget_details.BudgetDetailsFragment"
+        android:label="fragment_budget_details"
+        tools:layout="@layout/fragment_budget_details" >
+        <action
+            android:id="@+id/action_budgetDetailsFragment_to_transEditFragment"
+            app:destination="@id/transEditFragment" />
+        <argument
+            android:name="is_category"
+            app:argType="boolean" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument android:name="is_budget"
+            app:argType="boolean" />
+        <argument
+            android:name="currency"
+            app:argType="string" />
     </fragment>
 </navigation>

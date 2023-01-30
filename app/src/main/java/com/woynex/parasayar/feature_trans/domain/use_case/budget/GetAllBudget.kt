@@ -26,8 +26,6 @@ class GetAllBudget @Inject constructor(
             )
         }
 
-        println(currency)
-        println(categoryWithSubcategoryBudget)
         val budgetList = arrayListOf<Budget>()
         categoryWithSubcategoryBudget.forEach { categoryWithSubcategoryBudget ->
             val categoryExpenses = repo.getCategoriesTrans(
@@ -47,7 +45,9 @@ class GetAllBudget @Inject constructor(
                 budgetAmount = categoryBudgetAmount,
                 expenses = categoryBudgetExpenses,
                 percentage = categoryPercentage.toInt(),
-                currency = currency
+                currency = currency,
+                category_id = categoryWithSubcategoryBudget.categoryBudget.category_id,
+                category_name = categoryWithSubcategoryBudget.categoryBudget.category_name
             )
             val subCategoryBudgetList = arrayListOf<BudgetItem>()
             categoryWithSubcategoryBudget.subcategoryBudgetList.forEach { subcategoryBudget ->
@@ -59,13 +59,18 @@ class GetAllBudget @Inject constructor(
                 ).first()
                 val subcategoryBudgetAmount = subcategoryBudget.amount
                 val subcategoryBudgetExpenses = subcategoryExpenses.sumOf { it.amount }
-                val subcategoryPercentage = (subcategoryBudgetExpenses / subcategoryBudgetAmount) * 100
+                val subcategoryPercentage =
+                    (subcategoryBudgetExpenses / subcategoryBudgetAmount) * 100
                 val subcategoryBudgetItem = BudgetItem(
                     name = subcategoryBudget.subcategory_name,
                     budgetAmount = subcategoryBudgetAmount,
                     expenses = subcategoryBudgetExpenses,
                     percentage = subcategoryPercentage.toInt(),
-                    currency = currency
+                    currency = currency,
+                    category_id = categoryWithSubcategoryBudget.categoryBudget.id,
+                    category_name = categoryWithSubcategoryBudget.categoryBudget.category_name,
+                    subcategory_id = subcategoryBudget.subcategory_id,
+                    subcategory_name = subcategoryBudget.subcategory_name
                 )
                 subCategoryBudgetList.add(subcategoryBudgetItem)
             }

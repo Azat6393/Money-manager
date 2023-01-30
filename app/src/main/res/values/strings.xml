@@ -135,4 +135,6 @@
     <string name="add_budget">Add Budget</string>
     <string name="delete_budget_title">Delete Budget</string>
     <string name="delete_budget_message">Are you sure to delete Budget?</string>
+    <string name="used_amount">Used amount</string>
+    <string name="remaining">Remaining</string>
 </resources>

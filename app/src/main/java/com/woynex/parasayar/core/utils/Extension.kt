@@ -109,7 +109,7 @@ fun List<Trans>.convertToYearTrans(date: LocalDate, currency: String): List<Year
                 date = LocalDate.of(
                     date.year,
                     i,
-                    date.dayOfMonth - 1
+                    date.dayOfMonth - 2
                 ),
                 income = income,
                 expence = expense,

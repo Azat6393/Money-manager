@@ -4,5 +4,6 @@ data class DailyUseCases(
     val getTransByMonth: GetTransByMonth,
     val getTransByYear: GetTransByYear,
     val getTransByDay: GetTransByDay,
-    val getWeeklyTrans: GetWeeklyTrans
+    val getWeeklyTrans: GetWeeklyTrans,
+    val getBarStatistics: GetBarStatistics
 )

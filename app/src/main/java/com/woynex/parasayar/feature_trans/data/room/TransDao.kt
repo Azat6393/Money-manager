@@ -34,13 +34,23 @@ interface TransDao {
     fun getTransByMonth(month: Int, year: Int, currency: String): Flow<List<Trans>>
 
     @Query("SELECT * FROM trans WHERE month=:month OR month=:nextMonth OR month=:previousMonth AND year=:year AND currency=:currency")
-    fun getTransByWeek(month: Int, year: Int, nextMonth: Int, previousMonth: Int, currency: String): Flow<List<Trans>>
+    fun getTransByWeek(
+        month: Int,
+        year: Int,
+        nextMonth: Int,
+        previousMonth: Int,
+        currency: String
+    ): Flow<List<Trans>>
 
     @Query("SELECT * FROM trans WHERE month=:month AND account_name=:accountName AND year=:year")
     fun filterTransByMonthAndAccount(month: Int, accountName: String, year: Int): Flow<List<Trans>>
 
     @Query("SELECT * FROM trans WHERE month=:month AND type=:type AND year=:year")
-    fun filterTransByMonthAndExpensesOrIncome(month: Int, type: String, year: Int): Flow<List<Trans>>
+    fun filterTransByMonthAndExpensesOrIncome(
+        month: Int,
+        type: String,
+        year: Int
+    ): Flow<List<Trans>>
 
     @Query("SELECT * FROM trans WHERE month=:month AND type=:type AND category=:category AND year=:year")
     fun filterTransByMonthAndExpensesCategory(
@@ -66,4 +76,34 @@ interface TransDao {
 
     @Query("DELETE FROM trans WHERE fee_trans_id=:transId")
     suspend fun deleteFeeTrans(transId: String)
+
+    @Query("SELECT * FROM trans WHERE category_id=:category_id AND currency=:currency AND month=:month AND year=:year")
+    fun getTransByCategory(
+        category_id: Int,
+        currency: String,
+        month: Int,
+        year: Int
+    ): Flow<List<Trans>>
+
+    @Query("SELECT * FROM trans WHERE subcategory_id=:subcategory_id AND currency=:currency AND month=:month AND year=:year")
+    fun getTransBySubcategory(
+        subcategory_id: Int,
+        currency: String,
+        month: Int,
+        year: Int
+    ): Flow<List<Trans>>
+
+    @Query("SELECT * FROM trans WHERE category_id=:category_id AND currency=:currency AND year=:year")
+    fun getTransByCategoryYearly(
+        category_id: Int,
+        currency: String,
+        year: Int
+    ): Flow<List<Trans>>
+
+    @Query("SELECT * FROM trans WHERE subcategory_id=:subcategory_id AND currency=:currency AND year=:year")
+    fun getTransBySubcategoryYearly(
+        subcategory_id: Int,
+        currency: String,
+        year: Int
+    ): Flow<List<Trans>>
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
@@ -29,6 +30,7 @@ import com.woynex.parasayar.feature_statistics.domain.model.CategoryStatistics
 import com.woynex.parasayar.feature_statistics.presentation.adapter.CategoryStatisticsAdapter
 import com.woynex.parasayar.feature_statistics.presentation.stats.StatisticsCoreViewModel
 import com.woynex.parasayar.feature_statistics.presentation.stats.StatisticsFilter
+import com.woynex.parasayar.feature_statistics.presentation.stats.StatisticsFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -231,7 +233,14 @@ class StatisticsExpensesFragment : Fragment(R.layout.fragment_statistics_expense
     }
 
     override fun onClick(item: CategoryStatistics) {
-
+        val action = StatisticsFragmentDirections.actionStatisticsFragmentToBudgetDetailsFragment(
+            isCategory = true,
+            id = item.category_id!!,
+            name = item.category_name,
+            isBudget = false,
+            currency = item.currency
+        )
+        findNavController().navigate(action)
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
