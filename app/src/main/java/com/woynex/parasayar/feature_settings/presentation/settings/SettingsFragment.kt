@@ -40,6 +40,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun initView(){
         _binding.apply {
+            changeEditMode(false)
             val name = "${sharedPreferencesHelper.getUser().first_name} ${sharedPreferencesHelper.getUser().last_name}"
             nameTv.setText(name)
             setting.setOnClickListener {

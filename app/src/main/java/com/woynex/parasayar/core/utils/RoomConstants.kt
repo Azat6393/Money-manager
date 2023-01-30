@@ -16,7 +16,9 @@ object RoomConstants {
     @SuppressLint("ConstantLocale")
     val PARA_SAYAR_DEFAULT_DB =
         when (Locale.getDefault().language) {
-            "en" -> "database/accout_group.db"
-            else -> "database/accout_group.db"
+            "en" -> "database/accout_group_en.db"
+            "ru" -> "database/accout_group_ru.db"
+            "tr" -> "database/accout_group_tr.db"
+            else -> "database/accout_group_en.db"
         }
 }
