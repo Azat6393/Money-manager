@@ -98,27 +98,41 @@ fun List<Trans>.convertToYearInfoForAccountDetails(accountId: Int): YearInfo {
 }
 
 fun List<Trans>.convertToYearTrans(date: LocalDate, currency: String): List<YearTrans> {
-    val yearTransList = arrayListOf<YearTrans>()
-    for (i in 1..12) {
-        val monthTrans = this.filter { it.month == i }
-        val income = monthTrans.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
-        val expense = monthTrans.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
-        val total = income - expense
-        yearTransList.add(
-            YearTrans(
-                date = LocalDate.of(
-                    date.year,
-                    i,
-                    date.dayOfMonth - 2
-                ),
-                income = income,
-                expence = expense,
-                total = total,
-                currency = currency
+        val yearTransList = arrayListOf<YearTrans>()
+        for (i in 1..12) {
+            val monthTrans = this.filter { it.month == i }
+            val income = monthTrans.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
+            val expense = monthTrans.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
+            val total = income - expense
+            yearTransList.add(
+                try {
+                    YearTrans(
+                        date = LocalDate.of(
+                            date.year,
+                            i,
+                            date.dayOfMonth
+                        ),
+                        income = income,
+                        expence = expense,
+                        total = total,
+                        currency = currency
+                    )
+                }catch (e: Exception) {
+                    YearTrans(
+                        date = LocalDate.of(
+                            date.year,
+                            i,
+                            date.dayOfMonth - 3
+                        ),
+                        income = income,
+                        expence = expense,
+                        total = total,
+                        currency = currency
+                    )
+                }
             )
-        )
-    }
-    return yearTransList
+        }
+        return yearTransList
 }
 
 
