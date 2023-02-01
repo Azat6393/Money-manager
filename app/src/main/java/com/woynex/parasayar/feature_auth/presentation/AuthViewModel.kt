@@ -6,6 +6,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.woynex.parasayar.core.data.repository.CurrencyRepository
+import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.domain.model.User
 import com.woynex.parasayar.core.utils.Constants.FIREBASE_FIRESTORE_USERS_COLLECTION
 import com.woynex.parasayar.core.utils.Resource
@@ -19,7 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val sharedPreferencesHelper: SharedPreferencesHelper
+    private val sharedPreferencesHelper: SharedPreferencesHelper,
+    private val repo: CurrencyRepository
 ) : ViewModel() {
 
     private val _isAuth = MutableStateFlow(false)
@@ -48,12 +51,16 @@ class AuthViewModel @Inject constructor(
 
     fun signUpWithEmail(
         user: User,
-        password: String
+        password: String,
+        selectedCurrency: Currency
     ) = viewModelScope.launch {
         _signUpResponse.value = Resource.Loading<User>()
         val auth = Firebase.auth
         auth.createUserWithEmailAndPassword(user.email!!, password)
             .addOnSuccessListener {
+                viewModelScope.launch {
+                    repo.insertCurrency(currency = selectedCurrency)
+                }
                 it.user?.let { newUser ->
                     createUser(
                         user.copy(id = newUser.uid)

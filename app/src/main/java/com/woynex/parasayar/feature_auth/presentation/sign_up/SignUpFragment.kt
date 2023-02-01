@@ -93,7 +93,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                             phone_number = "${selectedCountry?.number}${_binding.phoneNumberTv.text}",
                             email = _binding.emailEt.text.toString()
                         ),
-                        password = passwordEt.text.toString()
+                        password = passwordEt.text.toString(),
+                        selectedCurrency = selectedCurrency!!
                     )
                 }
             }

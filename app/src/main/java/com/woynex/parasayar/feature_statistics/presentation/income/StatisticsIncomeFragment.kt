@@ -152,13 +152,7 @@ class StatisticsIncomeFragment : Fragment(R.layout.fragment_statistics_income),
             setOnChartValueSelectedListener(this@StatisticsIncomeFragment)
             animateY(1400, Easing.EaseInOutQuad)
             val l: Legend = legend
-            l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-            l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-            l.orientation = Legend.LegendOrientation.VERTICAL
-            l.setDrawInside(false)
-            l.xEntrySpace = 7f
-            l.yEntrySpace = 0f
-            l.yOffset = 0f
+            l.isEnabled = false
             setEntryLabelColor(Color.WHITE)
             setEntryLabelTextSize(12f)
 

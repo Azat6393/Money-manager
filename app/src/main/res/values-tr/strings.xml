@@ -101,7 +101,7 @@
     <string name="account_group_setting">Hesap Grubu Ayarı</string>
     <string name="accounts_setting">Hesap Ayarları</string>
     <string name="currency_setting">Para Birimi Ayarı</string>
-    <string name="set_currency_message">Seçitiğim para birimi varsayılan olarak ayarlamak istediğinizden emin misiniz?</string>
+    <string name="set_currency_message">Seçtiğiniz para birimini varsayılan olarak ayarlamak istediğinizden emin misiniz ?</string>
     <string name="set_currency_title">Varsayılan para birimini güncelle</string>
     <string name="enter_your_email_address_and_password">E-posta adresinizi ve şifrenizi giriniz</string>
     <string name="enter_your_email_address">E-posta adresinizi giriniz</string>
@@ -139,5 +139,6 @@
     <string name="delete_budget_message">Bütçeyi silmek istediğinizden emin misiniz?</string>
     <string name="used_amount">Kullanılan miktar</string>
     <string name="remaining">Kalan</string>
+    <string name="note">Not</string>
 
 </resources>

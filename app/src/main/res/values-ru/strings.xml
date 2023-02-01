@@ -139,5 +139,6 @@
     <string name="delete_budget_message">Вы действительно хотите удалить бюджет?</string>
     <string name="used_amount">Расход</string>
     <string name="remaining">Осталось</string>
+    <string name="note">Заметка</string>
 
 </resources>
