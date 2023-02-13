@@ -140,5 +140,8 @@
     <string name="used_amount">Расход</string>
     <string name="remaining">Осталось</string>
     <string name="note">Заметка</string>
+    <string name="change_category">Изменить категорию</string>
+    <string name="delete_trans_title">Удалить Операцию</string>
+    <string name="delete_trans_message">Вы действительно хотите удалить категорию Операцию?</string>
 
 </resources>

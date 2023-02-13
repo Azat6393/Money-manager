@@ -72,7 +72,7 @@ class SubcategorySettingFragment : Fragment(R.layout.fragment_subcategory_settin
             }
             editBtn.setOnClickListener {
                 CustomEditDialog(
-                    titleText = "Change Category",
+                    titleText = getString(R.string.change_category),
                     isEditMode = true,
                     editText = categoryWithSubCategories.category.name,
                     save = {},

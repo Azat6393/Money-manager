@@ -1,5 +1,6 @@
 package com.woynex.parasayar.feature_trans.presentation.calendar
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -24,6 +25,7 @@ import com.woynex.parasayar.feature_trans.domain.model.Trans
 import com.woynex.parasayar.feature_trans.presentation.adapter.CalendarAdapter
 import com.woynex.parasayar.feature_trans.presentation.trans.TransFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
@@ -54,6 +56,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), OnItemClickListen
         _binding.calendarRv.apply {
             adapter = mAdapter
             layoutManager = GridLayoutManager(requireContext(), 7)
+            setHasFixedSize(true)
         }
     }
 
@@ -83,7 +86,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), OnItemClickListen
             }
         }
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.transList.collect { result ->
                     when (result) {
                         is Resource.Empty -> {
@@ -105,10 +108,11 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar), OnItemClickListen
     }
 
     private fun setTransToMonth(date: LocalDate, transList: List<Trans>) {
-        val daysOfMonth = daysInMonthList(date, date, transList)
         mAdapter.submitList(null)
+        val daysOfMonth = daysInMonthList(date, date, transList)
         mAdapter.submitList(daysOfMonth)
     }
+
 
     override fun onClick(item: CalendarDay) {
         if (item.income != null && item.expense != null) {

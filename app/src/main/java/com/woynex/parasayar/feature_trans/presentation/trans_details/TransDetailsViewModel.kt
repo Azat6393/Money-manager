@@ -96,4 +96,8 @@ class TransDetailsViewModel @Inject constructor(
             _accounts.value = list.map { it.toAccount() }
         }.launchIn(viewModelScope)
     }
+
+    fun deleteTrans(trans: Trans) = viewModelScope.launch {
+        transUseCases.deleteTrans(trans)
+    }
 }

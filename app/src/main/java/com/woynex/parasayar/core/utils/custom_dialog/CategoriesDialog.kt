@@ -92,7 +92,7 @@ class CategoriesDialog(
 
     fun invisible() {
         _binding.root.isVisible = false
-        onClose
+        onClose()
     }
 
     override fun onClick(item: SubCategory) {

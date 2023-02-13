@@ -139,5 +139,8 @@
     <string name="used_amount">Used amount</string>
     <string name="remaining">Remaining</string>
     <string name="note">Note</string>
+    <string name="change_category">Change Category</string>
+    <string name="delete_trans_title">Delete Trans.</string>
+    <string name="delete_trans_message">Are you sure to delete Trans.?</string>
 
 </resources>

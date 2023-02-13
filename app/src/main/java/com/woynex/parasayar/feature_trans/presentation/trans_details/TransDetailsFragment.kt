@@ -107,12 +107,15 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
     private fun initView() {
         dateAndTime = LocalDateTime.now()
         _binding.apply {
+            deleteBtn.isVisible = false
             amount.setText("$selectedCurrency 0.00")
             date.setText(parseFullDate(dateAndTime))
-            date.setOnClickListener {
-                categoriesDialog?.invisible()
-                accountsDialog?.invisible()
-                showDatePicker()
+            date.setOnFocusChangeListener { v, hasFocus ->
+                if(hasFocus){
+                    categoriesDialog?.invisible()
+                    accountsDialog?.invisible()
+                    showDatePicker()
+                }
             }
             account.setOnFocusChangeListener { v, hasFocus ->
                 if (hasFocus) {
@@ -152,6 +155,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
                     categoriesDialog?.invisible()
                     accountsDialog?.invisible()
                     AmountInputBottomSheet(
+                        editText = _binding.amount,
                         defaultCurrency = selectedCurrency,
                         coreViewModel = coreViewModel,
                         input = { currency, amount ->
@@ -580,6 +584,7 @@ class TransDetailsFragment : Fragment(R.layout.fragment_trans_details) {
         _binding.apply {
             accountsDialog?.invisible()
             categoriesDialog?.invisible()
+            date.clearFocus()
             category.clearFocus()
             account.clearFocus()
             category.setText("")

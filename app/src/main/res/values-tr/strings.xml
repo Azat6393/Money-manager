@@ -68,20 +68,20 @@
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="delete_account_title">Hesabı Sil</string>
-    <string name="delete_account_message">Hesabı silmek istediğinizden emin misiniz</string>
+    <string name="delete_account_message">Hesabı silmek istediğinizden emin misiniz?</string>
     <string name="delete_currency_title">Para Birimini Sil</string>
     <string name="delete_currency_message">Para Birimini silmek istediğinizden emin misiniz?</string>
     <string name="cash">Nakit</string>
     <string name="delete_account_group_title">Hesap Grubunu Sil</string>
-    <string name="delete_account_group_message">Hesap Grubunu silmek istediğinizden emin misiniz</string>
+    <string name="delete_account_group_message">Hesap Grubunu silmek istediğinizden emin misiniz?</string>
     <string name="name_cannot_be_empty">İsim boş olamaz</string>
     <string name="add_account_group">Hesap Grubu Ekle</string>
     <string name="delete_category_title">Kategoriyi Sil</string>
-    <string name="delete_category_message">Kategoriyi silmek istediğinizden emin misiniz</string>
+    <string name="delete_category_message">Kategoriyi silmek istediğinizden emin misiniz?</string>
     <string name="expenses_category">Gider Kategorisi</string>
     <string name="income_category">Gelir Kategorisi</string>
     <string name="delete_subcategory_title">Alt Kategoriyi Sil</string>
-    <string name="delete_subcategory_message">Alt Kategoriyi silmek istediğinizden emin misiniz</string>
+    <string name="delete_subcategory_message">Alt Kategoriyi silmek istediğinizden emin misiniz?</string>
     <string name="subcategory">Alt kategori</string>
     <string name="modify_subcategory">Alt Kategoriyi Değiştir</string>
     <string name="balance">Bakiye</string>
@@ -140,5 +140,8 @@
     <string name="used_amount">Kullanılan miktar</string>
     <string name="remaining">Kalan</string>
     <string name="note">Not</string>
+    <string name="change_category">Kategoriyi Değiştir</string>
+    <string name="delete_trans_title">İşlemi sil</string>
+    <string name="delete_trans_message">İşlemi silmek istediğinizden emin misiniz?</string>
 
 </resources>

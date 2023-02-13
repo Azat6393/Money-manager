@@ -16,7 +16,6 @@ import java.time.LocalDate
 class CalendarAdapter(private val listener: OnItemClickListener<CalendarDay>) :
     ListAdapter<CalendarDay, CalendarAdapter.CalendarViewHolder>(DiffCallBack) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val binding = CalendarViewHolder(
             ItemCalendarDayBinding.inflate(
@@ -25,12 +24,12 @@ class CalendarAdapter(private val listener: OnItemClickListener<CalendarDay>) :
                 false
             )
         )
-        val layoutParams = binding.itemView.layoutParams
-        if (currentList.size > 15) {
-            layoutParams.height = (parent.height * 0.166666666).toInt()
-        } else {
-            layoutParams.height = parent.height
-        }
+          val layoutParams = binding.itemView.layoutParams
+          if (currentList.size > 15) {
+              layoutParams.height = (parent.height * 0.166666666).toInt()
+          } else {
+              layoutParams.height = parent.height
+          }
         return binding
     }
 

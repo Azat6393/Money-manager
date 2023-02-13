@@ -41,6 +41,7 @@ import com.woynex.parasayar.feature_settings.domain.model.SubCategory
 import com.woynex.parasayar.feature_trans.TransCoreViewModel
 import com.woynex.parasayar.feature_trans.domain.model.Trans
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.*
 import java.util.*
@@ -192,12 +193,27 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
     private fun initView() {
         dateAndTime = millisecondToLocalDateTime(args.trans.date_in_millis)
         _binding.apply {
+            deleteBtn.setOnClickListener {
+                requireActivity().showAlertDialog(
+                    title = getString(R.string.delete_trans_title),
+                    message = getString(R.string.delete_trans_message)
+                ){
+                    viewModel.deleteTrans(args.trans)
+                    deleteBtn.isVisible = false
+                    lifecycleScope.launch {
+                        delay(500L)
+                        findNavController().popBackStack()
+                    }
+                }
+            }
             amount.setText("$selectedCurrency 0.00")
             date.setText(parseFullDate(dateAndTime))
-            date.setOnClickListener {
-                categoriesDialog?.invisible()
-                accountsDialog?.invisible()
-                showDatePicker()
+            date.setOnFocusChangeListener { v, hasFocus ->
+                if(hasFocus){
+                    categoriesDialog?.invisible()
+                    accountsDialog?.invisible()
+                    showDatePicker()
+                }
             }
             account.setOnFocusChangeListener { v, hasFocus ->
                 if (hasFocus) {
@@ -237,6 +253,7 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
                     categoriesDialog?.invisible()
                     accountsDialog?.invisible()
                     AmountInputBottomSheet(
+                        editText = _binding.amount,
                         defaultCurrency = selectedCurrency,
                         coreViewModel = coreViewModel,
                         input = { currency, amount ->
@@ -693,6 +710,7 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
         _binding.apply {
             categoriesDialog?.invisible()
             accountsDialog?.invisible()
+            date.clearFocus()
             category.clearFocus()
             account.clearFocus()
             category.setText("")
