@@ -20,10 +20,13 @@ import com.woynex.parasayar.feature_auth.domain.model.CountryInfo
 import com.woynex.parasayar.feature_statistics.domain.model.CategoryStatistics
 import com.woynex.parasayar.feature_trans.domain.model.*
 import java.security.Timestamp
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.time.*
 import java.time.temporal.TemporalAdjuster
 import java.time.temporal.TemporalAdjusters
 import java.time.temporal.TemporalQueries.localDate
+import java.util.*
 
 
 fun String.fromJsonToCurrency(): List<Currency> {
@@ -60,8 +63,10 @@ fun List<Trans>.convertToDailyTransListForAccountDetails(accountId: Int): List<D
     newList.forEach { transList ->
         var allExpense = transList.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
         var allIncome = transList.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
-        allIncome += transList.filter { it.type == TransTypes.TRANSFER && it.to_account_id == accountId }.sumOf { it.amount }
-        allExpense += transList.filter { it.type == TransTypes.TRANSFER && it.account_id == accountId }.sumOf { it.amount }
+        allIncome += transList.filter { it.type == TransTypes.TRANSFER && it.to_account_id == accountId }
+            .sumOf { it.amount }
+        allExpense += transList.filter { it.type == TransTypes.TRANSFER && it.account_id == accountId }
+            .sumOf { it.amount }
         val newDailyTrans = DailyTrans(
             day = parseDayOfMonthDate(transList[0].date_in_millis),
             dayOfWeek = parseDayOfWeekDate(transList[0].date_in_millis),
@@ -88,8 +93,10 @@ fun List<Trans>.convertToYearInfo(): YearInfo {
 fun List<Trans>.convertToYearInfoForAccountDetails(accountId: Int): YearInfo {
     var income = this.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
     var expence = this.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
-    income += this.filter { it.type == TransTypes.TRANSFER && it.to_account_id == accountId }.sumOf { it.amount }
-    expence += this.filter { it.type == TransTypes.TRANSFER && it.account_id == accountId }.sumOf { it.amount }
+    income += this.filter { it.type == TransTypes.TRANSFER && it.to_account_id == accountId }
+        .sumOf { it.amount }
+    expence += this.filter { it.type == TransTypes.TRANSFER && it.account_id == accountId }
+        .sumOf { it.amount }
     return YearInfo(
         income = income,
         expence = expence,
@@ -98,41 +105,41 @@ fun List<Trans>.convertToYearInfoForAccountDetails(accountId: Int): YearInfo {
 }
 
 fun List<Trans>.convertToYearTrans(date: LocalDate, currency: String): List<YearTrans> {
-        val yearTransList = arrayListOf<YearTrans>()
-        for (i in 1..12) {
-            val monthTrans = this.filter { it.month == i }
-            val income = monthTrans.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
-            val expense = monthTrans.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
-            val total = income - expense
-            yearTransList.add(
-                try {
-                    YearTrans(
-                        date = LocalDate.of(
-                            date.year,
-                            i,
-                            date.dayOfMonth
-                        ),
-                        income = income,
-                        expence = expense,
-                        total = total,
-                        currency = currency
-                    )
-                }catch (e: Exception) {
-                    YearTrans(
-                        date = LocalDate.of(
-                            date.year,
-                            i,
-                            date.dayOfMonth - 3
-                        ),
-                        income = income,
-                        expence = expense,
-                        total = total,
-                        currency = currency
-                    )
-                }
-            )
-        }
-        return yearTransList
+    val yearTransList = arrayListOf<YearTrans>()
+    for (i in 1..12) {
+        val monthTrans = this.filter { it.month == i }
+        val income = monthTrans.filter { it.type == TransTypes.INCOME }.sumOf { it.amount }
+        val expense = monthTrans.filter { it.type == TransTypes.EXPENSE }.sumOf { it.amount }
+        val total = income - expense
+        yearTransList.add(
+            try {
+                YearTrans(
+                    date = LocalDate.of(
+                        date.year,
+                        i,
+                        date.dayOfMonth
+                    ),
+                    income = income,
+                    expence = expense,
+                    total = total,
+                    currency = currency
+                )
+            } catch (e: Exception) {
+                YearTrans(
+                    date = LocalDate.of(
+                        date.year,
+                        i,
+                        date.dayOfMonth - 3
+                    ),
+                    income = income,
+                    expence = expense,
+                    total = total,
+                    currency = currency
+                )
+            }
+        )
+    }
+    return yearTransList
 }
 
 
@@ -260,11 +267,19 @@ private fun interpolateColor(proportion: Float): Int {
     return Color.HSVToColor(hsvb)
 }
 
-fun LocalDate.toMillisecond(): Long{
+fun LocalDate.toMillisecond(): Long {
     return this.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
 }
 
 fun String.fromJsonToCountyList(): List<CountryInfo> {
     val gson = Gson()
     return gson.fromJson(this, Array<CountryInfo>::class.java).asList()
+}
+
+fun Double.maskCurrency(): String {
+    val formatter = NumberFormat.getCurrencyInstance(Locale.getDefault()) as DecimalFormat
+    val symbols = formatter.decimalFormatSymbols
+    symbols.currencySymbol = ""
+    formatter.decimalFormatSymbols = symbols
+    return formatter.format(this)
 }

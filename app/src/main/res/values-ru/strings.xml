@@ -143,5 +143,7 @@
     <string name="change_category">Изменить категорию</string>
     <string name="delete_trans_title">Удалить Операцию</string>
     <string name="delete_trans_message">Вы действительно хотите удалить категорию Операцию?</string>
+    <string name="edit">Изменить</string>
+
 
 </resources>

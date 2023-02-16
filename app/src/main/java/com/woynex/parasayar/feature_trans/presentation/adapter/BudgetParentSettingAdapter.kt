@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.OnItemClickListener
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.databinding.ItemBudgetSettingParentBinding
 import com.woynex.parasayar.feature_trans.domain.model.CategoryWithSubcategoryBudget
 import com.woynex.parasayar.feature_trans.domain.model.SubcategoryBudget
@@ -96,7 +97,7 @@ class BudgetParentSettingAdapter(private val listener: OnItemClickListener) :
                 arrowIcon.isVisible = item.subcategoryBudgetList.isNotEmpty()
                 _binding.recyclerView.isVisible = childViewState
                 categoryNameTv.text = item.categoryBudget.category_name
-                amount.text = "${item.categoryBudget.currency} ${item.categoryBudget.amount}"
+                amount.text = "${item.categoryBudget.currency} ${item.categoryBudget.amount.maskCurrency()}"
                 val mAdapter = BudgetChildSettingAdapter(this@BudgetParentSettingAdapter)
                 _binding.recyclerView.apply {
                     adapter = mAdapter

@@ -17,6 +17,7 @@ import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.SharedPreferencesHelper
 import com.woynex.parasayar.core.utils.custom_dialog.SelectMonthDialog
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.core.utils.parseDateText
 import com.woynex.parasayar.core.utils.parseYear
 import com.woynex.parasayar.databinding.FragmentTransBinding
@@ -68,9 +69,9 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 coreViewModel.yearInfo.collect { result ->
-                    _binding.income.text = result?.income.toString()
-                    _binding.expenses.text = result?.expence.toString()
-                    _binding.total.text = result?.total.toString()
+                    _binding.income.text = result?.income?.maskCurrency()
+                    _binding.expenses.text = result?.expence?.maskCurrency()
+                    _binding.total.text = result?.total?.maskCurrency()
                 }
             }
         }

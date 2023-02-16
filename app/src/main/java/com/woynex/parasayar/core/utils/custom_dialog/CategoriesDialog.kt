@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -55,16 +56,27 @@ class CategoriesDialog(
 
         _binding.categoryRecyclerView.apply {
             adapter = categoryAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
         }
         _binding.subcategoryRecyclerView.apply {
             adapter = subcategoryAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
         }
         _binding.closeBtn.setOnClickListener { invisible() }
         _binding.editBtn.setOnClickListener { onEdit() }
+        _binding.addBtn.setOnClickListener { onEdit() }
+        _binding.backBtn.setOnClickListener {
+            if (_binding.subcategoryRecyclerView.isVisible){
+                _binding.subcategoryRecyclerView.isVisible = false
+                _binding.categoryRecyclerView.isVisible = true
+                _binding.title.text = context.getString(R.string.category)
+                subcategoryAdapter.submitList(null)
+            }else {
+                invisible()
+            }
+        }
         observe()
     }
 
@@ -79,6 +91,9 @@ class CategoriesDialog(
         subcategoryAdapter.submitList(emptyList())
         subcategoryAdapter.notifyDataSetChanged()
         subcategoryAdapter.submitList(subCategories)
+        _binding.categoryRecyclerView.isVisible = false
+        _binding.subcategoryRecyclerView.isVisible = true
+        _binding.title.text = "${context.getString(R.string.category)} > ${category.name}"
     }
 
     override fun onSelect(category: Category) {
@@ -91,6 +106,10 @@ class CategoriesDialog(
     }
 
     fun invisible() {
+        _binding.subcategoryRecyclerView.isVisible = false
+        _binding.categoryRecyclerView.isVisible = true
+        _binding.title.text = context.getString(R.string.category)
+        subcategoryAdapter.submitList(null)
         _binding.root.isVisible = false
         onClose()
     }

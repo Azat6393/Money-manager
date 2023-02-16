@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.woynex.parasayar.core.utils.OnItemClickListener
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.databinding.ItemBudgetSettingChildBinding
 import com.woynex.parasayar.feature_trans.domain.model.SubcategoryBudget
 
@@ -52,7 +53,7 @@ class BudgetChildSettingAdapter(private val listener: OnItemClickListener<Subcat
         fun bind(item: SubcategoryBudget) {
             _binding.apply {
                 categoryNameTv.text = item.subcategory_name
-                amount.text = "${item.currency} ${item.amount}"
+                amount.text = "${item.currency} ${item.amount.maskCurrency()}"
             }
         }
     }

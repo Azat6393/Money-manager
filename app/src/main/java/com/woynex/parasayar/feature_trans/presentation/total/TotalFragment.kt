@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.SharedPreferencesHelper
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.databinding.FragmentTotalBinding
 import com.woynex.parasayar.feature_trans.TransCoreViewModel
 import com.woynex.parasayar.feature_trans.domain.model.Budget
@@ -84,9 +85,9 @@ class TotalFragment : Fragment(R.layout.fragment_total), BudgetParentAdapter.OnI
             val totalExpenses = list.sumOf { it.categoryBudget.expenses }
             val percentage = ((totalExpenses / totalBudget) * 100).toInt()
             totalAmount.text =
-                "${selectedCurrency!!.symbol} $totalBudget"
+                "${selectedCurrency!!.symbol} ${totalBudget.maskCurrency()}"
             expensesTv.text =
-                "${selectedCurrency!!.symbol} $totalExpenses"
+                "${selectedCurrency!!.symbol} ${totalExpenses.maskCurrency()}"
             percentageTv.text = "$percentage%"
             progressBar.progress = percentage
             if (percentage >= 95) {
@@ -98,11 +99,11 @@ class TotalFragment : Fragment(R.layout.fragment_total), BudgetParentAdapter.OnI
                 if (context != null) {
                     expensesTv.setTextColor(requireContext().getColor(R.color.red))
                     totalTv.text =
-                        "${requireContext().getText(R.string.excess)} ${selectedCurrency!!.symbol} ${totalBudget - totalExpenses}"
+                        "${requireContext().getText(R.string.excess)} ${selectedCurrency!!.symbol} ${(totalBudget - totalExpenses).maskCurrency()}"
                 }
             } else {
                 totalTv.text =
-                    "${selectedCurrency!!.symbol} ${totalBudget - totalExpenses}"
+                    "${selectedCurrency!!.symbol} ${(totalBudget - totalExpenses).maskCurrency()}"
             }
         }
     }

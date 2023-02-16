@@ -25,6 +25,7 @@ import com.skydoves.powermenu.PowerMenuItem
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.OnItemClickListener
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.databinding.FragmentAccountsBinding
 import com.woynex.parasayar.feature_accounts.domain.model.Account
 import com.woynex.parasayar.feature_accounts.presentation.adapter.AccountAdapter
@@ -84,9 +85,9 @@ class AccountsFragment : Fragment(R.layout.fragment_accounts), OnItemClickListen
                         allWithdraws += it.withdrawal
                     }
                     _binding.apply {
-                        assets.text = allDeposit.toString()
-                        liabilities.text = allWithdraws.toString()
-                        total.text = (allDeposit - allWithdraws).toString()
+                        assets.text = allDeposit.maskCurrency()
+                        liabilities.text = allWithdraws.maskCurrency()
+                        total.text = (allDeposit - allWithdraws).maskCurrency()
                         total.setTextColor(
                             if ((allDeposit - allWithdraws) >= 0) Color.parseColor("#3a86ff")
                             else Color.parseColor("#e63946")

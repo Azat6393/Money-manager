@@ -3,38 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/black" />
-
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:weightSum="10">
+        app:strokeWidth="2dp"
+        app:cardCornerRadius="5dp"
+        app:strokeColor="?attr/black"
+        android:layout_margin="10dp"
+        >
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="9"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:lines="2"
             android:textColor="?attr/black"
             android:textSize="16sp"
             tools:text="Food" />
 
-        <ImageView
-            android:id="@+id/subcategory_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

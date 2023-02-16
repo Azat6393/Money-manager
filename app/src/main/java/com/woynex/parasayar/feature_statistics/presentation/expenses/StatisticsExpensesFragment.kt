@@ -2,7 +2,9 @@ package com.woynex.parasayar.feature_statistics.presentation.expenses
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -25,6 +27,7 @@ import com.woynex.parasayar.R
 import com.woynex.parasayar.core.domain.model.Currency
 import com.woynex.parasayar.core.utils.OnItemClickListener
 import com.woynex.parasayar.core.utils.SharedPreferencesHelper
+import com.woynex.parasayar.core.utils.getColorFromAttr
 import com.woynex.parasayar.databinding.FragmentStatisticsExpensesBinding
 import com.woynex.parasayar.feature_statistics.domain.model.CategoryStatistics
 import com.woynex.parasayar.feature_statistics.presentation.adapter.CategoryStatisticsAdapter
@@ -140,8 +143,8 @@ class StatisticsExpensesFragment : Fragment(R.layout.fragment_statistics_expense
             setExtraOffsets(5f, 10f, 5f, 5f)
             dragDecelerationFrictionCoef = 0.95f
             isDrawHoleEnabled = true
-            setHoleColor(Color.WHITE)
-            setTransparentCircleColor(Color.WHITE)
+            setHoleColor(requireContext().getColorFromAttr(R.attr.background_color))
+            setTransparentCircleColor(requireContext().getColorFromAttr(R.attr.background_color))
             setTransparentCircleAlpha(110)
             holeRadius = 58f
             transparentCircleRadius = 61f
@@ -153,7 +156,7 @@ class StatisticsExpensesFragment : Fragment(R.layout.fragment_statistics_expense
             animateY(1400, Easing.EaseInOutQuad)
             val l: Legend = legend
             l.isEnabled = false
-            setEntryLabelColor(Color.WHITE)
+            setEntryLabelColor(Color.BLACK)
             setEntryLabelTextSize(12f)
 
             val dataItem = mutableListOf<PieEntry>()
@@ -183,7 +186,7 @@ class StatisticsExpensesFragment : Fragment(R.layout.fragment_statistics_expense
             val data = PieData(dataSet)
             data.setValueFormatter(PercentFormatter())
             data.setValueTextSize(11f)
-            data.setValueTextColor(Color.WHITE)
+            data.setValueTextColor(Color.BLACK)
             setData(data)
         }
     }

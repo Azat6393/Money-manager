@@ -143,5 +143,7 @@
     <string name="change_category">Kategoriyi Değiştir</string>
     <string name="delete_trans_title">İşlemi sil</string>
     <string name="delete_trans_message">İşlemi silmek istediğinizden emin misiniz?</string>
+    <string name="edit">Düzenle</string>
+
 
 </resources>

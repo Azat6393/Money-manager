@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.OnItemClickListener
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.databinding.ItemBudgetParentBinding
 import com.woynex.parasayar.feature_trans.domain.model.Budget
 import com.woynex.parasayar.feature_trans.domain.model.BudgetItem
@@ -83,9 +84,9 @@ class BudgetParentAdapter(private val listener: OnItemClickListener) :
                 childRv.isVisible = childViewState
                 categoryNameTv.text = item.categoryBudget.name
                 totalAmount.text =
-                    "${item.categoryBudget.currency} ${item.categoryBudget.budgetAmount}"
+                    "${item.categoryBudget.currency} ${item.categoryBudget.budgetAmount.maskCurrency()}"
                 expensesTv.text =
-                    "${item.categoryBudget.currency} ${item.categoryBudget.expenses}"
+                    "${item.categoryBudget.currency} ${item.categoryBudget.expenses.maskCurrency()}"
                 percentageTv.text = "${item.categoryBudget.percentage}%"
                 progressBar.progress = item.categoryBudget.percentage
                 if (item.categoryBudget.percentage >= 95) {
@@ -97,11 +98,11 @@ class BudgetParentAdapter(private val listener: OnItemClickListener) :
                     if (context != null) {
                         expensesTv.setTextColor(context!!.getColor(R.color.red))
                         totalTv.text =
-                            "${context!!.getText(R.string.excess)} ${item.categoryBudget.currency} ${item.categoryBudget.budgetAmount - item.categoryBudget.expenses}"
+                            "${context!!.getText(R.string.excess)} ${item.categoryBudget.currency} ${(item.categoryBudget.budgetAmount - item.categoryBudget.expenses).maskCurrency()}"
                     }
                 } else {
                     totalTv.text =
-                        "${item.categoryBudget.currency} ${item.categoryBudget.budgetAmount - item.categoryBudget.expenses}"
+                        "${item.categoryBudget.currency} ${(item.categoryBudget.budgetAmount - item.categoryBudget.expenses).maskCurrency()}"
                 }
                 val mAdapter = BudgetChildAdapter(this@BudgetParentAdapter)
                 childRv.apply {

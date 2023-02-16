@@ -1,6 +1,9 @@
 package com.woynex.parasayar.core.utils
 
 import android.content.Context
+import android.util.TypedValue
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -33,4 +36,14 @@ fun getJsonFromAssets(context: Context, fileName: String): String? {
         return null
     }
     return jsonString
+}
+
+@ColorInt
+fun Context.getColorFromAttr(
+    @AttrRes attrColor: Int,
+    typedValue: TypedValue = TypedValue(),
+    resolveRefs: Boolean = true
+): Int {
+    theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+    return typedValue.data
 }

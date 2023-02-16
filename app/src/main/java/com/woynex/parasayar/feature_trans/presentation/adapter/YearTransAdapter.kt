@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.core.utils.parseMonth
 import com.woynex.parasayar.databinding.ItemWeeksMonthsTransBinding
 import com.woynex.parasayar.feature_trans.domain.model.YearTrans
@@ -37,9 +38,9 @@ class YearTransAdapter :
             fun bind(item: YearTrans){
                 _binding.apply {
                     titleTv.text = parseMonth(item.date)
-                    incomeTv.text = "${item.currency} ${item.income}"
-                    expenceTv.text ="${item.currency} ${item.expence}"
-                    totalTv.text = "${item.currency} ${item.total}"
+                    incomeTv.text = "${item.currency} ${item.income?.maskCurrency()}"
+                    expenceTv.text ="${item.currency} ${item.expence?.maskCurrency()}"
+                    totalTv.text = "${item.currency} ${item.total?.maskCurrency()}"
                 }
             }
     }

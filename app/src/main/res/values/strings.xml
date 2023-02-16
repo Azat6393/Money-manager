@@ -142,5 +142,6 @@
     <string name="change_category">Change Category</string>
     <string name="delete_trans_title">Delete Trans.</string>
     <string name="delete_trans_message">Are you sure to delete Trans.?</string>
+    <string name="edit">Edit</string>
 
 </resources>

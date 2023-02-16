@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.woynex.parasayar.core.utils.OnItemClickListener
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.databinding.ItemAccountBinding
 import com.woynex.parasayar.feature_accounts.domain.model.Account
 
@@ -85,7 +86,7 @@ class AccountAdapter(private val listener: OnItemClickListener<Account>) :
                 accountGroupName.text = account.group_name
                 accountName.text = account.name
                 val amount = account.deposit - account.withdrawal
-                accountAmount.text = amount.toString()
+                accountAmount.text = amount.maskCurrency()
                 accountAmount.setTextColor(
                     if (amount >= 0) Color.parseColor("#3a86ff")
                     else Color.parseColor("#e63946")

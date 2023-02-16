@@ -1,12 +1,15 @@
 package com.woynex.parasayar.feature_statistics.presentation.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.OnItemClickListener
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.databinding.ItemCategoryStatisticsBinding
 import com.woynex.parasayar.feature_statistics.domain.model.CategoryStatistics
 
@@ -15,10 +18,13 @@ class CategoryStatisticsAdapter(private val listener: OnItemClickListener<Catego
         DIFF_CALL_BACK
     ) {
 
+    private var context: Context? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): CategoryStatisticsViewHolder {
+        context = parent.context
         return CategoryStatisticsViewHolder(
             ItemCategoryStatisticsBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -55,9 +61,16 @@ class CategoryStatisticsAdapter(private val listener: OnItemClickListener<Catego
             _binding.apply {
                 percentageTv.text = "% ${item.percentage}"
                 categoryNameTv.text = item.category_name
-                amountTv.text = "${item.currency} ${item.total_amount}"
+                amountTv.text = "${item.currency} ${item.total_amount.maskCurrency()}"
                 percentageCd.background.level = item.percentage
                 percentageCd.setCardBackgroundColor(item.color)
+                if(item.percentage <= 10){
+                    context?.getColor(R.color.red)?.let {
+                        percentageTv.setTextColor(
+                            it
+                        )
+                    }
+                }
             }
         }
     }

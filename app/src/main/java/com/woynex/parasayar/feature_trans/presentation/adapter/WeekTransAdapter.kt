@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.core.utils.parseMonth
 import com.woynex.parasayar.core.utils.parseWeek
 import com.woynex.parasayar.databinding.ItemWeeksMonthsTransBinding
@@ -39,9 +40,9 @@ class WeekTransAdapter :
             fun bind(item: WeekTrans){
                 _binding.apply {
                     titleTv.text = "${parseWeek(item.startWeek)} ~ ${parseWeek(item.endWeek)}"
-                    incomeTv.text = "${item.currency} ${item.income}"
-                    expenceTv.text ="${item.currency} ${item.expense}"
-                    totalTv.text = "${item.currency} ${item.total}"
+                    incomeTv.text = "${item.currency} ${item.income?.maskCurrency()}"
+                    expenceTv.text ="${item.currency} ${item.expense?.maskCurrency()}"
+                    totalTv.text = "${item.currency} ${item.total?.maskCurrency()}"
                 }
             }
     }

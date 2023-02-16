@@ -52,7 +52,6 @@ class CategoryAdapter(private val listener: CategoryOnItemClickListener) :
 
         fun bind(item: CategoryWithSubCategories) {
             _binding.apply {
-                subcategoryBtn.isVisible = item.subCategoryList.isNotEmpty()
                 name.text = item.category.name
             }
         }

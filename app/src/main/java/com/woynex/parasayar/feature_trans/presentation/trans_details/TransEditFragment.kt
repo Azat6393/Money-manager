@@ -259,7 +259,7 @@ class TransEditFragment : Fragment(R.layout.fragment_trans_details) {
                         input = { currency, amount ->
                             selectedCurrency = currency
                             selectedAmount = amount
-                            _binding.amount.setText("$currency $amount")
+                            _binding.amount.setText("$currency ${amount.maskCurrency()}")
                         },
                         navigateToListCurrency = {
                             val action =

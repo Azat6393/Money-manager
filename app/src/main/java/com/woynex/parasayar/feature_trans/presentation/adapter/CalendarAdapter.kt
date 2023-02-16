@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.woynex.parasayar.core.utils.OnItemClickListener
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.databinding.ItemCalendarDayBinding
 import com.woynex.parasayar.feature_trans.domain.model.CalendarDay
 import java.time.LocalDate
@@ -71,9 +72,9 @@ class CalendarAdapter(private val listener: OnItemClickListener<CalendarDay>) :
                 _binding.incomeTv.isVisible = true
                 _binding.expenceTv.isVisible = true
                 _binding.totalTv.isVisible = true
-                _binding.incomeTv.text = item.income.toString()
-                _binding.expenceTv.text = item.expense.toString()
-                _binding.totalTv.text = item.total.toString()
+                _binding.incomeTv.text = item.income.maskCurrency()
+                _binding.expenceTv.text = item.expense.maskCurrency()
+                _binding.totalTv.text = item.total.maskCurrency()
             }
         }
 

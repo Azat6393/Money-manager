@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.OnItemClickListener
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.core.utils.millisecondToLocalDate
 import com.woynex.parasayar.databinding.ItemDailyTransParentBinding
 import com.woynex.parasayar.feature_trans.domain.model.DailyTrans
@@ -47,8 +48,8 @@ class DailyTransAdapterParent(private val listener: OnItemClickListener<Trans>) 
                 dayTv.text = item.day
                 dayOfWeekTv.text = item.dayOfWeek
                 dateTv.text = item.date
-                incomeTv.text = "${item.arrayList[0].currency} ${item.income}"
-                expenseTv.text = "${item.arrayList[0].currency} ${item.expenses}"
+                incomeTv.text = "${item.arrayList[0].currency} ${item.income.maskCurrency()}"
+                expenseTv.text = "${item.arrayList[0].currency} ${item.expenses.maskCurrency()}"
                 val transAdapter = DailyTransAdapterChild(this@DailyTransAdapterParent)
                 transRv.apply {
                     adapter = transAdapter

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.woynex.parasayar.R
 import com.woynex.parasayar.core.utils.OnItemClickListener
 import com.woynex.parasayar.core.utils.TransTypes
+import com.woynex.parasayar.core.utils.maskCurrency
 import com.woynex.parasayar.databinding.ItemDailyTransChildBinding
 import com.woynex.parasayar.databinding.ItemDailyTransParentBinding
 import com.woynex.parasayar.feature_trans.domain.model.DailyTrans
@@ -61,7 +62,7 @@ class DailyTransAdapterChild(private val listener: OnItemClickListener<Trans>) :
                     subcategoryNameTv.isVisible = true
                     subcategoryNameTv.text = item.subcategory
                 }
-                amountNameTv.text = "${item.currency} ${item.amount}"
+                amountNameTv.text = "${item.currency} ${item.amount.maskCurrency()}"
                 noteTv.text = item.note
                 noteTv.isVisible = item.note.isNotBlank()
                 hasImageIv.isVisible = item.photo != null
