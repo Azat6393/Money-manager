@@ -67,7 +67,7 @@ class CategoriesDialog(
         _binding.closeBtn.setOnClickListener { invisible() }
         _binding.editBtn.setOnClickListener { onEdit() }
         _binding.addBtn.setOnClickListener { onEdit() }
-        _binding.backBtn.setOnClickListener {
+        _binding.backCategoryBtn.setOnClickListener {
             if (_binding.subcategoryRecyclerView.isVisible){
                 _binding.subcategoryRecyclerView.isVisible = false
                 _binding.categoryRecyclerView.isVisible = true

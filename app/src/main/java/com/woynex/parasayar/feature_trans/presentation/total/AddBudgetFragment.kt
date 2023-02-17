@@ -3,6 +3,7 @@ package com.woynex.parasayar.feature_trans.presentation.total
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -146,14 +147,14 @@ class AddBudgetFragment : Fragment(R.layout.fragment_add_budget) {
     override fun onStart() {
         super.onStart()
         requireActivity()
-            .findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            .findViewById<CoordinatorLayout>(R.id.coordinatorLayout)
             .visibility = View.GONE
     }
 
     override fun onStop() {
         super.onStop()
         requireActivity()
-            .findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            .findViewById<CoordinatorLayout>(R.id.coordinatorLayout)
             .visibility = View.VISIBLE
     }
 }

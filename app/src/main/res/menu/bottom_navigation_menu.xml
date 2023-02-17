@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_baseline_bar_chart_24"
         android:title="@string/stats"/>
 
+    <item
+        android:id="@+id/add_trans"
+        android:title="" />
+
     <item android:id="@+id/accountsFragment"
         android:icon="@drawable/ic_baseline_attach_money_24"
         android:title="@string/accounts"/>

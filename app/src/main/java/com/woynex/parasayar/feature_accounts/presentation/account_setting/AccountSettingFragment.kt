@@ -2,6 +2,7 @@ package com.woynex.parasayar.feature_accounts.presentation.account_setting
 
 import android.os.Bundle
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -104,14 +105,14 @@ class AccountSettingFragment : Fragment(R.layout.fragment_accounts_setting),
     override fun onStart() {
         super.onStart()
         requireActivity()
-            .findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            .findViewById<CoordinatorLayout>(R.id.coordinatorLayout)
             .visibility = View.GONE
     }
 
     override fun onStop() {
         super.onStop()
         requireActivity()
-            .findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            .findViewById<CoordinatorLayout>(R.id.coordinatorLayout)
             .visibility = View.VISIBLE
     }
 }

@@ -44,13 +44,6 @@ class TransFragment : Fragment(R.layout.fragment_trans) {
         date = LocalDate.now()
         updateDate()
 
-        _binding.apply {
-            addTransFab.setOnClickListener {
-                val action = TransFragmentDirections.actionTransFragmentToTransDetailsFragment()
-                findNavController().navigate(action)
-            }
-        }
-
         _binding.currencyFilter.editText?.doAfterTextChanged { text ->
             val currency = currencyList.find { it.symbol == text.toString() }
             currency?.let {

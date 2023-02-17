@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.woynex.parasayar.core.utils.SharedPreferencesHelper
 import com.woynex.parasayar.databinding.ActivityMainBinding
+import com.woynex.parasayar.feature_trans.presentation.trans.TransFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -38,6 +39,14 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostController.findNavController()
         binding.bottomNavigation.setupWithNavController(navController)
+
+        binding.bottomNavigation.setupWithNavController(navController)
+        binding.bottomNavigation.background = null
+        binding.bottomNavigation.menu.getItem(2).isEnabled = false
+
+        binding.addTransFab.setOnClickListener {
+            navController.navigate(R.id.transDetailsFragment)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

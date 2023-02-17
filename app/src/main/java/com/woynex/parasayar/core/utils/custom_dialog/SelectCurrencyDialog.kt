@@ -17,6 +17,7 @@ import com.woynex.parasayar.core.presentation.currency.CurrenciesViewModel
 import com.woynex.parasayar.core.utils.adapter.CurrencyAdapter
 import com.woynex.parasayar.core.utils.fromJsonToCurrency
 import com.woynex.parasayar.core.utils.getJsonFromAssets
+import com.woynex.parasayar.core.utils.showToastMessage
 import com.woynex.parasayar.databinding.DialogAddCurrencyBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -49,9 +50,13 @@ class SelectCurrencyDialog(
         }
         observe()
         viewModel.getCurrencies(requireContext())
+
         _binding.outlinedTextField.editText?.doAfterTextChanged { text ->
             val newList =
-                currencyList?.filter { it.name.lowercase().startsWith(text.toString().lowercase()) }
+                currencyList?.filter {
+                    it.name.lowercase().startsWith(text.toString().lowercase()) ||
+                            it.cc.lowercase().startsWith(text.toString().lowercase())
+                }
             mAdapter.submitList(newList)
         }
     }

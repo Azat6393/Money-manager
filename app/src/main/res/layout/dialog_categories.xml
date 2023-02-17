@@ -69,15 +69,15 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
         android:weightSum="9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/back_btn"
+            android:id="@+id/back_category_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -115,9 +115,14 @@
             android:drawableLeft="@drawable/ic_baseline_edit_24"
             android:drawableTint="@color/white"
             android:paddingTop="10dp"
+            android:maxLines="1"
+            android:lines="1"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="10sp"
             android:paddingBottom="10dp"
             android:text="@string/edit"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="RtlHardcoded"
+            tools:text="duzenleee" />
 
     </LinearLayout>
 

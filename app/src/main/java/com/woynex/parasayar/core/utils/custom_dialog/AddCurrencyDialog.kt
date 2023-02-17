@@ -50,7 +50,10 @@ class AddCurrencyDialog(
         viewModel.getCurrencies(requireContext())
         _binding.outlinedTextField.editText?.doAfterTextChanged { text ->
             val newList =
-                currencyList?.filter { it.name.lowercase().startsWith(text.toString().lowercase()) }
+                currencyList?.filter {
+                    it.name.lowercase().startsWith(text.toString().lowercase()) or
+                            it.cc.lowercase().startsWith(text.toString().lowercase())
+                }
             mAdapter.submitList(newList)
         }
     }
